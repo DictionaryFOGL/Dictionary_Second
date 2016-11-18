@@ -12,14 +12,14 @@ public class Test {
 			System.out.println(s);
 		System.out.println();
 		
-		BaiduSpider yy=new BaiduSpider("There is a boy");
+		BaiduSpider yy=new BaiduSpider("opheee is a guy");
 		System.out.println(yy.isfound());
 		ArrayList<String> sss=yy.getResult();
 		for(String s:sss)
 			System.out.println(s);
 		System.out.println();
 		
-		YoudaoSpider yyy=new YoudaoSpider("There is a boy");
+		YoudaoSpider yyy=new YoudaoSpider("There iss a pell called dreamweaver");
 		System.out.println(yyy.isfound());
 		ArrayList<String> ssss=yyy.getResult();
 		for(String s:ssss)
