@@ -32,7 +32,7 @@ public class CilentTest {
 		oos.writeObject(newUser);
 		System.out.println("Send...");
 		oos.close();
-		socket.shutdownOutput();
+		//socket.shutdownOutput();
 		
 		Object obj=ois.readObject();
 		
