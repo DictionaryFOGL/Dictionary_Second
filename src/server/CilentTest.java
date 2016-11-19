@@ -17,25 +17,27 @@ public class CilentTest {
 		System.out.println(user.getUserID()+"  "+user.getGender()+"  "+user.getUserName()+"  "+user.getFriendList().get(0).getUserName());
 	}
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
-		String serverIP="127.0.0.0";
+		String serverIP="127.0.0.1";
 		int port=20123;
 		
 		User newUser=new User("ahaha", "12345");
 		newUser.addNewFriend(new User("admin", "23333"));
 		
 		Socket socket=new Socket(serverIP, port);
-		System.out.println("Connect to server");
+		System.out.println("Connect to server...");
 		InputStream in=socket.getInputStream();
 		OutputStream out=socket.getOutputStream();
 		ObjectOutputStream oos=new ObjectOutputStream(out);
 		ObjectInputStream ois=new ObjectInputStream(in);
 		oos.writeObject(newUser);
+		System.out.println("Send...");
 		oos.close();
 		socket.shutdownOutput();
 		
 		Object obj=ois.readObject();
 		
 		showReturn(obj);
+		ois.close();
 	}
 
 }

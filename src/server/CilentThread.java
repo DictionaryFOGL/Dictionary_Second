@@ -25,13 +25,17 @@ public class CilentThread implements Runnable{
 	
 	@Override
 	public void run() {
+		System.out.println("Thread start...");
 		try {
 			InputStream in=socket.getInputStream();
 			OutputStream out=socket.getOutputStream();
 			ObjectInputStream ois=new ObjectInputStream(in);
-			Object obj=ois.readObject();
 			ObjectOutputStream oos=new ObjectOutputStream(out);
-			System.out.println("Server: ");
+			System.out.println("Start read...");
+			Object obj=ois.readObject();
+			ois.close();
+			System.out.println("Input end...");
+			System.out.println("From Server: ");
 			showReturn(obj);
 			oos.writeObject(obj);
 		} catch (IOException | ClassNotFoundException e) {

@@ -6,20 +6,17 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 public class ServerTest {
-	private static final int BUFSIZE=32;
-	public static void main(String[] args) throws IOException{
-		if(args.length != 1)
-			throw new IllegalArgumentException("Parameter(s):<port>");
-		int servPort=Integer.parseInt(args[0]);
+	public static void main(String[] args) throws IOException, InterruptedException{
+		int servPort=20123;
 		ServerSocket servSock=new ServerSocket(servPort);
-		int recvMsgSize;
-		byte[] receiveBuf=new byte[BUFSIZE];
+		System.out.println("Server starts working...");
 		while(true) {
 			Socket clntSock=servSock.accept();
 			SocketAddress clientAddress=clntSock.getRemoteSocketAddress();
 			System.out.println("Handling client at "+clientAddress);
-			new Thread(new CilentThread(clntSock)).start();
-			clntSock.close();
+			Thread test=new Thread(new CilentThread(clntSock));
+			test.start();
+			test.join();
 		}
 	}
 

@@ -1,10 +1,11 @@
 package application.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import application.util.*;
 
-public class User {
+public class User implements Serializable{
 	private static int userNumber=0;
 	
 	private int userID;
@@ -20,7 +21,7 @@ public class User {
 		this.userID=userNumber;
 		this.userName = userName;
 		this.password = password;
-		pwdMd5=Encryption.MD5(password);
+		//pwdMd5=Encryption.MD5(password);
 		this.gender = gender;
 	}
 	
@@ -39,7 +40,7 @@ public class User {
 	public boolean setPassword(String password) {
 		if(ValidInput.validPwd(password)) {
 			this.password = password;
-			pwdMd5=Encryption.MD5(password);
+			//pwdMd5=Encryption.MD5(password);
 			return true;
 		} else return false;
 	}
