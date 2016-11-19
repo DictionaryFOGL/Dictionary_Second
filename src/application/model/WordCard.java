@@ -41,7 +41,7 @@ public class WordCard {
 	}
 
 	public boolean isTheSameOne(WordCard another) {
-		if(word.isTheSameOne(another.word)) return true;
+		if(word.equals(another.word)) return true;
 		if(senderID == another.getSenderID()) return true;
 		if(site == another.site) return true;
 		return false;

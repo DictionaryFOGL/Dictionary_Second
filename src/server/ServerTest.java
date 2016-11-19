@@ -1,8 +1,6 @@
 package server;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -20,17 +18,7 @@ public class ServerTest {
 			Socket clntSock=servSock.accept();
 			SocketAddress clientAddress=clntSock.getRemoteSocketAddress();
 			System.out.println("Handling client at "+clientAddress);
-			InputStream in=clntSock.getInputStream();
-			OutputStream out=clntSock.getOutputStream();
-			while((recvMsgSize=in.read(receiveBuf)) != -1) {
-				out.write(receiveBuf,0,recvMsgSize);
-				try {
-					Thread.sleep(1000);
-				} catch(Exception e) {
-
-				}
-				System.out.println("wait");
-			}
+			new Thread(new CilentThread(clntSock)).start();
 			clntSock.close();
 		}
 	}

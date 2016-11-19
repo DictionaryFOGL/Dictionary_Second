@@ -1,4 +1,4 @@
-package application.util.wordspider;
+package application.util;
 
 import java.io.IOException;
 import java.util.ArrayList;

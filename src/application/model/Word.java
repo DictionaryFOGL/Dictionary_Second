@@ -9,7 +9,10 @@ public class Word {
 		this.words=words;
 		if(translation != null) this.translation.add(translation);
 	}
-	public boolean isTheSameOne(Word another) {
+	
+	@Override
+	public boolean equals(Object obj) {
+		Word another=(Word) obj;
 		if(words.equals(another.words)) return true;
 		if(showTranslation().equals(another.showTranslation())) return true;
 		return false;
