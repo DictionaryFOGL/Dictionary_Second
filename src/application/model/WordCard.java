@@ -16,9 +16,40 @@ public class WordCard {
 		this.site = site;
 	}
 
-	public WordCard(Word theWord) {
+	public WordCard(Word word) {
 		this.word = word;
 	}
 	
+	public Word getWord() {
+		return word;
+	}
+
+	public String getSenderName() {
+		return senderName;
+	}
+
+	public int getSenderID() {
+		return senderID;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public int getSite() {
+		return site;
+	}
+
+	public boolean isTheSameOne(WordCard another) {
+		if(word.isTheSameOne(another.word)) return true;
+		if(senderID == another.getSenderID()) return true;
+		if(site == another.site) return true;
+		return false;
+	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		WordCard another=(WordCard) obj;
+		return isTheSameOne(another);
+	}
 }

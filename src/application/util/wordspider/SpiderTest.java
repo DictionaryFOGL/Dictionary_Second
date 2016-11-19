@@ -2,7 +2,7 @@ package application.util.wordspider;
 
 public class SpiderTest {
 	public SpiderTest(){
-		 String test="room";
+		 String test="There is a pell";
 		 
 	     BaiduSpider spider=new BaiduSpider(test);
 	     System.out.println(spider.getExplanations());
@@ -26,5 +26,8 @@ public class SpiderTest {
 	     }
 	     System.out.println("-----------Bing suggestions done-----------");
 	}
-
+	
+	public static void main(String[] args) {
+		SpiderTest S=new SpiderTest();
+	}
 }

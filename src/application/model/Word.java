@@ -9,6 +9,11 @@ public class Word {
 		this.words=words;
 		if(translation != null) this.translation.add(translation);
 	}
+	public boolean isTheSameOne(Word another) {
+		if(words.equals(another.words)) return true;
+		if(showTranslation().equals(another.showTranslation())) return true;
+		return false;
+	}
 	
 	public Word(String words) {
 		this(words,null);
@@ -30,4 +35,7 @@ public class Word {
 		this.translation = translation;
 	}
 
+	public String showTranslation() {
+		return translation.toString().replaceAll(", ", "/").replaceAll("\\[|\\]", "");
+	}
 }
