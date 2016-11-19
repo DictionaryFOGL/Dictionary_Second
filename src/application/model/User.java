@@ -21,7 +21,7 @@ public class User implements Serializable{
 		this.userID=userNumber;
 		this.userName = userName;
 		this.password = password;
-		//pwdMd5=Encryption.MD5(password);
+		pwdMd5=Encryption.MD5(password);
 		this.gender = gender;
 	}
 	
@@ -40,7 +40,7 @@ public class User implements Serializable{
 	public boolean setPassword(String password) {
 		if(ValidInput.validPwd(password)) {
 			this.password = password;
-			//pwdMd5=Encryption.MD5(password);
+			pwdMd5=Encryption.MD5(password);
 			return true;
 		} else return false;
 	}
@@ -69,6 +69,14 @@ public class User implements Serializable{
 		}
 	}
 	
+	public void deleteWordCard(WordCard newCard) {
+		mailBox.remove(newCard);
+	}
+	
+	public void clearMailbox() {
+		mailBox.clear();
+	}
+	
 	public ArrayList<User> getFriendList() {
 		return friendList;
 	}
@@ -79,6 +87,20 @@ public class User implements Serializable{
 			friendList.add(friend);
 			return true;
 		}
+	}
+	
+	public boolean deleteFriend(User friend) {
+		if(friendList.contains(friend)) {
+			friendList.remove(friend);
+			return true;
+		} else return false;
+	}
+	
+	public void resetAll() {
+		mailBox.clear();
+		password="123456";
+		pwdMd5=Encryption.MD5(password);
+		friendList.clear();
 	}
 	
 	@Override

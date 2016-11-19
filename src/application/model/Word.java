@@ -5,9 +5,16 @@ import java.util.ArrayList;
 public class Word {
 	private String words;
 	private ArrayList<String> translation=new ArrayList<String>();
+	
+	public Word(String words, ArrayList<String> translation) {
+		this.words = words;
+		this.translation = translation;
+	}
+
 	public Word(String words, String translation) {
 		this.words=words;
-		if(translation != null) this.translation.add(translation);
+		if(translation.length() != 0 && translation != null)
+			this.translation.add(translation);
 	}
 	
 	@Override
@@ -19,7 +26,7 @@ public class Word {
 	}
 	
 	public Word(String words) {
-		this(words,null);
+		this.words=words;
 	}
 	
 	public String getWords() {
