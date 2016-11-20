@@ -101,15 +101,4 @@ public class BaiduSpider extends Spider{
 		
 	}
 
-	@Override
-	public String getExplanations() {
-		StringBuffer str=new StringBuffer();
-		for(int i=0;i<getResult().size();i++){
-	    	 str=str.append(getResult());
-	    	 if(i!=getResult().size()-1){
-	    		 str=str.append("/");
-	    	 }
-	     }
-		return str.toString();
-	}
 }

@@ -37,8 +37,8 @@ public class BingSpider extends Spider{
 		preUrl="http://cn.bing.com/dict/search?q=";
 		wordRegex="<li><span class=\"pos\">.*</span><span class=\"def\"><span>.*</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>.*</span></span></li>";
 		wordRegexd="<li><span class=\"pos\">|</span><span class=\"def\"><span>|</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>";
-		sentenceRegex="<a class=\"p1-9\".*1\">.*</a>|<span>.*</span>\n       <a class=\"p1-9\"|<span>.*</span>\n      </div>\n     </div>";
-		sentenceRegexd="<a class=\"p1-9\".*1\">|</a>|<span>|</span>\n       <a class=\"p1-9\"|</span>\n      </div>\n     </div>";
+		sentenceRegex="<a class=\"p1-9\" name=\"translation_sen_id.*1\">.*</a>|<span>.*</span>\n       <a class=\"p1-9\"|<span>.*</span>\n      </div>\n     </div>";
+		sentenceRegexd="<a class=\"p1-9\" name=\"translation_sen_id.*1\">|</a>|<span>|</span>\n       <a class=\"p1-9\"|</span>\n      </div>\n     </div>";
 		suggestionRegex="1\">.*</a>\n      <div class=\"df_wb_text\">";
 		suggestionRegexd="1\">|</a>\n      <div class=\"df_wb_text\">";
 		suggestionRegex2="&amp;FORM=BDVSP6.*1\">.*</a></li>";
@@ -80,12 +80,15 @@ public class BingSpider extends Spider{
     	pd=Pattern.compile(sentenceRegexd);
     	while(m.find()){
 			md=pd.matcher(m.group());
+			//System.out.println(m.group());
 			StringBuffer sb=new StringBuffer();
 			while(md.find()){
+				//System.out.println(md.group());
 				md.appendReplacement(sb,"");
 			}
 			md.appendTail(sb);
 			str=str.append(sb);
+			
 		}
     	explanations.add(str.toString());
 	}
@@ -141,15 +144,4 @@ public class BingSpider extends Spider{
 		return suggestions;
 	}
 
-	@Override
-	public String getExplanations() {
-		StringBuffer str=new StringBuffer();
-		for(int i=0;i<getResult().size();i++){
-	    	 str=str.append(getResult());
-	    	 if(i!=getResult().size()-1){
-	    		 str=str.append("/");
-	    	 }
-	     }
-		return str.toString();
-	}
 }

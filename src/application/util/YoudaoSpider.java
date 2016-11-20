@@ -14,6 +14,7 @@ public class YoudaoSpider extends Spider{
 	private String wordRegex2;
 	private String wordRegex2d;
 	private String sentenceRegexd;
+	private String translationRegexd;
 	private Document doc;
 	private Pattern p;
 	private Pattern p2;
@@ -40,6 +41,8 @@ public class YoudaoSpider extends Spider{
 		wordRegex2d="<li>|</li>";
 		sentenceRegex="&nbsp;</a> \n            <span>.*</span> \n           </div> ";
 		sentenceRegexd="&nbsp;</a> \n            <span>|</span> \n           </div> ";
+		translationRegex="<p>.*</p> \n          <p>以上为机器翻译结果";
+		translationRegexd="<p>|</p> \n          <p>以上为机器翻译结果";
 		suggestionRegex="class=\"search-js\">.*</a></span>";
 		suggestionRegexd="class=\"search-js\">|</a></span>";
 	}
@@ -58,6 +61,21 @@ public class YoudaoSpider extends Spider{
 		process(keyWord);	
 	}
 
+	private void processTranslation(){
+		p=Pattern.compile(translationRegex);
+		pd=Pattern.compile(translationRegexd);
+		m = p.matcher(doc.html());
+		while(m.find()){
+			md=pd.matcher(m.group());
+			StringBuffer sb=new StringBuffer();
+			while(md.find()){
+				md.appendReplacement(sb,"");
+			}
+			md.appendTail(sb);
+			explanations.add(sb.toString());
+		}
+	}
+	
 	private void processSuggestion(){
 		p=Pattern.compile(suggestionRegex);
 		pd=Pattern.compile(suggestionRegexd);
@@ -117,6 +135,9 @@ public class YoudaoSpider extends Spider{
 				processSentence();
 				processSuggestion();
 			}
+			if(explanations.size()==0){
+				processTranslation();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}  
@@ -128,15 +149,4 @@ public class YoudaoSpider extends Spider{
 		return suggestions;
 	}
 	
-	@Override
-	public String getExplanations() {
-		StringBuffer str=new StringBuffer();
-		for(int i=0;i<getResult().size();i++){
-	    	 str=str.append(getResult());
-	    	 if(i!=getResult().size()-1){
-	    		 str=str.append("/");
-	    	 }
-	     }
-		return str.toString();
-	}
 }
