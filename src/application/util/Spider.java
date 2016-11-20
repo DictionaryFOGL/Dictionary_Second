@@ -11,7 +11,6 @@ abstract class Spider {
 	protected String suggestionRegex;
 	protected ArrayList<String> explanations;
 	protected ArrayList<String> suggestions;
-	protected boolean isWordFound;
 	
 	public Spider(){
 		explanations=new ArrayList<String>();
@@ -30,9 +29,5 @@ abstract class Spider {
 
 	public abstract String getExplanations();//the result joint into a single string
 	
-	public boolean isWordFound(){
-		return isWordFound;
-	}//whether the result is found by "word" rather than sentence;
-
 	public abstract ArrayList<String> getSuggestion();//for suggestions of input,not work in baiduspider
 }

@@ -51,15 +51,9 @@ public class BingSpider extends Spider{
 	}
 
 	@Override
-	public boolean isWordFound() {
-		return isWordFound;
-	}
-
-	@Override
 	public void setWord(String keyWord) {
 		explanations.clear();
 		suggestions.clear();
-		isWordFound=true;
 		this.keyWord=keyWord;
 		process(keyWord);	
 	}
@@ -132,7 +126,6 @@ public class BingSpider extends Spider{
 			doc = Jsoup.connect(url).get();
 			processWords();
 			if(explanations.size()==0){
-				isWordFound=false;
 				processSentence();
 		    }
 			processSuggestion();

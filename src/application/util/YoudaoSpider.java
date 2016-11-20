@@ -49,16 +49,11 @@ public class YoudaoSpider extends Spider{
 		return explanations;
 	}
 
-	@Override
-	public boolean isWordFound() {
-		return isWordFound;
-	}
 
 	@Override
 	public void setWord(String keyWord) {
 		explanations.clear();
 		suggestions.clear();
-		isWordFound=true;
 		this.keyWord=keyWord;
 		process(keyWord);	
 	}
@@ -119,7 +114,6 @@ public class YoudaoSpider extends Spider{
 			doc = Jsoup.connect(url).get();	
 			processWord();
 			if(explanations.size()==0){
-				isWordFound=false;
 				processSentence();
 				processSuggestion();
 			}
