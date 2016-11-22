@@ -21,7 +21,7 @@ public class User implements Serializable{
 		this.userID=userNumber;
 		this.userName = userName;
 		this.password = password;
-		pwdMd5=Encryption.MD5(password);
+		//pwdMd5=Encryption.MD5(password);
 		this.gender = gender;
 	}
 	
@@ -40,7 +40,7 @@ public class User implements Serializable{
 	public boolean setPassword(String password) {
 		if(ValidInput.validPwd(password)) {
 			this.password = password;
-			pwdMd5=Encryption.MD5(password);
+			//pwdMd5=Encryption.MD5(password);
 			return true;
 		} else return false;
 	}
@@ -99,7 +99,7 @@ public class User implements Serializable{
 	public void resetAll() {
 		mailBox.clear();
 		password="123456";
-		pwdMd5=Encryption.MD5(password);
+		//pwdMd5=Encryption.MD5(password);
 		friendList.clear();
 	}
 	

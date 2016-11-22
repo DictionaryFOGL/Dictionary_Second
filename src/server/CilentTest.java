@@ -2,11 +2,11 @@ package server;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 import application.model.User;
 
@@ -20,24 +20,55 @@ public class CilentTest {
 		String serverIP="127.0.0.1";
 		int port=20123;
 		
-		User newUser=new User("ahaha", "12345");
-		newUser.addNewFriend(new User("admin", "23333"));
-		
 		Socket socket=new Socket(serverIP, port);
 		System.out.println("Connect to server...");
 		InputStream in=socket.getInputStream();
 		OutputStream out=socket.getOutputStream();
+		
 		ObjectOutputStream oos=new ObjectOutputStream(out);
-		ObjectInputStream ois=new ObjectInputStream(in);
-		oos.writeObject(newUser);
-		System.out.println("Send...");
-		oos.close();
-		//socket.shutdownOutput();
+		Scanner sc=new Scanner(System.in);
+		Scanner scin=new Scanner(in);
 		
-		Object obj=ois.readObject();
-		
-		showReturn(obj);
-		ois.close();
+		int i=0;
+		while(true) {
+			int a=sc.nextInt();
+			if(a == 0) {
+				oos.writeObject(new User("ahaha", "12345"));
+				System.out.println("send a==0 mode");
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(i == 0) System.out.println("Server: "+scin.nextLine());
+				
+				System.out.println("\t"+scin.nextLine());
+				System.out.println("\t"+scin.nextLine());
+			} else {
+				User user=new User("ahaha", "12345");
+				user.setGender('p');
+				oos.writeObject(user);
+				System.out.println("send stop mode");
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(i == 0) System.out.println("Server: "+scin.nextLine());
+				
+				System.out.println("\t"+scin.nextLine());
+				System.out.println("\t"+scin.nextLine());
+				break;
+			}
+			i++;
+		}
+		scin.close();
+		socket.close();
+		sc.close();
 	}
 
 }
