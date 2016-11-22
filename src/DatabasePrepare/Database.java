@@ -71,6 +71,7 @@ public class Database {
 	public static void insertTestData() {
 		try {
 			Date d=new Date(2012, 3, 4, 5, 6, 7);
+			d.setYear(111);//不明bug的时间-19正确
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			stat.executeUpdate("INSERT INTO "+sheet1+"(name,gender,password,pwdmd5,signtime) "
 					+ "values('admin','f',123456,'error','"+sdf.format(d)+"')");
@@ -99,8 +100,9 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		connect();
+		stat.executeQuery("USE "+dbName);
 		createDatabaseAndList();
 		insertTestData();
 		closeAll();
