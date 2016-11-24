@@ -24,12 +24,15 @@ public class Client implements CSConstant{
 	public Client(){
 		try {
             init();
+            
 			login("dreamgazer","123456",'M');
-			//
+			
 			objectFromServer=new ObjectInputStream(socket.getInputStream());
 			while(true){
 				work((Message)objectFromServer.readObject());
+				
 				logout();
+				
 				Thread.sleep(1000);
 			}
 			
@@ -90,7 +93,7 @@ public class Client implements CSConstant{
 			if(message.isIdentified()){
 				isLogin=true;
 				account=message.getUser();
-				System.out.println(account.getUserName()+" login");
+				System.out.println(account.getUserName()+" login succeeded");
 			}
 			else{
 				isLogin=false;
@@ -101,7 +104,7 @@ public class Client implements CSConstant{
 	
 	private void logoutResult(LogoutMessage message) throws IOException{	
 		if(message.isLogout()){
-			System.out.println("Logout succeed");
+			System.out.println("Logout succeeded");
 			isLogin=false;
 			account=null;
 		}

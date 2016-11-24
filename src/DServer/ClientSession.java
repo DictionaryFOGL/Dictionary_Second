@@ -27,15 +27,12 @@ class ClientSession implements Runnable,CSConstant{
 			work((Message)objectFromClient.readObject());
 		}
 			
-
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		finally{
-
+			
 		}
-		
-		
 	}
 
 	
@@ -54,7 +51,7 @@ class ClientSession implements Runnable,CSConstant{
 			case(FRIEND_ONLINE):friendOnline(message);break;
 			case(ADD_FRIEND):addFriend(message);break;
 			case(LIKE):like(message);break;
-			case(LIKE_CONCEL):like_concel(message);break;		
+			case(LIKE_CANCEL):likeCancel(message);break;		
 			case(SEARCH_HISTORY):searchHistory(message);break;
 			case(LOGIN):login((LoginMessage)message);break;
 			case(LOGOUT):logout((LogoutMessage)message);break;
@@ -78,7 +75,7 @@ class ClientSession implements Runnable,CSConstant{
 	private void like(Message message){		
 	}
 	
-	private void like_concel(Message message){
+	private void likeCancel(Message message){
 		
 	}
 	
@@ -87,7 +84,7 @@ class ClientSession implements Runnable,CSConstant{
 	
 	private void login(LoginMessage message) throws ClassNotFoundException, IOException {
 		User user=(User)message.getUser();
-		System.out.print("login...."+user.getUserName());
+		System.out.println("login...."+user.getUserName());
 		
 		boolean isUserFound=true;
 		if(isUserFound){
@@ -100,7 +97,7 @@ class ClientSession implements Runnable,CSConstant{
 	}
 	
 	private void logout(LogoutMessage message) throws IOException{
-		System.out.print("Server:logout....");
+		System.out.println("Server:logout....");
 		message.Logout();
 		objectToClient.writeObject(message);;
 	}

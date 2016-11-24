@@ -16,10 +16,10 @@ public class Server {
 	public Server() throws ClassNotFoundException{
 		try {
 			ServerSocket serversocket=new ServerSocket(8000);
-			
+			System.out.println("Server working....");
+
 			while(true){
 				Socket socket=serversocket.accept();
-				System.out.println("working....");
 				System.out.println(socket.getPort());
 				System.out.println(socket.getInetAddress());
 				System.out.println(socket.getLocalAddress());
