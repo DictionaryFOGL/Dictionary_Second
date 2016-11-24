@@ -4,13 +4,13 @@ import java.io.*;
 import java.net.Socket;
 
 import application.model.User;
+import application.model.message.*;
+
 
 
 class ClientSession implements Runnable,CSConstant{
 	private Socket socket;
-	private DataInputStream dataFromClient;
 	private ObjectInputStream objectFromClient;
-	private DataOutputStream dataToClient;
 	private ObjectOutputStream objectToClient;
 	private boolean waiting;
 	public ClientSession(Socket socket){
@@ -20,39 +20,25 @@ class ClientSession implements Runnable,CSConstant{
 	@Override
 	public void run() {
 		try {
-				dataFromClient=new DataInputStream(socket.getInputStream());
-				dataToClient=new DataOutputStream(socket.getOutputStream());
-				objectFromClient=new ObjectInputStream(socket.getInputStream());
-				objectToClient=new ObjectOutputStream(socket.getOutputStream());
-
-				while(true){
-					work(dataFromClient.readByte());
-					try {
-						waitForAction();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+			objectToClient=new ObjectOutputStream(socket.getOutputStream());
+			objectToClient.flush();
+			objectFromClient=new ObjectInputStream(socket.getInputStream());
+		while(true){
+			work((Message)objectFromClient.readObject());
+		}
 			
 
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		finally{
-			try {
-				dataFromClient.close();
-				dataToClient.close();
-				objectFromClient.close();
-				objectToClient.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+
 		}
 		
 		
 	}
 
+	
 	private void waitForAction() throws InterruptedException{
 		//boolean waiting=true;
 	     while(waiting){
@@ -62,50 +48,64 @@ class ClientSession implements Runnable,CSConstant{
 	}
 
 	
-	private void work(byte message){
-		switch(message){
-		case(SEND_CARD):sendCard();break;
-		case(FRIEND_ONLINE):friendOnline();break;
-		case(ADD_FRIEND):addFriend();break;
-		case(LIKE):like();break;
-		case(LIKE_CONCEL):like_concel();break;		
-		case(SEARCH_HISTORY):searchHistory();break;
-		case(LOGIN):login();break;
-		case(LOGOUT):logout();break;
-		case(REGISTER):regeister();break;
+	private void work(Message message) throws ClassNotFoundException, IOException{
+		switch(message.getType()){
+			case(SEND_CARD):sendCard((SendCardMessage)message);break;
+			case(FRIEND_ONLINE):friendOnline(message);break;
+			case(ADD_FRIEND):addFriend(message);break;
+			case(LIKE):like(message);break;
+			case(LIKE_CONCEL):like_concel(message);break;		
+			case(SEARCH_HISTORY):searchHistory(message);break;
+			case(LOGIN):login((LoginMessage)message);break;
+			case(LOGOUT):logout((LogoutMessage)message);break;
+			case(REGISTER):regeister(message);break;
 		}
 		
 	}
 	
-	private void sendCard(){		
+	private void sendCard(SendCardMessage message){		
 		
 	}
 	
-	private void friendOnline(){		
+	private void friendOnline(Message message){		
 		
 	}
 	
-	private void addFriend(){		
+	private void addFriend(Message message){		
 		
 	}
 	
-	private void like(){		
+	private void like(Message message){		
 	}
 	
-	private void like_concel(){
+	private void like_concel(Message message){
 		
 	}
 	
-	private void searchHistory(){		
+	private void searchHistory(Message message){		
 	}
 	
-	private void login(){		
+	private void login(LoginMessage message) throws ClassNotFoundException, IOException {
+		User user=(User)message.getUser();
+		System.out.print("login...."+user.getUserName());
+		
+		boolean isUserFound=true;
+		if(isUserFound){
+			message.identify();
+			objectToClient.writeObject(message);
+		}
+		else{
+			objectToClient.writeObject(message);
+		}
 	}
 	
-	private void logout(){		
+	private void logout(LogoutMessage message) throws IOException{
+		System.out.print("Server:logout....");
+		message.Logout();
+		objectToClient.writeObject(message);;
 	}
 	
-	private void regeister(){		
+	private void regeister(Message message){		
 	}
 
 	

@@ -24,7 +24,6 @@ public class CilentTest {
 		System.out.println("Connect to server...");
 		InputStream in=socket.getInputStream();
 		OutputStream out=socket.getOutputStream();
-		
 		ObjectOutputStream oos=new ObjectOutputStream(out);
 		Scanner sc=new Scanner(System.in);
 		Scanner scin=new Scanner(in);

@@ -11,11 +11,12 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server implements CSConstant{
+public class Server {
 
 	public Server() throws ClassNotFoundException{
 		try {
-			ServerSocket serversocket=new ServerSocket(33208);
+			ServerSocket serversocket=new ServerSocket(8000);
+			
 			while(true){
 				Socket socket=serversocket.accept();
 				System.out.println("working....");

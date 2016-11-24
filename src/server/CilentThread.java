@@ -30,7 +30,6 @@ public class CilentThread implements Runnable{
 			try {
 				ins = socket.getInputStream();
 				outs = socket.getOutputStream();
-				
 				ObjectInputStream in = new ObjectInputStream(ins);
 				PrintWriter out = new PrintWriter(outs,true);
 				
