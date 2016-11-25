@@ -4,20 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Database {
 	private static Connection conn=null;
 	private static Statement stat=null;
-	private static String local="jdbc:mysql://127.0.0.1:3306";
+	private static String local="jdbc:mysql://127.0.0.1:3306";//local地址可改为服务器地址
 	private static String usr="root";
 	private static String pwd="root";
 	private static String dbName="Dictionary";
 	private static String sheet1="UserMessage";
-	private static String sheet2="history";
+	private static String sheet2="history";//暂不确定
 	private static String sheet3="mailBox";
 	private static String sheet4="wordsLike";
 	

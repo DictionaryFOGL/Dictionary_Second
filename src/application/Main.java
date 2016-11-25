@@ -5,9 +5,11 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
+import com.sun.javafx.application.ParametersImpl;
+
 import application.model.*;
 import application.util.*;
-//import application.view.*;
+import application.view.*;
 
 public class Main extends Application {
 	@Override
@@ -21,6 +23,9 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		//TODO for multi-client test, important!!!!!!!!
+		Parameters p=ParametersImpl.getParameters(this);
+		System.out.println(p.getUnnamed());
 	}
 	
 	public static void main(String[] args) {
