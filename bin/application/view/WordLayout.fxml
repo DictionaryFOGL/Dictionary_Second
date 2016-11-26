@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WordLayoutController">
    <children>
       <GridPane prefHeight="490.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -65,7 +65,58 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="50.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="2">
                      <children>
-                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: black;" />
+                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                           <top>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="www.youdao.com" />
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </top>
+                           <center>
+                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets left="12.0" />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <Text lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
+                                       <font>
+                                          <Font name="Microsoft JhengHei" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="2.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <right>
+                              <HBox prefHeight="100.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="BOTTOM_CENTER">
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" right="12.0" />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="45.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button layoutX="37.0" layoutY="45.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </right></BorderPane>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
                               <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" />
@@ -76,9 +127,61 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="100.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="3">
+                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="3">
                      <children>
-                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: black;" />
+                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                           <center>
+                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Text lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
+                                       <font>
+                                          <Font name="Microsoft JhengHei" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="2.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets left="12.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </center>
+                           <right>
+                              <HBox prefHeight="100.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="BOTTOM_CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="45.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button layoutX="37.0" layoutY="45.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" right="12.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </right>
+                           <top>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="www.youdao.com" />
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </top>
+                        </BorderPane>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
                               <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" />
@@ -90,9 +193,61 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="233.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="4">
+                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="4">
                      <children>
-                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: black;" />
+                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                           <center>
+                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Text lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
+                                       <font>
+                                          <Font name="Microsoft JhengHei" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="2.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets left="12.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </center>
+                           <right>
+                              <HBox prefHeight="100.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="BOTTOM_CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="45.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button layoutX="37.0" layoutY="45.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                                       <HBox.margin>
+                                          <Insets top="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" right="12.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </right>
+                           <top>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="www.youdao.com" />
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </top>
+                        </BorderPane>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
                               <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" />
