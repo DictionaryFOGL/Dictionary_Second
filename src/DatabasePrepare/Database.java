@@ -98,6 +98,7 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+	
 	public static void main(String[] args) throws SQLException {
 		connect();
 		stat.executeQuery("USE "+dbName);

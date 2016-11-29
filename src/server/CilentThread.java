@@ -5,14 +5,18 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import application.model.User;
 
 public class CilentThread implements Runnable{
 	private Socket socket=null;
+	private ServerSocket server=null;
+	private User user=null;
 	
-	public CilentThread(Socket socket) {
+	public CilentThread(Socket socket,ServerSocket server) {
 		this.socket=socket;
+		this.server=server;
 	}
 	
 	public static void showReturn(User user) {

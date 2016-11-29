@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="480.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="20.0" layoutY="14.0" opacity="0.43" text="-Word Card-" textFill="WHITE">
+         <font>
+            <Font name="Roboto Light Italic" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="353.0" layoutY="19.0" text="www.youdao.com" textFill="WHITE">
+         <font>
+            <Font name="Roboto Light" size="13.0" />
+         </font>
+      </Label>
+      <Separator layoutX="16.0" layoutY="45.0" prefHeight="1.0" prefWidth="454.0" />
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="20.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There is a dog">
+         <font>
+            <Font name="Roboto Light" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="21.0" layoutY="106.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="在这堆草在这堆草图里在这堆草图里图里" wrappingWidth="300.0">
+         <font>
+            <Font name="Microsoft JhengHei" size="19.0" />
+         </font>
+      </Text>
+      <Ellipse fill="#1f93ff00" layoutX="391.0" layoutY="164.0" radiusX="67.0" radiusY="58.0" stroke="WHITE" strokeType="INSIDE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#66b5ff00" height="29.0" layoutX="20.0" layoutY="191.0" rotate="2.5" stroke="WHITE" strokeType="INSIDE" width="292.0" />
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="33.0" layoutY="211.0" rotate="2.5" strokeType="OUTSIDE" strokeWidth="0.0" text="这是一个好句子！希望你喜欢！" wrappingWidth="266.07598876953125">
+         <font>
+            <Font name="Microsoft JhengHei UI" size="16.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="337.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="06:58 PM">
+         <font>
+            <Font name="Roboto Light" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="338.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nov 10th -- 2016">
+         <font>
+            <Font name="Roboto Light" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="342.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dreamgazer">
+         <font>
+            <Font name="Roboto Medium Italic" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
