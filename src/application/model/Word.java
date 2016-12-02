@@ -1,8 +1,9 @@
 package application.model;
 
+
 import java.util.ArrayList;
 
-public class Word {
+public class Word{
 	private String words;
 	private ArrayList<String> translation=new ArrayList<String>();
 	

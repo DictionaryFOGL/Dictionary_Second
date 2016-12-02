@@ -25,10 +25,10 @@ public class Server {
 				System.out.println(socket.getLocalAddress());
 				Thread thread=new Thread(new ClientSession(socket));
 				thread.start();
-				thread.join();
+				//thread.join();
 			}
 			
-		} catch (IOException | InterruptedException e) {
+		} catch (IOException  e) {
 			e.printStackTrace();
 		}		
 	}

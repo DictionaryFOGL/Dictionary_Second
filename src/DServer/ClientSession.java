@@ -35,7 +35,6 @@ class ClientSession implements Runnable,CSConstant{
 		}
 	}
 
-	
 	private void waitForAction() throws InterruptedException{
 		//boolean waiting=true;
 	     while(waiting){
@@ -44,7 +43,6 @@ class ClientSession implements Runnable,CSConstant{
 	     waiting=true;
 	}
 
-	
 	private void work(Message message) throws ClassNotFoundException, IOException{
 		switch(message.getType()){
 			case(SEND_CARD):sendCard((SendCardMessage)message);break;
@@ -56,8 +54,7 @@ class ClientSession implements Runnable,CSConstant{
 			case(LOGIN):login((LoginMessage)message);break;
 			case(LOGOUT):logout((LogoutMessage)message);break;
 			case(REGISTER):regeister(message);break;
-		}
-		
+		}		
 	}
 	
 	private void sendCard(SendCardMessage message){		

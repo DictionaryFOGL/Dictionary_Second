@@ -1,4 +1,4 @@
-package DatabasePrepare;
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Database {
+public class DictionaryDBInit {
 	private static Connection conn=null;
 	private static Statement stat=null;
 	private static String local="jdbc:mysql://127.0.0.1:3306";//local地址可改为服务器地址
@@ -15,9 +15,10 @@ public class Database {
 	private static String pwd="24601";
 	private static String dbName="Dictionary";
 	private static String sheet1="UserMessage";
-	private static String sheet2="history";//暂不确定
+	private static String sheet2="history";
 	private static String sheet3="mailBox";
 	private static String sheet4="wordsLike";
+	private static String sheet5="relationship";
 	
 	
 	public static void connect() {
@@ -57,11 +58,11 @@ public class Database {
 					+ "baidu int(2) NOT NULL default 0,"
 					+ "bing int(1) NOT NULL default 0,"
 					+ "youdao int(1) NOT NULL default 0)");
-			System.out.println(sheet1 +"created!");
+			System.out.println(sheet2 +"created!");
 			stat.execute("CREATE TABLE "+sheet3+"(senderID int(6) NOT NULL,"
 					+ "receiverID int(6) NOT NULL,"
 					+ "words varchar(64),"
-					+ "url int(1) NOT NULL,"
+					+ "url char(30) NOT NULL,"
 					+ "time datetime NOT NULL,"
 					+ "say varchar(10))");//TODO 暂定长度
 			System.out.println(sheet3 +"created!");
@@ -70,6 +71,11 @@ public class Database {
 					+ "bing int(2) NOT NULL,"
 					+ "youdao int(2) NOT NULL)");
 			System.out.println(sheet4 +"created!");
+			stat.execute("CREATE TABLE "+sheet5+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
+					+ "user int(2) NOT NULL,"//TODO 暂定长度
+					+ "friend int(2) NOT NULL,"
+					+ "relationship int(2) NOT NULL)");
+			System.out.println(sheet5 +"created!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,8 +88,8 @@ public class Database {
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			stat.executeUpdate("INSERT INTO "+sheet1+"(name,gender,password,pwdmd5,signtime) "
 					+ "values('admin','f',123456,'error','"+sdf.format(d)+"')");
-			stat.executeUpdate("INSERT INTO "+sheet3+"(senderID,receiverID,url,time) "
-					+ "values(1,3,'b','"+sdf.format(d)+"')");
+			stat.executeUpdate("INSERT INTO "+sheet3+"(senderID,receiverID,words,url,time,say) "
+					+ "values(1,3,\"dictionary\",\"www.baidu.com\",'"+sdf.format(d)+"',\"blablabla\")");
 			System.out.println("insert!");
 		} catch (SQLException e) {
 			e.printStackTrace();

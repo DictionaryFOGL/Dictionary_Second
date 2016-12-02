@@ -1,24 +1,36 @@
 package application.model;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import application.util.*;
 
-public class User implements Serializable{
+public class User {
 	private static int userNumber=0;
 	
 	private int userID;
 	private String userName;
 	private String password;
 	private String pwdMd5;
+	private Date registerDate;
 	private char gender;
 	private ArrayList<WordCard> mailBox=new ArrayList<WordCard>();
 	private ArrayList<User> friendList=new ArrayList<User>();
 	
 	public User(String userName, String password, char gender) {
 		userNumber++;
+		this.setRegisterDate(new Date());
 		this.userID=userNumber;
+		this.userName = userName;
+		this.password = password;
+		//pwdMd5=Encryption.MD5(password);
+		this.gender = gender;
+	}
+	
+	public User(String userName, String password, char gender,Date registerDate) {
+		this.setRegisterDate(registerDate);
+		this.userID=0;
 		this.userName = userName;
 		this.password = password;
 		//pwdMd5=Encryption.MD5(password);
@@ -108,5 +120,13 @@ public class User implements Serializable{
 		User friend=(User) obj;
 		if(friend.userID == userID) return true;
 		else return false;
+	}
+
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
 	}
 }

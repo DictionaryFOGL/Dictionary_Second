@@ -61,6 +61,7 @@ public class Server implements DatabaseConstant{
 	 */
 	//用户登陆
 	public User login(String userName,String pwdMd5) {
+		return null;
 		//TODO 根据用户名以及密码的Md5加密判断是否存在该用户，存在则根据数据库中提取的数据构建一个User对象返回，不存在返回null
 		
 	}

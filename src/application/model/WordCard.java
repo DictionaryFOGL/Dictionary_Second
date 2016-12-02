@@ -26,6 +26,10 @@ public class WordCard {
 	public Word getWord() {
 		return word;
 	}
+	
+	public void setSenderName(String senderName) {
+		this.senderName=senderName;
+	}
 
 	public String getSenderName() {
 		return senderName;
