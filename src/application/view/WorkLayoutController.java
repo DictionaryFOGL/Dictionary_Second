@@ -2,6 +2,7 @@ package application.view;
 
 import application.Main;
 import application.util.Controller;
+import application.util.ValidInput;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -19,6 +20,9 @@ public class WorkLayoutController implements Controller{
 	private BorderPane myself;
 	private AnchorPane wordLay;
 	private AnchorPane friendLay;
+	
+	private WordLayoutController wordCon;
+	private FriendLayoutController friendCon;
 	
 	@FXML
 	private ImageView modePic;
@@ -57,16 +61,21 @@ public class WorkLayoutController implements Controller{
 	
 	private void searchWordBase(String content) {
 		wordSearchMode();
-		//TODO controller变量没有……卧槽
+		wordCon.searchResult(content);
 	}
 	
 	private void searchFriendBase(String content) {
-		
+		friendSearchMode();
+		friendCon.searchResult(content);
 	}
 	
 	@FXML
 	private void goSearch() {
-		
+		if(mode == 1) {
+			searchWordBase(ValidInput.wordSearchProcessed(input.getText()));
+		} else {
+			searchFriendBase(ValidInput.friendSearchProcessed(input.getText()));
+		}
 	}
 	
 	@FXML
