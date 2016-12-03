@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,4 +11,29 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="40.0" right="40.0" />
+         </BorderPane.margin>
+         <children>
+            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField prefHeight="32.0" prefWidth="732.0">
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
+            </TextField>
+            <ChoiceBox prefHeight="30.0" prefWidth="50.0">
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
+            </ChoiceBox>
+            <ChoiceBox layoutX="779.0" layoutY="24.0" prefHeight="30.0" prefWidth="50.0">
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
+            </ChoiceBox>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

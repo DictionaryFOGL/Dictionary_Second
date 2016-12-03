@@ -7,22 +7,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.StartLayoutController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="97.0" text="Sign up">
+            <Button fx:id="signUp" mnemonicParsing="false" onAction="#startSignUpMode" prefHeight="38.0" prefWidth="97.0" text="Sign up">
                <font>
                   <Font name="Roboto Thin" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="442.0" layoutY="41.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="97.0" text="Sign in">
+            <Button fx:id="signIn" layoutX="442.0" layoutY="41.0" mnemonicParsing="false" onAction="#startSignInMode" prefHeight="38.0" prefWidth="97.0" text="Sign in">
                <font>
                   <Font name="Roboto Thin" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="490.0" layoutY="41.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="97.0" text="Search">
+            <Button fx:id="searchMode" layoutX="490.0" layoutY="41.0" mnemonicParsing="false" onAction="#startSearchMode" prefHeight="38.0" prefWidth="97.0" text="Search">
                <font>
                   <Font name="Roboto Thin" size="20.0" />
                </font>
@@ -44,7 +43,4 @@
    <bottom>
       <ImageView fitHeight="65.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </bottom>
-   <center>
-      <AnchorPane style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>
