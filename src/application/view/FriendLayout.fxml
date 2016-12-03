@@ -1,8 +1,283 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.FriendLayoutController">
+   <children>
+      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="490.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane style="-fx-background-color: blue;" visible="false" GridPane.columnIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <GridPane.margin>
+                  <Insets right="50.0" top="3.0" />
+               </GridPane.margin>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Name:">
+                           <font>
+                              <Font name="Roboto Light Italic" size="20.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Trumph2016">
+                           <font>
+                              <Font name="Microsoft JhengHei" size="22.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <GridPane prefHeight="95.0" prefWidth="110.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <HBox.margin>
+                              <Insets bottom="12.5" top="12.5" />
+                           </HBox.margin>
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label text="126">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="-Baidu-">
+                                       <font>
+                                          <Font name="Roboto Light Italic" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                        <GridPane prefHeight="95.0" prefWidth="180.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label text="126">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="-Youdao-">
+                                       <font>
+                                          <Font name="Roboto Light Italic" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <HBox.margin>
+                              <Insets bottom="12.5" top="12.5" />
+                           </HBox.margin>
+                        </GridPane>
+                        <GridPane layoutX="120.0" layoutY="10.0" prefHeight="95.0" prefWidth="120.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label text="126">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="-Bing-">
+                                       <font>
+                                          <Font name="Roboto Light Italic" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <HBox.margin>
+                              <Insets bottom="12.5" top="12.5" />
+                           </HBox.margin>
+                        </GridPane>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="16.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="Recent : ">
+                           <font>
+                              <Font name="Roboto Light Italic" size="20.0" />
+                           </font>
+                        </Label>
+                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="48.0" prefWidth="500.0" text="Youdao">
+                           <font>
+                              <Font name="Roboto Light Italic" size="16.0" />
+                           </font>
+                           <graphic>
+                              <Label prefHeight="20.0" prefWidth="412.0" text="There is">
+                                 <font>
+                                    <Font name="Roboto Light Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Button>
+                        <Button alignment="CENTER_RIGHT" layoutX="10.0" layoutY="105.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="500.0" text="Baidu">
+                           <font>
+                              <Font name="Roboto Light Italic" size="16.0" />
+                           </font>
+                           <graphic>
+                              <Label prefHeight="20.0" prefWidth="428.0" text="There is">
+                                 <font>
+                                    <Font name="Roboto Light Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="58.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="20.0" prefWidth="175.0" text="Add the new friend">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                           <font>
+                              <Font name="Roboto Light" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="30.0" left="65.0" right="35.0" top="42.0" />
+               </padding>
+            </GridPane>
+            <ListView prefHeight="200.0" prefWidth="200.0">
+               <GridPane.margin>
+                  <Insets right="25.0" />
+               </GridPane.margin>
+            </ListView>
+            <GridPane layoutX="235.0" layoutY="13.0" style="-fx-background-color: yellow;" GridPane.columnIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <padding>
+                  <Insets bottom="45.0" left="65.0" right="40.0" top="45.0" />
+               </padding>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="您当前查找的用户：">
+                           <font>
+                              <Font name="Microsoft YaHei" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trump">
+                           <font>
+                              <Font name="Microsoft YaHei" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="75.0" layoutY="52.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="该用户不存在，请检查您的输入并重新查找">
+                           <font>
+                              <Font name="Microsoft YaHei" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="75.0" layoutY="152.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="为您推荐几位好友：">
+                           <font>
+                              <Font name="Microsoft YaHei" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" layoutX="75.0" layoutY="55.0" prefHeight="38.0" prefWidth="551.0" spacing="10.0" GridPane.rowIndex="3">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
+                           <font>
+                              <Font name="Microsoft YaHei UI" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="396.0" layoutY="10.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
+                           <font>
+                              <Font name="Microsoft YaHei UI" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="396.0" layoutY="10.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
+                           <font>
+                              <Font name="Microsoft YaHei UI" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="225.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
 </AnchorPane>
-

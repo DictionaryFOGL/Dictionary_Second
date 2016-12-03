@@ -12,6 +12,14 @@ public class ValidInput {
 		Pattern p=Pattern.compile("^[a-zA-Z0-9]{4,16}$");
 		return patternCheck(p, password);
 	}
+	//见上次词典的实现(超过字符限制可以使其变色？)
+	public static String wordSearchProcessed(String input) {
+		//TODO
+	}
+	//用户名不允许空格，字符数量限制等
+	public static String friendSearchProcessed(String input) {
+		//TODO
+	}
 	private static boolean patternCheck(Pattern p,String content) {
 		Matcher m=p.matcher(content);
 		if(!m.find()) return false;

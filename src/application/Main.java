@@ -38,11 +38,7 @@ public class Main extends Application {
 	
 	public void initBaseLayout() {
 		try {
-			FXMLLoader loaderb=new FXMLLoader();
-			loaderb.setLocation(Main.class.getResource("view/BaseLayout.fxml"));
-			baseLayout=(BorderPane) loaderb.load();
-			BaseLayoutController controller1=loaderb.getController();
-			controller1.setMain(this);
+			FXMLLoadBase("view/BaseLayout.fxml",0);
 			Scene scene=new Scene(baseLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -56,11 +52,14 @@ public class Main extends Application {
 	
 	public void initStartLayout() {
 		try {
-			FXMLLoader loaders=new FXMLLoader();
-			loaders.setLocation(Main.class.getResource("view/StartLayout.fxml"));
-			startLayout=(BorderPane) loaders.load();
-			StartLayoutController controller2=loaders.getController();
-			controller2.setMain(this);
+			StartLayoutController controller2=(StartLayoutController) FXMLLoadBase("view/StartLayout.fxml",1);
+			controller2.setBase(baseLayout);
+			
+			AnchorPane signIn=FXMLLoadBase("view/SignInLayout.fxml");
+			AnchorPane signUp=FXMLLoadBase("view/SignUpLayout.fxml");
+			AnchorPane about=FXMLLoadBase("view/AboutLayout.fxml");
+			
+			controller2.setChildPane(signIn, signUp, about);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,15 +68,48 @@ public class Main extends Application {
 	
 	public void initWorkLayout() {
 		try {
-			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(Main.class.getResource("view/WorkLayout.fxml"));
-			workLayout=(BorderPane) loader.load();
-			WorkLayoutController controller3=loader.getController();
-			controller3.setMain(this);
+			WorkLayoutController controller=(WorkLayoutController) FXMLLoadBase("view/WorkLayout.fxml",2);
+			
+			AnchorPane word=FXMLLoadBase("view/WordLayout.fxml");
+			AnchorPane friend=FXMLLoadBase("view/FriendLayout.fxml");
+			
+			controller.setChildPane(word, friend);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private Controller FXMLLoadBase(String source,int local) throws IOException {
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(Main.class.getResource(source));
+		if(local == 0) {
+			baseLayout=(BorderPane) loader.load();
+		} else if(local == 1) {
+			startLayout=(BorderPane) loader.load();
+		} else if(local == 2) {
+			workLayout=(BorderPane) loader.load();
+		}
+		Controller c=loader.getController();
+		c.setMain(this);
+		if(local == 0) {
+			c.setPaneMyself(baseLayout);
+		} else if(local == 1) {
+			c.setPaneMyself(startLayout);
+		} else if(local == 2) {
+			c.setPaneMyself(workLayout);
+		}
+		return c;
+	}
+	
+	private AnchorPane FXMLLoadBase(String source) throws IOException {
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(Main.class.getResource(source));
+		AnchorPane pane=(AnchorPane) loader.load();
+		Controller c=loader.getController();
+		c.setMain(this);
+		c.setPaneMyself(pane);
+		return pane;
 	}
 	
 	public void staticResourceLoad() {
@@ -86,12 +118,32 @@ public class Main extends Application {
 	
 	public void setStart() {
 		baseLayout.setCenter(startLayout);
+		
 	}
 	
 	public void setWork() {
 		baseLayout.setCenter(workLayout);
 	}
 	
+	public void searchEmptyMode() {
+		
+	}
+	
+	public void searchWordSuccessMode() {
+		
+	}
+
+	public void searchWordFailedMode() {
+		
+	}
+	
+	public void searchFriendSuccessMode() {
+		
+	}
+	
+	public void searchFriendFailMode() {
+		
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

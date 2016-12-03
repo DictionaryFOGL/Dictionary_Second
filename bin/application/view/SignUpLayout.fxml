@@ -54,21 +54,9 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <CheckBox mnemonicParsing="false" text="Male">
-                           <font>
-                              <Font name="Roboto Light" size="18.0" />
-                           </font>
-                        </CheckBox>
-                        <CheckBox layoutX="10.0" layoutY="33.0" mnemonicParsing="false" text="Female">
-                           <font>
-                              <Font name="Roboto Light" size="18.0" />
-                           </font>
-                        </CheckBox>
-                        <CheckBox layoutX="82.0" layoutY="33.0" mnemonicParsing="false" text="Secret">
-                           <font>
-                              <Font name="Roboto Light" size="18.0" />
-                           </font>
-                        </CheckBox>
+                        <RadioButton mnemonicParsing="false" text="Male" />
+                        <RadioButton mnemonicParsing="false" text="Female" />
+                        <RadioButton mnemonicParsing="false" text="Secret" />
                      </children>
                   </HBox>
                   <TextField maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" />
