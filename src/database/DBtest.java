@@ -10,7 +10,7 @@ public class DBtest {
 		Database DB=new DictionaryDB();
 		DB.connect();
 
-		try {
+		//try {
 			//User u=DB.verify("dreamgazer", "307726302");
 			//java.sql.Date dt=new java.sql.Date(new java.util.Date().getTime());
 			//DB.register("dreamgazer","307726302",(java.sql.Date) dt,'m');
@@ -42,12 +42,10 @@ public class DBtest {
 			DB.like(1,1);
 			System.out.println("baidu:"+DB.getWordsLike().getBaidu()+"bing:"+DB.getWordsLike().getBing()+"youdao:"+DB.getWordsLike().getYoudao());
 			*/
-			DB.addFriends(3,0);
-			DB.addFriends(2,0);
 			
-	} catch (SQLException e) {
+	//} catch (SQLException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	//	e.printStackTrace();
+	//}
 }
 }

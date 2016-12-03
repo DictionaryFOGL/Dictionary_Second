@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Message implements Serializable{
 	protected byte type;
 	
-	Message(byte type){
+	public Message(byte type){
 		this.type=type;
 	}
 	

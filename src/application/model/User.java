@@ -1,12 +1,18 @@
 package application.model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import application.util.*;
 
-public class User {
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static int userNumber=0;
 	
 	private int userID;
@@ -66,7 +72,8 @@ public class User {
 	}
 
 	public String getPwdMd5() {
-		return pwdMd5;
+		//return pwdMd5;
+		return password;
 	}
 
 	public ArrayList<WordCard> getMailBox() {

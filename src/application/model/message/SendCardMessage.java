@@ -3,26 +3,36 @@ package application.model.message;
 import application.model.*;
 
 public class SendCardMessage extends Message{
-	private User reciver;
-	private Word word;
+	private String receiverName;
+	private WordCard card;
+	
 
-	SendCardMessage(byte type,User reciver,Word word) {
+	public SendCardMessage(byte type, String receiverName,WordCard card) {
 		super(type);
-		// TODO Auto-generated constructor stub
+		this.receiverName=receiverName;
+		this.setCard(card);
 	}
 
 	@Override
 	public byte getType() {
-		// TODO Auto-generated method stub
-		return 0;
+		return type;
 	}
 
-	public User getReciver() {
-		return reciver;
+
+	public String getReceiverName() {
+		return receiverName;
 	}
 
-	public Word getWord() {
-		return word;
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public WordCard getCard() {
+		return card;
+	}
+
+	public void setCard(WordCard card) {
+		this.card = card;
 	}
 
 

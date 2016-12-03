@@ -1,8 +1,13 @@
 package application.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class WordCard {
+public class WordCard  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4307660439468308688L;
 	private Word word;
 	private String senderName;
 	private String saySomething;

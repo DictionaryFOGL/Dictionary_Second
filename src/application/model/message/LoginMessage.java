@@ -7,6 +7,7 @@ public class LoginMessage extends Message{
 
 	private  User account;
 	private boolean identified;
+	private int registered;
 	
 	public LoginMessage(byte type,User account){
 		super(type);
@@ -30,4 +31,13 @@ public class LoginMessage extends Message{
 	public void identify(){
 		identified=true;
 	}
+
+	public int getRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(int registered) {
+		this.registered = registered;
+	}
+
 }

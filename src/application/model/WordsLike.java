@@ -1,6 +1,8 @@
 package application.model;
 
-public class WordsLike {
+import java.io.Serializable;
+
+public class WordsLike implements Serializable{
 	private int baidu;
 	private int bing;
 	private int youdao;

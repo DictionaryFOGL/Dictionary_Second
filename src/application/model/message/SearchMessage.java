@@ -3,7 +3,7 @@ package application.model.message;
 public class SearchMessage extends Message {
 	private String keyWord;
 
-	SearchMessage(byte type,String keyWord) {
+	public SearchMessage(byte type,String keyWord) {
 		super(type);
 		setKeyWord(keyWord);
 	}

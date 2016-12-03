@@ -6,7 +6,7 @@ public class ResultMessage extends Message {
 	
 	private ArrayList Results;
 
-	ResultMessage(byte type,ArrayList results) {
+	public ResultMessage(byte type,ArrayList results) {
 		super(type);
 		setResults(results);
 	}

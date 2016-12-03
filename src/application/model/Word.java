@@ -1,9 +1,14 @@
 package application.model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Word{
+public class Word  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6923765951036647041L;
 	private String words;
 	private ArrayList<String> translation=new ArrayList<String>();
 	
