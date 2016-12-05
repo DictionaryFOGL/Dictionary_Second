@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane hgap="3.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="8.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="363.0" minWidth="10.0" prefWidth="363.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="155.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" minHeight="46.0" prefHeight="46.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="217.0" text="-MailBox-">
+                           <padding>
+                              <Insets bottom="9.0" />
+                           </padding>
+                           <font>
+                              <Font name="Roboto Light Italic" size="20.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="62.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                     <padding>
+                        <Insets top="6.0" />
+                     </padding>
+                  </HBox>
+                  <ListView prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets bottom="9.0" left="18.0" right="18.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="217.0" text="-Friend-">
+                           <font>
+                              <Font name="Roboto Light Italic" size="20.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="6.0" />
+                     </padding>
+                  </HBox>
+                  <ListView prefWidth="200.0" />
+               </children>
+            </VBox>
+            <GridPane vgap="3.0" GridPane.columnIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <GridPane alignment="CENTER" hgap="1.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="33.0" minWidth="10.0" prefWidth="34.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <VBox maxWidth="32.0" minWidth="32.0" prefHeight="200.0" prefWidth="32.0" GridPane.columnIndex="1">
+                           <children>
+                              <Button maxHeight="32.0" maxWidth="64.0" minHeight="34.0" minWidth="66.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="64.0" rotate="90.0" text="Clear" translateX="-16.0" translateY="16.0">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="10.0" maxHeight="32.0" maxWidth="52.0" minHeight="34.0" minWidth="54.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0" rotate="90.0" text="Save" translateX="-10.0" translateY="43.0" />
+                           </children>
+                        </VBox>
+                        <GridPane alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="144.0" />
+                            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="oldPassword : ">
+                                 <font>
+                                    <Font name="Roboto Light" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="56.0" layoutY="20.0" text="newPassword : " GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Roboto Light" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="56.0" layoutY="60.0" text="comfirm : " GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="Roboto Light" size="17.0" />
+                                 </font>
+                              </Label>
+                              <PasswordField prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="Roboto Light" size="14.0" />
+                                 </font>
+                              </PasswordField>
+                              <PasswordField layoutX="154.0" layoutY="24.0" prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Roboto Light" size="14.0" />
+                                 </font>
+                              </PasswordField>
+                              <PasswordField layoutX="154.0" layoutY="56.0" prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="Roboto Light" size="14.0" />
+                                 </font>
+                              </PasswordField>
+                           </children>
+                           <padding>
+                              <Insets bottom="12.0" right="8.0" top="12.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID : 14127003050082">
+                           <font>
+                              <Font name="Microsoft YaHei" size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="179.0" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.rowIndex="1">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Male" />
+                        <RadioButton layoutX="137.0" layoutY="24.0" mnemonicParsing="false" text="Female" />
+                        <RadioButton layoutX="183.0" layoutY="24.0" mnemonicParsing="false" text="Sceret" />
+                     </children>
+                  </HBox>
+                  <GridPane GridPane.rowIndex="3">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <GridPane.margin>
+                        <Insets bottom="24.0" left="36.0" right="36.0" top="24.0" />
+                     </GridPane.margin>
+                     <children>
+                        <Label text="Baidu : " GridPane.columnIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="60.0" layoutY="24.0" text="Youdao : " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="60.0" layoutY="76.0" text="BiYing : " GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                        <Label layoutX="78.0" layoutY="128.0" text="123" GridPane.columnIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="78.0" layoutY="76.0" text="233" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="78.0" layoutY="24.0" text="100" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

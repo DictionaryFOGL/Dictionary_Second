@@ -6,12 +6,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class AboutLayoutController implements Controller{
+	private Main mainApp;
 	private AnchorPane myself;
 
 	@Override
 	public void setMain(Main mainApp) {
-		// TODO Auto-generated method stub
-		
+		this.mainApp=mainApp;
 	}
 
 	@Override
