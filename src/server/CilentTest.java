@@ -32,7 +32,7 @@ public class CilentTest {
 		while(true) {
 			int a=sc.nextInt();
 			if(a == 0) {
-				oos.writeObject(new User("ahaha", "12345"));
+				oos.writeObject(new User("ahaha", "12345", null));
 				System.out.println("send a==0 mode");
 				
 				try {
@@ -46,7 +46,7 @@ public class CilentTest {
 				System.out.println("\t"+scin.nextLine());
 				System.out.println("\t"+scin.nextLine());
 			} else {
-				User user=new User("ahaha", "12345");
+				User user=new User("ahaha", "12345", null);
 				user.setGender('p');
 				oos.writeObject(user);
 				System.out.println("send stop mode");

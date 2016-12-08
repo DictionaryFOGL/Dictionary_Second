@@ -7,17 +7,12 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Database {
+public class Database implements DBConstant{
 	private static Connection conn=null;
 	private static Statement stat=null;
 	private static String local="jdbc:mysql://127.0.0.1:3306";//local地址可改为服务器地址
 	private static String usr="root";
-	private static String pwd="24601";
-	private static String dbName="Dictionary";
-	private static String sheet1="UserMessage";
-	private static String sheet2="history";//暂不确定
-	private static String sheet3="mailBox";
-	private static String sheet4="wordsLike";
+	private static String pwd="root";
 	
 	
 	public static void connect() {
@@ -51,13 +46,14 @@ public class Database {
 					+ "pwdmd5 char(32) NOT NULL,"
 					+ "signTime datetime NOT NULL)");
 			System.out.println(sheet1 +"created!");
-			stat.execute("CREATE TABLE "+sheet2+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
+			stat.execute("CREATE TABLE "+sheet2+"(historyNum int(5) PRIMARY KEY AUTO_INCREMENT,"
+					+ "ID int(6) NOT NULL,"
 					+ "keyWord varchar(32) NOT NULL,"
-					+ "userId int(1) NOT NULL default 0,"
-					+ "baidu int(2) NOT NULL default 0,"
+					+ "baidu int(1) NOT NULL default 0,"
 					+ "bing int(1) NOT NULL default 0,"
-					+ "youdao int(1) NOT NULL default 0)");
-			System.out.println(sheet1 +"created!");
+					+ "youdao int(1) NOT NULL default 0,"
+					+ "searchTime datetime NOT NULL)");
+			System.out.println(sheet2 +"created!");
 			stat.execute("CREATE TABLE "+sheet3+"(senderID int(6) NOT NULL,"
 					+ "receiverID int(6) NOT NULL,"
 					+ "words varchar(64),"
@@ -77,13 +73,12 @@ public class Database {
 	
 	public static void insertTestData() {
 		try {
-			Date d=new Date(2012, 3, 4, 5, 6, 7);
-			d.setYear(111);//不明bug的时间-19正确
+			long d=System.currentTimeMillis();
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			stat.executeUpdate("INSERT INTO "+sheet1+"(name,gender,password,pwdmd5,signtime) "
 					+ "values('admin','f',123456,'error','"+sdf.format(d)+"')");
 			stat.executeUpdate("INSERT INTO "+sheet3+"(senderID,receiverID,url,time) "
-					+ "values(1,3,'b','"+sdf.format(d)+"')");
+					+ "values(1,3,0,'"+sdf.format(d)+"')");
 			System.out.println("insert!");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,10 +105,10 @@ public class Database {
 	
 	public static void main(String[] args) throws SQLException {
 		connect();
-
 		createDatabaseAndList();
 		stat.executeQuery("USE "+dbName);
 		insertTestData();
 		closeAll();
+		//resetAll();
 	}
 }

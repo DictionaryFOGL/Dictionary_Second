@@ -22,7 +22,7 @@ public class CilentThread implements Runnable{
 	public static void showReturn(User user) {
 		user.setPassword("changed");
 		user.setGender('M');
-		user.addNewFriend(new User("ss","2333"));
+		user.addNewFriend(new User("ss","2333", null));
 	}
 	
 	@Override

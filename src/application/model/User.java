@@ -12,7 +12,6 @@ public class User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	private static int userNumber=0;
 	
 	private int userID;
@@ -23,32 +22,28 @@ public class User implements Serializable{
 	private char gender;
 	private ArrayList<WordCard> mailBox=new ArrayList<WordCard>();
 	private ArrayList<User> friendList=new ArrayList<User>();
+	private int baidu,youdao,bing;
 	
-	public User(String userName, String password, char gender) {
+	public User(String userName, String password, char gender,Date registerDate) {
 		userNumber++;
 		this.setRegisterDate(new Date());
 		this.userID=userNumber;
 		this.userName = userName;
 		this.password = password;
-		//pwdMd5=Encryption.MD5(password);
+		pwdMd5=Encryption.MD5(password);
 		this.gender = gender;
-	}
-	
-	public User(String userName, String password, char gender,Date registerDate) {
-		this.setRegisterDate(registerDate);
-		this.userID=0;
-		this.userName = userName;
-		this.password = password;
-		//pwdMd5=Encryption.MD5(password);
-		this.gender = gender;
+		this.registerDate=registerDate;
+		baidu=0;
+		youdao=0;
+		bing=0;
 	}
 	
 	public int getUserID() {
 		return userID;
 	}
 
-	public User(String userName, String password) {
-		this(userName,password,'s');
+	public User(String userName, String password, Date registerDate) {
+		this(userName,password,'s',registerDate);
 	}
 
 	public String getUserName() {
@@ -58,7 +53,7 @@ public class User implements Serializable{
 	public boolean setPassword(String password) {
 		if(ValidInput.validPwd(password)) {
 			this.password = password;
-			//pwdMd5=Encryption.MD5(password);
+			pwdMd5=Encryption.MD5(password);
 			return true;
 		} else return false;
 	}
@@ -72,8 +67,46 @@ public class User implements Serializable{
 	}
 
 	public String getPwdMd5() {
-		//return pwdMd5;
-		return password;
+		return pwdMd5;
+	}
+
+	public int getBaidu() {
+		return baidu;
+	}
+	
+	public void baiduLike() {
+		baidu++;
+	}
+	
+	public void baiduDisLike() {
+		if(baidu>0) baidu--;
+		else throw new IndexOutOfBoundsException();
+	}
+	
+	public int getYoudao() {
+		return youdao;
+	}
+
+	public void youdaoLike() {
+		youdao++;
+	}
+	
+	public void youdaoDisLike() {
+		if(youdao>0) youdao--;
+		else throw new IndexOutOfBoundsException();
+	}
+
+	public int getBing() {
+		return bing;
+	}
+	
+	public void bingLike() {
+		bing++;
+	}
+	
+	public void bingDisLike() {
+		if(bing>0) bing--;
+		else throw new IndexOutOfBoundsException();
 	}
 
 	public ArrayList<WordCard> getMailBox() {
@@ -118,7 +151,7 @@ public class User implements Serializable{
 	public void resetAll() {
 		mailBox.clear();
 		password="123456";
-		//pwdMd5=Encryption.MD5(password);
+		pwdMd5=Encryption.MD5(password);
 		friendList.clear();
 	}
 	
