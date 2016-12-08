@@ -107,7 +107,6 @@ public class Database implements DBConstant{
 		connect();
 		createDatabaseAndList();
 		stat.executeQuery("USE "+dbName);
-		insertTestData();
 		closeAll();
 		//resetAll();
 	}

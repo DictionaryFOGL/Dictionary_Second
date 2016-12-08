@@ -3,7 +3,7 @@ package application.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class WordCard implements Serializable,WebSite{
+public class WordCard implements Serializable{
 	/**
 	 * 
 	 */
@@ -13,9 +13,9 @@ public class WordCard implements Serializable,WebSite{
 	private String saySomething;
 	private int senderID;
 	private Date time;
-	private byte site;
+	private int site;
 	
-	public WordCard(Word word, String senderName, String saySomething, int senderID, Date time, byte site) {
+	public WordCard(Word word, String senderName, String saySomething, int senderID, Date time, int site) {
 		this.word = word;
 		this.senderName = senderName;
 		this.saySomething=saySomething;
@@ -53,8 +53,8 @@ public class WordCard implements Serializable,WebSite{
 	}
 
 	public String getSite() {
-		if(site == BAIDU) return "fanyi.baidu.com";
-		else if(site == YOUDAO) return "www.youdao.com";
+		if(site == 0) return "fanyi.baidu.com";
+		else if(site == 2) return "www.youdao.com";
 		else return "www.bing.com/translator";
 	}
 

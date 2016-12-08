@@ -172,7 +172,7 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	}
 	
 	public void login(String name,String passWord) throws IOException{
-		LoginMessage message=new LoginMessage(LOGIN,new User(name,passWord));
+		LoginMessage message=new LoginMessage(LOGIN,new User(name,passWord, null));
 		objectToServer.writeObject(message);	
 	}
 	

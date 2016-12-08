@@ -36,7 +36,7 @@ interface Client{
 	
 	public ArrayList<User> getFriend();
 	
-	public void like_cancel(Website website) throws IOException;
+	public void like_cancel(int website) throws IOException;
 
 	public void like(Website website) throws IOException;
 	

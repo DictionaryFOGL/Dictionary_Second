@@ -118,7 +118,7 @@ public class CStest extends JFrame{
 	
  	class SearchListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			User user=new User("testuser","123456789");
+			User user=new User("testuser","123456789", null);
 			user.setGender('M');
 			user.setRegisterDate(new Date());
 			try {
@@ -178,7 +178,7 @@ public class CStest extends JFrame{
 
  	class SearchListener2 implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			User user=new User("dreamgazer","9630");
+			User user=new User("dreamgazer","9630", null);
 			user.setGender('M');
 			user.setRegisterDate(new Date());
 			try {
