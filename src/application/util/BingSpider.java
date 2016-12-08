@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import application.model.Word;
+
 public class BingSpider extends Spider{
 	
 	private String suggestionRegexd;
@@ -24,7 +26,6 @@ public class BingSpider extends Spider{
 	public BingSpider() {
 		super();
 		init();
-		process(keyWord); 
 	}
 	
 	public BingSpider(String keyWord) {
@@ -46,16 +47,10 @@ public class BingSpider extends Spider{
 	}
 
 	@Override
-	public ArrayList<String> getResult() {
-		return explanations;
-	}
-
-	@Override
 	public void setWord(String keyWord) {
 		explanations.clear();
 		suggestions.clear();
 		this.keyWord=keyWord;
-		process(keyWord);	
 	}
 	
 	private void processWords(){
@@ -144,4 +139,15 @@ public class BingSpider extends Spider{
 		return suggestions;
 	}
 
+	@Override
+	public Word getResult() {
+		process(keyWord);
+		if(explanations.size() == 0) {
+			return null;
+		} else {
+			Word result=new Word(keyWord);
+			result.setTranslation(explanations);
+			return result;
+		}
+	}
 }

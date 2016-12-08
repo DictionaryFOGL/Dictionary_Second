@@ -2,7 +2,9 @@ package application.util;
 
 import java.util.ArrayList;
 
-abstract class Spider {
+import application.model.Word;
+
+public abstract class Spider {
 	protected String keyWord;
 	protected String url;
 	protected String preUrl;
@@ -26,7 +28,7 @@ abstract class Spider {
 	
 	public abstract void setWord(String keyWord);// set the keyWord for Searching
 	
-	public abstract ArrayList<String> getResult();// return the words OR SENTENCE
+	public abstract Word getResult();// return the words OR SENTENCE
 	
 	public abstract ArrayList<String> getSuggestion();//for suggestions of input,not work in baiduspider
 }

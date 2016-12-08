@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import application.model.Word;
+
 public class BaiduSpider extends Spider{
 
 	private String wordRegexd;
@@ -37,8 +39,16 @@ public class BaiduSpider extends Spider{
 	}
 
 	@Override
-	public ArrayList<String> getResult() {
-		return explanations;
+	public Word getResult() {
+		process(keyWord);
+		if(explanations.size() == 0) {
+			System.out.println(explanations.size());
+			return null;
+		} else {
+			Word result=new Word(keyWord);
+			result.setTranslation(explanations);
+			return result;
+		}
 	}
 
 	@Override
@@ -53,7 +63,6 @@ public class BaiduSpider extends Spider{
 		explanations.clear();
 		suggestions.clear();
 		this.keyWord=keyWord;
-		process(keyWord);
 	}
 	
 	private void processWords(){
@@ -97,8 +106,12 @@ public class BaiduSpider extends Spider{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}  
-
-		
 	}
-
+	public static void main(String[] args) {
+		Spider s=new BaiduSpider();
+		s.setWord("you");
+		Word r=s.getResult();
+		for(String ss:r.getTranslation())
+			System.out.println(ss);
+	}
 }
