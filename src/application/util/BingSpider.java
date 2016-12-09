@@ -37,15 +37,14 @@ public class BingSpider extends Spider{
 	private void init(){
 		preUrl="http://cn.bing.com/dict/search?q=";
 		wordRegex="<li><span class=\"pos\">.*</span><span class=\"def\"><span>.*</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>.*</span></span></li>";
-		wordRegexd="<li><span class=\"pos\">|</span><span class=\"def\"><span>|</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>";
+		wordRegexd="<li><span class=\"pos\">|</span><span class=\"def\"><span>|</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>|</span><span>\\(=</span>.*</a><span>\\)</span><span>";
 		sentenceRegex="<a class=\"p1-9\" name=\"translation_sen_id.*1\">.*</a>|<span>.*</span>\n       <a class=\"p1-9\"|<span>.*</span>\n      </div>\n     </div>";
-		sentenceRegexd="<a class=\"p1-9\" name=\"translation_sen_id.*1\">|</a>|<span>|</span>\n       <a class=\"p1-9\"|</span>\n      </div>\n     </div>";
+		sentenceRegexd="<a class=\"p1-9\" name=\"translation_sen_id.*1\">|</a>|<span>|</span>\n       <a class=\"p1-9\"|</span>\n      </div>\n     </div>|</span><span>(=</span>.*</a><span>)</span><span>";
 		suggestionRegex="1\">.*</a>\n      <div class=\"df_wb_text\">";
 		suggestionRegexd="1\">|</a>\n      <div class=\"df_wb_text\">";
 		suggestionRegex2="&amp;FORM=BDVSP6.*1\">.*</a></li>";
 		suggestionRegex2d="&amp;FORM=BDVSP6.*1\">|</a></li>";
 	}
-
 	@Override
 	public void setWord(String keyWord) {
 		explanations.clear();
@@ -75,10 +74,8 @@ public class BingSpider extends Spider{
     	pd=Pattern.compile(sentenceRegexd);
     	while(m.find()){
 			md=pd.matcher(m.group());
-			//System.out.println(m.group());
 			StringBuffer sb=new StringBuffer();
 			while(md.find()){
-				//System.out.println(md.group());
 				md.appendReplacement(sb,"");
 			}
 			md.appendTail(sb);
@@ -99,7 +96,16 @@ public class BingSpider extends Spider{
 				md.appendReplacement(sb,"");
 			}
 			md.appendTail(sb);
-			suggestions.add(sb.toString());
+			boolean isrepeated=false;
+			for(int i=0;i<suggestions.size();i++){
+				if(sb.toString().equals(suggestions.get(i))){					
+					isrepeated=true;
+				}
+			}
+			if(!isrepeated){
+				suggestions.add(sb.toString());				
+			}
+
 			
 		}
 		if(suggestions.size()==0){
@@ -144,7 +150,11 @@ public class BingSpider extends Spider{
 		process(keyWord);
 		if(explanations.size() == 0) {
 			return null;
-		} else {
+		}
+		else if(explanations.get(0).length()==0){
+			return null;
+		}
+			else{
 			Word result=new Word(keyWord);
 			result.setTranslation(explanations);
 			return result;

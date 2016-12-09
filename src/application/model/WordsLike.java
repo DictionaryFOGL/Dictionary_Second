@@ -12,10 +12,10 @@ public class WordsLike implements Serializable{
 	private int bing;
 	private int youdao;
 	
-	public WordsLike() {
-		this.baidu=0;
-		this.bing=0;
-		this.youdao=0;
+	public WordsLike(int baidu,int bing,int youdao) {
+		this.baidu=baidu;
+		this.bing=bing;
+		this.youdao=youdao;
 	}
 	public int getBaidu() {
 		return baidu;

@@ -213,9 +213,9 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	public void like_cancel(Website website) throws IOException {
 		int site;	
 		switch(website){
-		case Baidu:site=0;break;
-		case Youdao:site=2;break;
-		case Bing:site=1;break;
+		case BAIDU:site=0;break;
+		case YOUDAO:site=2;break;
+		case BING:site=1;break;
 		default:site=3;
 		}		
 		LikeMessage message=new LikeMessage(LIKE_CANCEL,site,account.getUserName());
@@ -227,9 +227,9 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	public void like(Website website) throws IOException {
 		int site;	
 		switch(website){
-		case Baidu:site=0;break;
-		case Youdao:site=2;break;
-		case Bing:site=1;break;
+		case BAIDU:site=0;break;
+		case YOUDAO:site=2;break;
+		case BING:site=1;break;
 		default:site=3;
 		}		
 		LikeMessage message=new LikeMessage(LIKE,site,account.getUserName());

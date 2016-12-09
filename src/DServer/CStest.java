@@ -123,7 +123,7 @@ public class CStest extends JFrame{
 			user.setRegisterDate(new Date());
 			try {
 				//client.register(user);
-				//client.login("admin", "123456");
+				client.login("admin", "123456");
 				//client.searchUser("adm");
 				//client.sendCard("testuser", new WordCard(new Word("Dictionary","×Öµä"),client.getUser().getUserName(),"blablabla",client.getUser().getUserID(),new Date(),1));
 				//client.refreshCards();
@@ -183,7 +183,7 @@ public class CStest extends JFrame{
 			user.setRegisterDate(new Date());
 			try {
 				client.login("dreamgazer","9630");
-				client.register(user);
+				//client.register(user);
 				//client.logout();
 			   // client.login("admin", "error");
 			} catch (IOException e1) {

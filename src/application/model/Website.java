@@ -1,5 +1,5 @@
 package application.model;
 
-public enum WebSite {
+public enum Website {
 	BAIDU,BING,YOUDAO;
 }

@@ -1,0 +1,261 @@
+[33mcommit 6420fbc474133ec3dee816e095c48878f865a4c8[m
+Merge: 8b76cc1 2b40935
+Author: dreamgazer <574110878@qq.com>
+Date:   Sun Dec 4 06:12:42 2016 +0800
+
+    Merge branch 'master' of github.com:DictionaryFOGL/Dictionary_Second
+
+[33mcommit 8b76cc177bddcfdde6b6e7f293dae74a07039267[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Sun Dec 4 06:11:43 2016 +0800
+
+    client interface and its implemention complete with a few test ~ZZZZZZ
+
+[33mcommit 2b409353441904184c436bae06f5fa50cf6b09ea[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sat Dec 3 21:50:50 2016 +0800
+
+    UI framework and method framework
+
+[33mcommit c49e5ebb9cbe7623ec25a207b1f1df5dd106db26[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sat Dec 3 20:36:52 2016 +0800
+
+    UI preparing……
+
+[33mcommit 07131003aafe62ffd74a38039fddc86db86712b9[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Sat Dec 3 03:39:58 2016 +0800
+
+    database interface and its implementions finished,CS API will get finished in 24h
+
+[33mcommit 550c366fc13d91ea6cf7378302ef89f022f755af[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Tue Nov 29 16:00:55 2016 +0800
+
+    Server database interface
+
+[33mcommit ca45bb7601ecc9b606f2d041cf981663afb521c3[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Mon Nov 28 03:08:50 2016 +0800
+
+    WordCard fxml finished
+
+[33mcommit 75e11918875a9e1023167ac3c96a3da243df9ab1[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Mon Nov 28 02:44:16 2016 +0800
+
+    ppt for report
+
+[33mcommit 9a8d1b56dd0026d43ac0a65d9f8bc229315240f7[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sun Nov 27 01:26:54 2016 +0800
+
+    UI add sendCard
+
+[33mcommit b015929a667c0699fd414f4162cf3d672f94e371[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sun Nov 27 00:58:53 2016 +0800
+
+    UI layout basic mode（without css）
+
+[33mcommit 6acaaae28b4a5de12dae857f0bb2c91e4ec23033[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sat Nov 26 21:24:54 2016 +0800
+
+    UIdesign start with test
+
+[33mcommit b2a569dca5e94890f2c05c901e7328ff8996eb46[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Fri Nov 25 21:40:37 2016 +0800
+
+    add libraries,find parameters for test from javafx source code
+
+[33mcommit 0a5ae11e5acc33465ea0756644fec7c9e8bc50eb[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Fri Nov 25 04:04:05 2016 +0800
+
+    little fix
+
+[33mcommit 556ba8f20f0d8c7ce99db853ad8057a05a9f24c7[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Fri Nov 25 03:43:18 2016 +0800
+
+    CS message communication & test
+
+[33mcommit 6487edeeff0d8f18bedf5158c3790f6191cf1cf1[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Wed Nov 23 23:27:58 2016 +0800
+
+    CSdesign begins
+
+[33mcommit a85f9baeee4230f3559220229771a2fb35704407[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Wed Nov 23 03:02:36 2016 +0800
+
+    something wrong with time set year......
+
+[33mcommit f1b970a2160fccecbd55f698bf5c627ebb5b9128[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Wed Nov 23 02:56:54 2016 +0800
+
+    database reset and test successfully
+
+[33mcommit 3a5f448aba389d60214bec5dd3a46cafdadfcf90[m
+Merge: 7a6a873 318e560
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Wed Nov 23 00:51:48 2016 +0800
+
+    Merge branch 'master' of github.com:DictionaryFOGL/Dictionary_Second
+    
+    Conflicts:
+            bin/.gitignore
+    
+    Interaction C/S tested successfully
+
+[33mcommit 7a6a873081ffbdaa21f87f82d6f4edd1ea9c3b18[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Wed Nov 23 00:46:14 2016 +0800
+
+    C/S test succeeded!!!!!!!!!!!!Yeah!!!!!!!
+
+[33mcommit 318e560bd4e68d15293dfe70f9bc6fd015f41809[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Mon Nov 21 22:00:02 2016 +0800
+
+    c/s test by dreamgazer
+
+[33mcommit 31ecf3730b15fd81b93a0c266b9417a0065380e4[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Mon Nov 21 00:47:25 2016 +0800
+
+    improved bing&youdao sentence translation
+
+[33mcommit 1da9aea4a586330e504e9192683cdde07e37759d[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Mon Nov 21 00:14:11 2016 +0800
+
+    isWordFound removed
+
+[33mcommit c2bafc711a71051049309cd496a59ff2ae288874[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sun Nov 20 02:56:58 2016 +0800
+
+    renew something
+
+[33mcommit 1984bf7ac7d0742e41763dfd912c7fdcbf71ce4a[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sun Nov 20 02:20:52 2016 +0800
+
+    Icon resources ready,UI finished!But test failed again...I'm sleepy
+
+[33mcommit bebb1bf521ad101fb9570fb0815e38cd1b524761[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sun Nov 20 01:13:41 2016 +0800
+
+    Server test failed……TAT sad
+
+[33mcommit a652cafb2fae6914f1b4548fa32628569acb4c95[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sun Nov 20 00:24:59 2016 +0800
+
+    UI improve,Server and Client test,
+
+[33mcommit 5bffe65ede13271d6ced33eaf4e368922c91b659[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sat Nov 19 20:06:06 2016 +0800
+
+    User class,improve WordCard and Word
+
+[33mcommit 71deb4551054a0a84ff3724152893dbd1643ae38[m
+Merge: 753cc8f 7e46c58
+Author: dreamgazer <574110878@qq.com>
+Date:   Sat Nov 19 04:15:32 2016 +0800
+
+    updated sipder without sufficient test
+
+[33mcommit 753cc8fbf6c0c269537d30782ce2d4934ac7b31a[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Sat Nov 19 04:04:57 2016 +0800
+
+    updated sipder without sufficient test
+
+[33mcommit 7e46c583f384a7e2e758366f8517f182ff46c831[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sat Nov 19 01:38:23 2016 +0800
+
+    UML and server test
+
+[33mcommit 7e186510c3a7348654c36a3671cb47415d3ee9c8[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Thu Nov 17 18:23:52 2016 +0800
+
+    Spider new framework
+
+[33mcommit be08af197132b95deca77e95a1f7ba94d654d62b[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Thu Nov 17 16:20:59 2016 +0800
+
+    Test failed
+
+[33mcommit d83444e84c47a0d69a9a3c674144785f533caeed[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Thu Nov 17 14:22:17 2016 +0800
+
+    wordspider to get explanations from baidu,bing and youdao
+
+[33mcommit 4b5861a773782562aba34909efcd4423211419bf[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Mon Nov 14 03:40:04 2016 +0800
+
+    Add resources directory for static pictures resources
+
+[33mcommit 29c3d5856eae3a6e2c5933066feaad0c7f97ef2b[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Mon Nov 14 03:34:48 2016 +0800
+
+    UI design finished 80% over,……I'm so tired now……
+
+[33mcommit 9685d7902b10a7e665eec05e98f98599080d7e2c[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Sat Nov 12 05:37:11 2016 +0800
+
+    add two new jar for Database
+    UI finished show
+
+[33mcommit 3b0fbc74e34cd49a91a384f739c11b47d9d90fcb[m
+Merge: b752206 3e94a16
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Fri Nov 11 01:49:14 2016 +0800
+
+    Merge branch 'master' of github.com:DictionaryFOGL/Dictionary_Second
+
+[33mcommit b75220649bb412ee2292d4f2b50c85007c7d2ca0[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Fri Nov 11 01:43:53 2016 +0800
+
+    UI sign out and sign in another version
+
+[33mcommit 3e94a1621d3977067a188a7542c57e31282f7def[m
+Author: dreamgazer <574110878@qq.com>
+Date:   Thu Nov 10 20:40:06 2016 +0800
+
+    survive comfirm
+
+[33mcommit 49228c038e9bc6fd55d52087cb5fa2e2b5afd253[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Thu Nov 10 18:39:13 2016 +0800
+
+    UI design start
+
+[33mcommit e5a8ecb9034322aa77e70609b7bf8c2f1b17c908[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Thu Nov 10 17:17:43 2016 +0800
+
+    Encryption MD5 finished without test
+
+[33mcommit f164e334e35e9873abcf7910cbf34b25f43f8825[m
+Author: GARENFEATHER <476217804@qq.com>
+Date:   Thu Nov 10 01:10:25 2016 +0800
+
+    Init
