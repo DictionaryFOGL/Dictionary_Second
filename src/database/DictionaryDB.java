@@ -54,7 +54,11 @@ public class DictionaryDB implements Database,DBConstant{
 		    account=null;
 		}
 		else{
+<<<<<<< HEAD
 			account=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0),result.getDate(6));				
+=======
+			account=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0), null);				
+>>>>>>> 8baa032fa952eeebe013f4b720ac8b54a9dcc63a
 		}
 		return account;
 	}

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.SendCardController">
    <children>
       <GridPane alignment="TOP_CENTER" prefHeight="480.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -21,11 +21,11 @@
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="170.0" text="FriendList" />
-                  <ListView prefWidth="200.0" />
+                  <ListView fx:id="friend" prefWidth="200.0" />
                   <HBox prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Button maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="SelectAll" />
-                        <Button layoutX="10.0" layoutY="10.0" maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="DeleteAll" />
+                        <Button fx:id="selectAll" maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="SelectAll" />
+                        <Button fx:id="deleteAll" layoutX="10.0" layoutY="10.0" maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="DeleteAll" />
                      </children>
                   </HBox>
                </children>
@@ -42,8 +42,8 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="38.0" GridPane.rowIndex="2">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="106.0" text="Send" />
-                        <Button layoutX="428.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="132.0" text="Cancel" />
+                        <Button fx:id="ok" mnemonicParsing="false" prefHeight="34.0" prefWidth="106.0" text="Send" />
+                        <Button fx:id="cancel" layoutX="428.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="132.0" text="Cancel" />
                      </children>
                      <GridPane.margin>
                         <Insets left="22.0" right="32.0" />
@@ -73,15 +73,15 @@
                         <Label layoutX="124.0" layoutY="96.0" text="English : " GridPane.rowIndex="2" />
                         <Label layoutX="109.0" layoutY="155.0" text="Chinese : " GridPane.rowIndex="3" />
                         <Label layoutX="104.0" layoutY="213.0" text="Time : " GridPane.rowIndex="4" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" />
-                        <TextField prefHeight="35.0" prefWidth="345.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Text fx:id="sendTo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="say" prefHeight="35.0" prefWidth="345.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="55.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Text layoutX="166.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Text layoutX="166.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Text layoutX="166.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Text fx:id="english" layoutX="166.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Text fx:id="chinese" layoutX="166.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Text fx:id="time" layoutX="166.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="360.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                   <Label text="-sendWordCard-" />

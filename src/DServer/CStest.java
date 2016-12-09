@@ -27,7 +27,6 @@ import javax.swing.text.BadLocationException;
 
 import application.model.SearchHistory;
 import application.model.User;
-import application.model.Website;
 import application.model.Word;
 import application.model.WordCard;
 
@@ -60,12 +59,12 @@ public class CStest extends JFrame{
 		setLayout(new BorderLayout());
 		client=new DictionaryFOGLClient();
 		
-		try {
-			client.waitForAction();
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			client.waitForAction();
+//		} catch (ClassNotFoundException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}//初始化界面
 	
 	private JPanel northPanel(){

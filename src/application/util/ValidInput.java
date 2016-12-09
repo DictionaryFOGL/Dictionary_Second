@@ -5,9 +5,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidInput {
+	//已存在用户名？？？？？？
 	public static boolean validUsername(String userName) {
 		Pattern p=Pattern.compile("^[a-zA-Z0-9_\u4e00-\u9fa5]{2,10}$");
-		return patternCheck(p, userName);
+		//return patternCheck(p, userName);
 	}
 	public static boolean validPwd(String password) {
 		Pattern p=Pattern.compile("^[a-zA-Z0-9]{4,16}$");

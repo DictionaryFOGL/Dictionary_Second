@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AboutLayoutController">
+<AnchorPane fx:id="myself" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AboutLayoutController">
    <children>
       <GridPane alignment="CENTER" prefHeight="382.0" prefWidth="740.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -34,7 +34,7 @@
                         <Font name="Roboto Light" size="25.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" text="dreamgazer">
+                  <Button fx:id="dream" mnemonicParsing="false" text="dreamgazer">
                      <font>
                         <Font name="Roboto Light" size="24.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Font name="Roboto Light" size="25.0" />
                      </font>
                   </Label>
-                  <Button layoutX="318.0" layoutY="26.0" mnemonicParsing="false" text="GARENFEATHER">
+                  <Button fx:id="fog" layoutX="318.0" layoutY="26.0" mnemonicParsing="false" text="GARENFEATHER">
                      <font>
                         <Font name="Roboto Light" size="24.0" />
                      </font>
@@ -72,7 +72,7 @@
                         <Font name="Roboto Light" size="25.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" text="Clickhere">
+                  <Button fx:id="feedback" mnemonicParsing="false" text="Clickhere">
                      <font>
                         <Font name="Roboto Light" size="24.0" />
                      </font>

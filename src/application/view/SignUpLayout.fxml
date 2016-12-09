@@ -48,20 +48,20 @@
                   </Label>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" text="Sign up" />
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" text="Cancel" />
+                        <Button fx:id="ok" mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" text="Sign up" />
+                        <Button fx:id="cancel" mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" text="Cancel" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Male" />
-                        <RadioButton mnemonicParsing="false" text="Female" />
-                        <RadioButton mnemonicParsing="false" text="Secret" />
+                        <RadioButton fx:id="male" mnemonicParsing="false" text="Male" />
+                        <RadioButton fx:id="female" mnemonicParsing="false" text="Female" />
+                        <RadioButton fx:id="secret" mnemonicParsing="false" text="Secret" />
                      </children>
                   </HBox>
-                  <TextField maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" />
-                  <TextField layoutX="180.0" layoutY="30.0" maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField layoutX="180.0" layoutY="106.0" maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="name" maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="pwd1" layoutX="180.0" layoutY="30.0" maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="pwd2" layoutX="180.0" layoutY="106.0" maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

@@ -20,6 +20,7 @@ public class Main extends Application {
 	private BorderPane baseLayout;
 	private BorderPane startLayout;
 	private BorderPane workLayout;
+	private Controller tempControl;
 	
 	public Main() {
 		
@@ -72,7 +73,11 @@ public class Main extends Application {
 			WorkLayoutController controller=(WorkLayoutController) FXMLLoadBase("view/WorkLayout.fxml",2);
 			
 			AnchorPane word=FXMLLoadBase("view/WordLayout.fxml");
+			WordLayoutController c1=(WordLayoutController) tempControl;
+			controller.setWordControl(c1);
 			AnchorPane friend=FXMLLoadBase("view/FriendLayout.fxml");
+			FriendLayoutController c2=(FriendLayoutController) tempControl;
+			controller.setFriControl(c2);
 			
 			controller.setChildPane(word, friend);
 		} catch (IOException e) {
@@ -108,6 +113,7 @@ public class Main extends Application {
 		loader.setLocation(Main.class.getResource(source));
 		AnchorPane pane=(AnchorPane) loader.load();
 		Controller c=loader.getController();
+		tempControl=c;
 		c.setMain(this);
 		c.setPaneMyself(pane);
 		return pane;

@@ -15,15 +15,17 @@ import javafx.scene.layout.Pane;
 public class WorkLayoutController implements Controller{
 	private Main mainApp;
 	//1ÎªËÑË÷µ¥´Ê,-1ÎªËÑË÷ÅóÓÑ
-	private int mode=1;
+	private int mode=-1;
 	
-	private BorderPane myself;
+	
 	private AnchorPane wordLay;
 	private AnchorPane friendLay;
 	
 	private WordLayoutController wordCon;
 	private FriendLayoutController friendCon;
 	
+	@FXML
+	private BorderPane myself;
 	@FXML
 	private ImageView modePic;
 	@FXML
@@ -51,7 +53,16 @@ public class WorkLayoutController implements Controller{
 		this.friendLay=friendLay;
 	}
 	
+	public void setWordControl(WordLayoutController wordCon) {
+		this.wordCon=wordCon;
+	}
+	
+	public void setFriControl(FriendLayoutController friendCon) {
+		this.friendCon=friendCon;
+	}
+	
 	private void wordSearchMode() {
+		System.out.println(myself);
 		myself.setCenter(wordLay);
 	}
 	
@@ -61,6 +72,7 @@ public class WorkLayoutController implements Controller{
 	
 	private void searchWordBase(String content) {
 		wordSearchMode();
+		//TODO change
 		wordCon.searchResult(content);
 	}
 	

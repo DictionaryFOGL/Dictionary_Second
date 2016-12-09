@@ -77,6 +77,7 @@ public class Server implements DatabaseConstant{
 		try {
 			while (true) {
 				Socket clntSock = servSock.accept();
+				System.out.println(clntSock.hashCode());
 				SocketAddress clientAddress = clntSock.getRemoteSocketAddress();
 				System.out.println("Handling client at " + clientAddress);
 				Thread test = new Thread(new CilentThread(clntSock,servSock));
