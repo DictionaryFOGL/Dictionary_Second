@@ -21,7 +21,7 @@ public class CilentTest {
 		int port=20123;
 		
 		Socket socket=new Socket(serverIP, port);
-		System.out.println("Connect to server...");
+		System.out.println("Connect to server..."+socket.hashCode());
 		InputStream in=socket.getInputStream();
 		OutputStream out=socket.getOutputStream();
 		ObjectOutputStream oos=new ObjectOutputStream(out);

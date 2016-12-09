@@ -19,9 +19,8 @@ public class BaseLayoutController implements Controller{
 	private Label time;
 	@FXML
 	private Label date;
-	
 	@FXML
-	private Label test;
+	private Label name;
 	
 	@Override
 	public void setMain(Main mainApp) {

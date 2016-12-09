@@ -12,7 +12,6 @@ public class User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static int userNumber=0;
 	
 	private int userID;
 	private String userName;
@@ -25,9 +24,7 @@ public class User implements Serializable{
 	private int baidu,youdao,bing;
 	
 	public User(String userName, String password, char gender,Date registerDate) {
-		userNumber++;
 		this.setRegisterDate(new Date());
-		this.userID=userNumber;
 		this.userName = userName;
 		this.password = password;
 		pwdMd5=Encryption.MD5(password);

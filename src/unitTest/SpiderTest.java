@@ -106,8 +106,8 @@ public class SpiderTest {
 		Spider s=new YoudaoSpider();
 		s.setWord("cries");
 		Word r=s.getResult();
-		System.out.println(s.getSuggestion().get(0));
-		assertArrayEquals(new int[]{2,5}, new int[]{r.getTranslation().size(),s.getSuggestion().size()});
+		//System.out.println(s.getSuggestion().get(0));
+		assertEquals(2, r.getTranslation().size());
 	}
 
 	@Test

@@ -18,7 +18,7 @@ public class Server {
 			ServerSocket serversocket=new ServerSocket(8000);
 			System.out.println("Server working....");
 
-			while(true){
+			while(true) {
 				Socket socket=serversocket.accept();
 				System.out.println(socket.getPort());
 				System.out.println(socket.getInetAddress());
@@ -27,7 +27,6 @@ public class Server {
 				thread.start();
 				//thread.join();
 			}
-			
 		} catch (IOException  e) {
 			e.printStackTrace();
 		}		

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.PersonalEditLayoutController">
    <children>
       <GridPane hgap="3.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="8.0">
         <columnConstraints>
@@ -25,7 +24,7 @@
                <children>
                   <HBox alignment="CENTER" minHeight="46.0" prefHeight="46.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="clearCards" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="217.0" text="-MailBox-">
                            <padding>
                               <Insets bottom="9.0" />
@@ -34,13 +33,13 @@
                               <Font name="Roboto Light Italic" size="20.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="62.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="refreshCards" fitHeight="43.0" fitWidth="43.0" layoutX="62.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <padding>
                         <Insets top="6.0" />
                      </padding>
                   </HBox>
-                  <ListView prefWidth="200.0" />
+                  <ListView fx:id="wordCards" prefWidth="200.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
@@ -55,7 +54,7 @@
                               <Font name="Roboto Light Italic" size="20.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="refreshFriend" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -64,7 +63,7 @@
                         <Insets top="6.0" />
                      </padding>
                   </HBox>
-                  <ListView prefWidth="200.0" />
+                  <ListView fx:id="friends" prefWidth="200.0" />
                </children>
             </VBox>
             <GridPane vgap="3.0" GridPane.columnIndex="2">
@@ -89,12 +88,12 @@
                      <children>
                         <VBox maxWidth="32.0" minWidth="32.0" prefHeight="200.0" prefWidth="32.0" GridPane.columnIndex="1">
                            <children>
-                              <Button maxHeight="32.0" maxWidth="64.0" minHeight="34.0" minWidth="66.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="64.0" rotate="90.0" text="Clear" translateX="-16.0" translateY="16.0">
+                              <Button fx:id="cancel" maxHeight="32.0" maxWidth="64.0" minHeight="34.0" minWidth="66.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="64.0" rotate="90.0" text="Clear" translateX="-16.0" translateY="16.0">
                                  <font>
                                     <Font name="Microsoft YaHei" size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="10.0" layoutY="10.0" maxHeight="32.0" maxWidth="52.0" minHeight="34.0" minWidth="54.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0" rotate="90.0" text="Save" translateX="-10.0" translateY="43.0" />
+                              <Button fx:id="save" layoutX="10.0" layoutY="10.0" maxHeight="32.0" maxWidth="52.0" minHeight="34.0" minWidth="54.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0" rotate="90.0" text="Save" translateX="-10.0" translateY="43.0" />
                            </children>
                         </VBox>
                         <GridPane alignment="CENTER">
@@ -123,17 +122,17 @@
                                     <Font name="Roboto Light" size="17.0" />
                                  </font>
                               </Label>
-                              <PasswordField prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1">
+                              <PasswordField fx:id="old" prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1">
                                  <font>
                                     <Font name="Roboto Light" size="14.0" />
                                  </font>
                               </PasswordField>
-                              <PasswordField layoutX="154.0" layoutY="24.0" prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <PasswordField fx:id="new1" layoutX="154.0" layoutY="24.0" prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="Roboto Light" size="14.0" />
                                  </font>
                               </PasswordField>
-                              <PasswordField layoutX="154.0" layoutY="56.0" prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <PasswordField fx:id="new2" layoutX="154.0" layoutY="56.0" prefHeight="29.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <font>
                                     <Font name="Roboto Light" size="14.0" />
                                  </font>
@@ -147,7 +146,7 @@
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID : 14127003050082">
+                        <Text fx:id="id" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : 14127003050082">
                            <font>
                               <Font name="Microsoft YaHei" size="17.0" />
                            </font>
@@ -156,9 +155,9 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="179.0" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.rowIndex="1">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Male" />
-                        <RadioButton layoutX="137.0" layoutY="24.0" mnemonicParsing="false" text="Female" />
-                        <RadioButton layoutX="183.0" layoutY="24.0" mnemonicParsing="false" text="Sceret" />
+                        <RadioButton fx:id="male" mnemonicParsing="false" text="Male" />
+                        <RadioButton fx:id="female" layoutX="137.0" layoutY="24.0" mnemonicParsing="false" text="Female" />
+                        <RadioButton fx:id="secret" layoutX="183.0" layoutY="24.0" mnemonicParsing="false" text="Sceret" />
                      </children>
                   </HBox>
                   <GridPane GridPane.rowIndex="3">
@@ -191,20 +190,20 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-                        <Label layoutX="78.0" layoutY="128.0" text="123" GridPane.columnIndex="2">
+                        <ImageView fx:id="like1" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="like2" fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                        <ImageView fx:id="like3" fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                        <Label fx:id="baidu" layoutX="78.0" layoutY="128.0" text="123" GridPane.columnIndex="2">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="78.0" layoutY="76.0" text="233" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label fx:id="youdao" layoutX="78.0" layoutY="76.0" text="233" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="78.0" layoutY="24.0" text="100" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label fx:id="bing" layoutX="78.0" layoutY="24.0" text="100" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
                               <Font size="18.0" />
                            </font>

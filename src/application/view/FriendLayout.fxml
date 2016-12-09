@@ -10,9 +10,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.FriendLayoutController">
    <children>
-      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="490.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="490.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="16.0">
          <children>
-            <GridPane style="-fx-background-color: blue;" visible="false" GridPane.columnIndex="1">
+            <GridPane style="-fx-background-color: blue;" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -202,7 +202,7 @@
                   <Insets right="25.0" />
                </GridPane.margin>
             </ListView>
-            <GridPane layoutX="235.0" layoutY="13.0" style="-fx-background-color: yellow;" GridPane.columnIndex="1">
+            <GridPane layoutX="235.0" layoutY="13.0" style="-fx-background-color: yellow;" visible="false" GridPane.columnIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>

@@ -15,13 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class PersonalEditLayout implements Controller {
+public class PersonalEditLayoutController implements Controller {
 	private Main mainApp;
 	
 	@FXML
 	private ListView<WordCard> wordCards;
 	@FXML
-	private ListView<User> friend;
+	private ListView<User> friends;
 	@FXML
 	private PasswordField old;
 	@FXML

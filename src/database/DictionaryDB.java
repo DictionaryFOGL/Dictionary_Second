@@ -54,7 +54,7 @@ public class DictionaryDB implements Database,DBConstant{
 		    account=null;
 		}
 		else{
-			account=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0));				
+			account=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0), null);				
 		}
 		return account;
 	}

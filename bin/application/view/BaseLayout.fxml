@@ -21,20 +21,30 @@
         </rowConstraints>
          <children>
             <Label text="DictionaryPro" GridPane.columnIndex="1" />
-            <Label text="Label" GridPane.columnIndex="2" />
+            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2">
+               <children>
+                  <Label fx:id="time" text="Label" GridPane.columnIndex="2" />
+                  <Label fx:id="date" layoutX="10.0" layoutY="48.0" text="Label" />
+               </children>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="personalEdit" fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="test" onMouseClicked="#handleTest" text="Welcome, ">
                      <font>
                         <Font name="Roboto Thin" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="50.0" layoutY="10.0" text="guest">
+                  <Label fx:id="name" layoutX="50.0" layoutY="10.0" text="guest">
                      <font>
                         <Font name="Roboto Thin" size="22.0" />
                      </font>
                   </Label>
+                  <Button fx:id="logout" mnemonicParsing="false" prefHeight="5.0" prefWidth="5.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>
