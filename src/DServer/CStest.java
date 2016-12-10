@@ -59,12 +59,12 @@ public class CStest extends JFrame{
 		setLayout(new BorderLayout());
 		client=new DictionaryFOGLClient();
 		
-//		try {
-//			client.waitForAction();
-//		} catch (ClassNotFoundException | IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			client.waitForAction();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}//初始化界面
 	
 	private JPanel northPanel(){
@@ -177,11 +177,11 @@ public class CStest extends JFrame{
 
  	class SearchListener2 implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			User user=new User("dreamgazer","9630", null);
+			User user=new User("biur","123423", (new Date()));
 			user.setGender('M');
 			user.setRegisterDate(new Date());
 			try {
-				client.login("dreamgazer","9630");
+				client.login("biur","123423");
 				//client.register(user);
 				//client.logout();
 			   // client.login("admin", "error");
@@ -190,7 +190,7 @@ public class CStest extends JFrame{
 				e1.printStackTrace();
 			}
 			if(client.getUser()!=null)
-			explains.setText(client.getUser().getUserName()+" "+client.getUser().getGender()+" login");
+			explains.setText(client.getUser().getUserName()+" "+client.getUser().getGender()+client.getUser().getRegisterDate()+" login");
 			else{
 				explains.setText("not login!");
 			}

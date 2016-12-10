@@ -34,4 +34,6 @@ public interface Database {
 	public boolean addFriends(String userName,String friendName) throws SQLException;
 	
 	public ArrayList<User> getFriends(String userName) throws SQLException;
+	
+	public boolean isUserNameRepeated(String userName) throws SQLException;
 }

@@ -54,9 +54,9 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Male" />
-                        <RadioButton mnemonicParsing="false" text="Female" />
-                        <RadioButton mnemonicParsing="false" text="Secret" />
+                        <RadioButton fx:id="male" mnemonicParsing="false" text="Male" />
+                        <RadioButton fx:id="female" mnemonicParsing="false" text="Female" />
+                        <RadioButton fx:id="secret" mnemonicParsing="false" text="Secret" />
                      </children>
                   </HBox>
                   <TextField fx:id="name" maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" />

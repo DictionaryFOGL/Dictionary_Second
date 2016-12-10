@@ -1,14 +1,32 @@
 package application.util;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import database.Database;
+import database.DictionaryDB;
 
 public class ValidInput {
 	//已存在用户名？？？？？？
 	public static boolean validUsername(String userName) {
 		Pattern p=Pattern.compile("^[a-zA-Z0-9_\u4e00-\u9fa5]{2,10}$");
 		//return patternCheck(p, userName);
+		Database DB=new DictionaryDB();
+		DB.connect();
+		try {
+			if (DB.isUserNameRepeated(userName)){
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DB.closeAll();
+		}
+		return true;
+		
 	}
 	public static boolean validPwd(String password) {
 		Pattern p=Pattern.compile("^[a-zA-Z0-9]{4,16}$");

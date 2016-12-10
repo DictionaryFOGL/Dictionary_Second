@@ -192,7 +192,7 @@ class ClientSession implements Runnable,CSConstant{
 	}
 	
 	private void regeister(LoginMessage message) throws IOException, SQLException{	
-		if(message.getUser().getUserName().length()>1){
+		if(message.getUser().getUserName().length()>=1){
 			DB.connect();
 			int result=DB.register(message.getUser().getUserName(), message.getUser().getPwdMd5(), message.getUser().getRegisterDate(), message.getUser().getGender());
 			if(result==0){

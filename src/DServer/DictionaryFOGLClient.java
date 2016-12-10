@@ -64,6 +64,7 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	}
 	
 	private void work(Message message) throws ClassNotFoundException, IOException{
+		System.out.println(message.getType());
 		switch(message.getType()){
 		case(RECEIVE_CARD):receiveCard((ResultMessage)message);break;
 		case(SEND_CARD):sendCardResult();break;
@@ -74,7 +75,7 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 		case(INSERT_HISTORY):insertResult();break;
 		case(LIKE_CANCEL):refreshLike((LikeMessage)message);break;
 		case(SEARCH_HISTORY):getSearchHistory((ResultMessage)message);break;
-		case(LOGIN):loginResult((LoginMessage) message);break;
+		case(LOGIN):loginResult((LoginMessage) message);System.out.println("logined11");break;
 		case(LOGOUT):logoutResult((LogoutMessage) message);break;
 		case(REGISTER):regeisterResult((LoginMessage)message);break;
 		case(SEARCH_USER):searchUserResult((ResultMessage)message);break;
@@ -135,8 +136,10 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 		searchhistory=message.getResults();
 	}
 
-	public void loginResult(LoginMessage message) throws IOException, ClassNotFoundException{		
+	public void loginResult(LoginMessage message) throws IOException, ClassNotFoundException{
+
 			if(message.isIdentified()){
+				System.out.println("logined");
 				isLogin=true;
 				account=message.getUser();
 				System.out.println(account.getUserName()+" login succeeded");

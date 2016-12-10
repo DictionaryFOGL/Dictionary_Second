@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import application.model.*;
+import application.util.Encryption;
 
 public class DictionaryDB implements Database,DBConstant{
 	private Connection conn=null;
@@ -50,29 +51,28 @@ public class DictionaryDB implements Database,DBConstant{
 		//System.out.println(name+' '+passWord);
 		ResultSet result = stat.executeQuery("select * from usermessage where name = '"+name+"';");
 		result.last();
-		if(result.getRow()==0||!result.getString(4).equals(passWord)){
+		if(result.getRow()==0||!result.getString(5).equals(passWord)){
 		    account=null;
 		}
 		else{
-<<<<<<< HEAD
+
 			account=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0),result.getDate(6));				
-=======
-			account=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0), null);				
->>>>>>> 8baa032fa952eeebe013f4b720ac8b54a9dcc63a
+
 		}
 		return account;
 	}
 
 	@Override
-	public int register(String name, String passWord, java.util.Date date, char gender) throws SQLException {
+	public int register(String name, String MD5, java.util.Date date, char gender) throws SQLException {
 		ResultSet result = stat.executeQuery("select * from usermessage where name = '"+name+"';");
 		result.last();
 		if(result.getRow()!=0){
 			return 1;
 		}
+		//String MD5=Encryption.MD5(passWord);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		stat.executeUpdate("INSERT INTO "+sheet1+"(name,gender,password,pwdmd5,signtime) "
-				+ "values('"+name+"','"+gender+"','"+passWord+"','"+""+"','"+sdf.format(date)+"')");
+				+ "values('"+name+"','"+gender+"','"+""+"','"+MD5+"','"+sdf.format(date)+"')");
 		return 0;
 	}
 
@@ -302,5 +302,15 @@ public class DictionaryDB implements Database,DBConstant{
 		stat.executeUpdate("INSERT INTO "+sheet2+"(keyWord,userId,baidu,bing,youdao)"
 				+ "values('"+keyWord+"','"+userId+"','"+0+"','"+0+"','"+0+"')");
 		return true;
+	}
+
+	@Override
+	public boolean isUserNameRepeated(String userName) throws SQLException {
+		ResultSet result = stat.executeQuery("select * from usermessage where name = '"+userName+"';");
+		result.last();
+		if(result.getRow()!=0){
+			return true;
+		}
+		return false;
 	}
 }
