@@ -1,13 +1,6 @@
 package DServer;
 
-import java.util.EventObject;
-
 class RefreshEvent  {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8261846266143702024L;
 
 	private static boolean isRefreshed=false;
 	private static boolean isFriendRefreshed=false;

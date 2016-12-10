@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import application.model.SearchHistory;
 import application.model.User;
+import application.model.WordCard;
 import application.model.message.AddFriendMessage;
 import application.model.message.InsertHistoryMessage;
 import application.model.message.LikeMessage;
@@ -29,12 +30,25 @@ class ClientThread extends Thread implements CSConstant
 	private PipedInputStream in=new PipedInputStream();
 	private Database DB;
 	private User sessionAccount;
+	private int cardSize=0;
+	private int friendSize=0;
 	private Socket socket;
 	private ObjectInputStream objectFromClient;
 	private ObjectOutputStream objectToClient;
 	
 	public ClientThread(Socket socket){
 		this.socket=socket;
+	}
+	
+	
+	protected void finalize(){
+		DB.connect();
+		try {
+			DB.userOnline(sessionAccount.getUserName(), 0);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DB.closeAll();
 	}
 
 	public PipedOutputStream getOutputStream()
@@ -56,9 +70,25 @@ class ClientThread extends Thread implements CSConstant
 					int num=in.read(b);
 					if(num!=-1)
 					{
-						System.out.println("The receiver Thread receices "+new String(b,0,num));
-						SearchMessage message=new SearchMessage(RECEIVE_CARD,sessionAccount.getUserName());
-						sendCardsList((SearchMessage)message);
+						switch(new String(b,0,num)){
+						case("USER"):{
+							DB.connect();
+							ResultMessage message=new ResultMessage(USER_UPDATE,DB.searchAccount(""));
+							objectToClient.writeObject(message);
+							DB.closeAll();
+							break;
+						}
+						case("CARD"):{
+							SearchMessage message=new SearchMessage(RECEIVE_CARD,sessionAccount.getUserName());
+							sendCardsList((SearchMessage)message);
+							break;
+						}
+						case("FRIEND"):{
+							SearchMessage message=new SearchMessage(SEARCH_FRIEND,sessionAccount.getUserName());
+							searchFriend(message); 
+							break;
+						}
+						};
 					}
 				} 
 				catch (IOException | SQLException e) 
@@ -73,6 +103,11 @@ class ClientThread extends Thread implements CSConstant
 	public void userUpdate() throws IOException{
 		RefreshEvent.setRefreshed(true);	
 		RefreshEvent.setUserStateRefreshed(true);
+	}
+	
+	public void newFriend() throws IOException{
+		RefreshEvent.setRefreshed(true);	
+		RefreshEvent.setFriendRefreshed(true);
 	}
 	
 	public void newCard() throws IOException{
@@ -103,7 +138,6 @@ class ClientThread extends Thread implements CSConstant
 		}
 	}
 
-
 	private void work(Message message) throws ClassNotFoundException, IOException, SQLException{
 		switch(message.getType()){
 			case(SEND_CARD):sendCard((SendCardMessage)message);break;
@@ -131,13 +165,18 @@ class ClientThread extends Thread implements CSConstant
 			objectToClient.writeObject(feedback);
 		}
 		DB.closeAll();
-		
 	}
 
 	private void searchFriend(SearchMessage message) throws SQLException, IOException {
 		DB.connect();
 		ArrayList<User> friends=new ArrayList<User>();
 		friends=DB.getFriends(message.getKeyWord());
+		System.out.println(sessionAccount.getUserName()+"FriendSize "+friendSize+" "+friends.size());
+		if(friendSize==friends.size()){
+			DB.closeAll();
+			return;
+		}
+		friendSize=friends.size();
 		ResultMessage resultmessage=new ResultMessage(SEARCH_FRIEND,friends);
 		objectToClient.writeObject(resultmessage);
 		DB.closeAll();
@@ -153,14 +192,19 @@ class ClientThread extends Thread implements CSConstant
 
 	private void sendCardsList(SearchMessage message) throws SQLException, IOException {
 		DB.connect();
-		ResultMessage resultMessage=new ResultMessage(RECEIVE_CARD,DB.getCard(message.getKeyWord()));
+		ArrayList<WordCard> tempCards=DB.getCard(message.getKeyWord());
+		ResultMessage resultMessage=new ResultMessage(RECEIVE_CARD,tempCards);		
+		if(tempCards.size()==cardSize){
+			DB.closeAll();
+			return;
+		}	
+		cardSize=tempCards.size();
 		objectToClient.writeObject(resultMessage);
 		DB.closeAll();
 		
 	}
 
-	private void searchUser(SearchMessage message) throws SQLException, IOException {
-		
+	private void searchUser(SearchMessage message) throws SQLException, IOException {	
 		DB.connect();
 		ResultMessage resultMessage=new ResultMessage(SEARCH_USER,DB.searchAccount(message.getKeyWord()));
 		objectToClient.writeObject(resultMessage);
@@ -172,6 +216,7 @@ class ClientThread extends Thread implements CSConstant
 		DB.sendCard(message.getCard(), message.getReceiverName());
 		DB.closeAll();
 		Message sendMessage=new Message(SEND_CARD);
+		newCard();
 		objectToClient.writeObject(sendMessage);
 	}
 	
@@ -181,9 +226,10 @@ class ClientThread extends Thread implements CSConstant
 	
 	private void addFriend(AddFriendMessage message) throws SQLException, IOException{		
 		DB.connect();
-		Message feedback=new Message(ADD_FRIEND);
-		if(DB.addFriends(message.getSender(), message.getReceiver())){
-			objectToClient.writeObject(feedback);
+		//Message feedback=new Message(ADD_FRIEND);
+		if(DB.addFriends(message.getSender(), message.getReceiver())&&DB.addFriends( message.getReceiver(),message.getSender())){
+			//objectToClient.writeObject(feedback);
+			newFriend();
 		}		
 		DB.closeAll();
 	}
@@ -214,7 +260,7 @@ class ClientThread extends Thread implements CSConstant
 	}
 	
 
-	private void login(LoginMessage message) throws ClassNotFoundException, IOException {
+	private void login(LoginMessage message) throws ClassNotFoundException, IOException, SQLException {
 		boolean isUserFound=false;
 		DB.connect();
 		User user=(User)message.getUser();
@@ -230,22 +276,26 @@ class ClientThread extends Thread implements CSConstant
 		}
 		if(isUserFound){
 			message.identify();
+			DB.userOnline(message.getUser().getUserName(), 1);
 			message.getUser().setGender(account.getGender());
 			message.getUser().setRegisterDate(account.getRegisterDate());
 			sessionAccount=message.getUser();
 			userUpdate();
-			objectToClient.writeObject(message);
-			
+			objectToClient.writeObject(message);		
 		}
 		else{
 			objectToClient.writeObject(message);
 		}
+		DB.closeAll();
 	}
 	
-	private void logout(LogoutMessage message) throws IOException{
+	private void logout(LogoutMessage message) throws IOException, SQLException{
+		DB.connect();
 		message.Logout();
+		DB.userOnline(sessionAccount.getUserName(), 0);
 		objectToClient.writeObject(message);
 		userUpdate();
+		DB.closeAll();
 	}
 	
 	private void regeister(LoginMessage message) throws IOException, SQLException{	
@@ -254,6 +304,8 @@ class ClientThread extends Thread implements CSConstant
 			int result=DB.register(message.getUser().getUserName(), message.getUser().getPwdMd5(), message.getUser().getRegisterDate(), message.getUser().getGender());
 			if(result==0){
 				message.setRegistered(0);
+				sessionAccount=message.getUser();
+				DB.userOnline(sessionAccount.getUserName(), 1);
 				userUpdate();
 			}
 			if(result==1){

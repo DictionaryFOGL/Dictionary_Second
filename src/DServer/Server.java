@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.TreeMap;
 
 public class Server implements CSConstant {
-
 	TreeMap < String,ClientThread > Sessions = new TreeMap < String , ClientThread> (); 
 	TreeMap < String,PipedOutputStream > pipesout = new TreeMap < String , PipedOutputStream> ();  
 	PipedOutputStream out=null,serverOut=null;
@@ -24,7 +23,6 @@ public class Server implements CSConstant {
 	ClientThread thread;
 	public Server() throws ClassNotFoundException{
 		try {
-
 			ServerSocket serversocket=new ServerSocket(8000);
 			System.out.println("Server working....");
 			(new Thread(new PipeSession())).start();
@@ -52,8 +50,7 @@ public class Server implements CSConstant {
 		public void run() {
 			while(true){				
 				try {
-					Thread.sleep(100);
-					//System.out.println(RefreshEvent.isRefreshed());
+					Thread.sleep(100);//refresh every 100ms
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -63,13 +60,13 @@ public class Server implements CSConstant {
 						sendToSessions("CARD");
 						RefreshEvent.setCardRefreshed(false);
 					}
-					if(RefreshEvent.isFriendRefreshed()){
-						//sendToSessions(REFRESH_FRIENDS);
-						RefreshEvent.setFriendRefreshed(false);
-					}
 					if(RefreshEvent.isUserStateRefreshed()){
 						sendToSessions("USER");
 						RefreshEvent.setUserStateRefreshed(false);
+					}
+					if(RefreshEvent.isFriendRefreshed()){
+						sendToSessions("FRIEND");
+						RefreshEvent.setFriendRefreshed(false);
 					}
 
 				}

@@ -55,5 +55,9 @@ interface Client{
 	public void logout() throws IOException;
 	
 	public void sendCard(String receiver,WordCard card) throws IOException;
+	
+	public boolean isUserUpdated();
+
+	public boolean isCardUpdated();
 
 }

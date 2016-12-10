@@ -43,6 +43,58 @@ public class CStest extends JFrame{
 	private ArrayList results;
 	
 	public CStest() {
+		init();		
+	}
+	
+	class test implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				System.out.print("");
+				/*
+				if(client.isUserUpdated()){
+					ArrayList<User>Result=client.searchUserResult();
+					if(Result!=null){
+						String str=" ";
+						for(int i=0;i<Result.size();i++){
+							str+=Result.get(i).getUserName()+" "+Result.get(i).getStatus()+"\n";
+						}
+						explains.setText(str);
+					}
+				}
+				
+				if(client.isCardUpdated()){
+					ArrayList<WordCard> Result;
+					try {
+						Result = client.getCards();
+						if(Result!=null){
+							String str=" ";
+							for(int i=0;i<Result.size();i++){
+								str+=Result.get(i).getSenderName()+" "+Result.get(i).getWord().getWords()+Result.get(i).getTime()+Result.get(i).getSite()+Result.get(i).getSaySomething()+"\n";
+							}
+							System.out.print(str);
+							explains.setText(str);
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+				}*/
+				if(client.isFriendAdded()){
+					ArrayList<User> Result;
+					Result = client.getFriend();
+					if(Result!=null){
+						String str=" ";
+						for(int i=0;i<Result.size();i++){
+							str+=Result.get(i).getUserName()+"\n";
+						}
+						System.out.print(str);
+						explains.setText(str);
+					}					
+				}				
+			}
+		}
+		
 	}
 
 	public void init(){
@@ -58,7 +110,7 @@ public class CStest extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		client=new DictionaryFOGLClient();
-		
+		(new Thread(new test())).start();
 		try {
 			client.waitForAction();
 		} catch (ClassNotFoundException | IOException e) {
@@ -122,10 +174,12 @@ public class CStest extends JFrame{
 			user.setGender('M');
 			user.setRegisterDate(new Date());
 			try {
+				client.addFriend("Biur");
+				//client.logout();
 				//client.register(user);
 				//client.login("admin", "123456");
 				//client.searchUser("adm");
-				client.sendCard("testuser", new WordCard(new Word("Dictionary","×Öµä"),client.getUser().getUserName(),"blablabla",client.getUser().getUserID(),new Date(),1));
+				//client.sendCard("biur", new WordCard(new Word("Dictionary","×Öµä"),client.getUser().getUserName(),"blablabla",client.getUser().getUserID(),new Date(),1));
 				//client.refreshCards();
 				/*
 				client.like(Website.Baidu);
@@ -152,8 +206,9 @@ public class CStest extends JFrame{
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			
+			/*
 			try {
+				
 				client.refreshHistory();
 				String str="";
 				ArrayList<SearchHistory>Result=client.getHistory();
@@ -167,62 +222,47 @@ public class CStest extends JFrame{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			*/
 			
 			
-			}
-			
-			
-		
+			}		
 	}
-	
-
  	class SearchListener2 implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			User user=new User("biur","123423", (new Date()));
+			User user=new User("dreamgazer","109234", (new Date()));
+			User user2=new User("Zeratul","aiur", (new Date()));
+			User user3=new User("biur","123423", (new Date()));
+			
 			user.setGender('M');
 			user.setRegisterDate(new Date());
 			try {
-				client.login("biur","123423");
-				//client.register(user);
+				//client.login("biur","123423");
+				client.login("Zeratul","aiur");
+				//client.register(user2);
 				//client.logout();
-			   // client.login("admin", "error");
+			   //client.login("admin", "error");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			if(client.getUser()!=null)
-			explains.setText(client.getUser().getUserName()+" "+client.getUser().getGender()+client.getUser().getRegisterDate()+" login");
-			else{
-				explains.setText("not login!");
-			}
-			if(client.isCardSended()){
-				try {
-					ArrayList<WordCard>Result=client.getCards();
-					if(Result!=null){
-						String str=" ";
-						for(int i=0;i<Result.size();i++){
-							str+=Result.get(i).getSenderName()+Result.get(i).getWord()+"\n";
-						}
-						explains.setText(str);
-					}
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
+			//if(client.getUser()!=null)
+			//explains.setText(client.getUser().getUserName()+" "+client.getUser().getGender()+client.getUser().getRegisterDate()+" login");
+			//else{
+				//explains.setText("not login!");
+			//}			
+			
 		}
-	}//ËÑË÷°´Å¥¼àÌý
+	}
 	
 	class ResultsListener implements ListSelectionListener{
 		private int  index=0;
 		public void valueChanged(ListSelectionEvent e){
 			
 		}	
-	}//·­Òë½á¹û¿ò¼àÌý
+	}
 	
 	public static void main(String[] args){
 		CStest DictionaryGUI=new CStest();
-		DictionaryGUI.init();
 	}
 
 }

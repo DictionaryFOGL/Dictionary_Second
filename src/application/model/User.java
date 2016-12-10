@@ -14,6 +14,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int userID;
+	private boolean status;
 	private String userName;
 	private String password;
 	private String pwdMd5;
@@ -105,7 +106,7 @@ public class User implements Serializable{
 		if(bing>0) bing--;
 		else throw new IndexOutOfBoundsException();
 	}
-
+	
 	public ArrayList<WordCard> getMailBox() {
 		return mailBox;
 	}
@@ -165,5 +166,13 @@ public class User implements Serializable{
 
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
+	}
+
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }
