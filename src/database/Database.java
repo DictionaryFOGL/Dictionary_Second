@@ -36,4 +36,6 @@ public interface Database {
 	public ArrayList<User> getFriends(String userName) throws SQLException;
 	
 	public boolean isUserNameRepeated(String userName) throws SQLException;
+	
+	public void userOnline(String userName,int status) throws SQLException;//1 online,0 offline
 }

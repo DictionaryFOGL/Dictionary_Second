@@ -20,4 +20,5 @@ interface CSConstant {
 	static final byte REFRESH_LIKE=0x51;
 	static final byte REFRESH_CARDS=0x52;
 	static final byte REFRESH_FRIENDS=0x53;
+	static final byte USER_UPDATE=0x60;
 }

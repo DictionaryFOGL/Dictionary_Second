@@ -110,7 +110,17 @@ public class SpiderTest {
 		Spider s=new YoudaoSpider();
 		s.setWord("cries");
 		Word r=s.getResult();
+<<<<<<< HEAD
 		assertEquals(2, r.getTranslation().size());
+=======
+
+		assertArrayEquals(new int[]{2,5}, new int[]{r.getTranslation().size(),s.getSuggestion().size()});
+		//wrong Suggestion size check Suggestion size should be zero
+
+		//System.out.println(s.getSuggestion().get(0));
+		assertEquals(2, r.getTranslation().size());
+
+>>>>>>> 8a5ab5fcf8c46172a005db7b5c2df9fbe64e51d0
 	}
 
 	@Test

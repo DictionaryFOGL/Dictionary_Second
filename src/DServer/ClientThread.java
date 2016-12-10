@@ -1,28 +1,120 @@
 package DServer;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import application.model.*;
-import application.model.message.*;
+import application.model.SearchHistory;
+import application.model.User;
+import application.model.WordCard;
+import application.model.message.AddFriendMessage;
+import application.model.message.InsertHistoryMessage;
+import application.model.message.LikeMessage;
+import application.model.message.LoginMessage;
+import application.model.message.LogoutMessage;
 import application.model.message.Message;
-import database.*;
+import application.model.message.ResultMessage;
+import application.model.message.SearchMessage;
+import application.model.message.SendCardMessage;
+import database.Database;
+import database.DictionaryDB;
 
-
-
-class ClientSession implements Runnable,CSConstant{
+class ClientThread extends Thread implements CSConstant
+{
+	private PipedOutputStream out=new PipedOutputStream();
+	private PipedInputStream in=new PipedInputStream();
 	private Database DB;
 	private User sessionAccount;
+	private int cardSize=0;
+	private int friendSize=0;
 	private Socket socket;
 	private ObjectInputStream objectFromClient;
 	private ObjectOutputStream objectToClient;
-	private boolean waiting;
-	public ClientSession(Socket socket){
+	
+	public ClientThread(Socket socket){
 		this.socket=socket;
 	}
+	
+	
+	protected void finalize(){
+		DB.connect();
+		try {
+			DB.userOnline(sessionAccount.getUserName(), 0);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DB.closeAll();
+	}
 
+	public PipedOutputStream getOutputStream()
+	{
+		return out;
+	}
+	public PipedInputStream getInputStream()
+	{
+		return in;
+	}
+	
+	class PipeThread extends Thread{
+		@Override
+		public void run() {
+			byte[] b=new byte[1024];
+			while(true){
+				try 
+				{
+					int num=in.read(b);
+					if(num!=-1)
+					{
+						switch(new String(b,0,num)){
+						case("USER"):{
+							DB.connect();
+							ResultMessage message=new ResultMessage(USER_UPDATE,DB.searchAccount(""));
+							objectToClient.writeObject(message);
+							DB.closeAll();
+							break;
+						}
+						case("CARD"):{
+							SearchMessage message=new SearchMessage(RECEIVE_CARD,sessionAccount.getUserName());
+							sendCardsList((SearchMessage)message);
+							break;
+						}
+						case("FRIEND"):{
+							SearchMessage message=new SearchMessage(SEARCH_FRIEND,sessionAccount.getUserName());
+							searchFriend(message); 
+							break;
+						}
+						};
+					}
+				} 
+				catch (IOException | SQLException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+	}
+	public void userUpdate() throws IOException{
+		RefreshEvent.setRefreshed(true);	
+		RefreshEvent.setUserStateRefreshed(true);
+	}
+	
+	public void newFriend() throws IOException{
+		RefreshEvent.setRefreshed(true);	
+		RefreshEvent.setFriendRefreshed(true);
+	}
+	
+	public void newCard() throws IOException{
+		RefreshEvent.setRefreshed(true);	
+		RefreshEvent.setCardRefreshed(true);
+	}
+	
 	@Override
 	public void run() {
 		try {
@@ -30,6 +122,8 @@ class ClientSession implements Runnable,CSConstant{
 			objectToClient.flush();
 			objectFromClient=new ObjectInputStream(socket.getInputStream());
 			DB=new DictionaryDB();
+			(new PipeThread()).start();
+			
 		while(true){
 			work((Message)objectFromClient.readObject());
 		}
@@ -42,14 +136,6 @@ class ClientSession implements Runnable,CSConstant{
 		finally{
 			
 		}
-	}
-
-	private void waitForAction() throws InterruptedException{
-		//boolean waiting=true;
-	     while(waiting){
-	    	 Thread.sleep(100);
-	     }
-	     waiting=true;
 	}
 
 	private void work(Message message) throws ClassNotFoundException, IOException, SQLException{
@@ -79,13 +165,18 @@ class ClientSession implements Runnable,CSConstant{
 			objectToClient.writeObject(feedback);
 		}
 		DB.closeAll();
-		
 	}
 
 	private void searchFriend(SearchMessage message) throws SQLException, IOException {
 		DB.connect();
 		ArrayList<User> friends=new ArrayList<User>();
 		friends=DB.getFriends(message.getKeyWord());
+		System.out.println(sessionAccount.getUserName()+"FriendSize "+friendSize+" "+friends.size());
+		if(friendSize==friends.size()){
+			DB.closeAll();
+			return;
+		}
+		friendSize=friends.size();
 		ResultMessage resultmessage=new ResultMessage(SEARCH_FRIEND,friends);
 		objectToClient.writeObject(resultmessage);
 		DB.closeAll();
@@ -101,14 +192,19 @@ class ClientSession implements Runnable,CSConstant{
 
 	private void sendCardsList(SearchMessage message) throws SQLException, IOException {
 		DB.connect();
-		ResultMessage resultMessage=new ResultMessage(RECEIVE_CARD,DB.getCard(message.getKeyWord()));
+		ArrayList<WordCard> tempCards=DB.getCard(message.getKeyWord());
+		ResultMessage resultMessage=new ResultMessage(RECEIVE_CARD,tempCards);		
+		if(tempCards.size()==cardSize){
+			DB.closeAll();
+			return;
+		}	
+		cardSize=tempCards.size();
 		objectToClient.writeObject(resultMessage);
 		DB.closeAll();
 		
 	}
 
-	private void searchUser(SearchMessage message) throws SQLException, IOException {
-		
+	private void searchUser(SearchMessage message) throws SQLException, IOException {	
 		DB.connect();
 		ResultMessage resultMessage=new ResultMessage(SEARCH_USER,DB.searchAccount(message.getKeyWord()));
 		objectToClient.writeObject(resultMessage);
@@ -120,6 +216,7 @@ class ClientSession implements Runnable,CSConstant{
 		DB.sendCard(message.getCard(), message.getReceiverName());
 		DB.closeAll();
 		Message sendMessage=new Message(SEND_CARD);
+		newCard();
 		objectToClient.writeObject(sendMessage);
 	}
 	
@@ -129,9 +226,10 @@ class ClientSession implements Runnable,CSConstant{
 	
 	private void addFriend(AddFriendMessage message) throws SQLException, IOException{		
 		DB.connect();
-		Message feedback=new Message(ADD_FRIEND);
-		if(DB.addFriends(message.getSender(), message.getReceiver())){
-			objectToClient.writeObject(feedback);
+		//Message feedback=new Message(ADD_FRIEND);
+		if(DB.addFriends(message.getSender(), message.getReceiver())&&DB.addFriends( message.getReceiver(),message.getSender())){
+			//objectToClient.writeObject(feedback);
+			newFriend();
 		}		
 		DB.closeAll();
 	}
@@ -162,7 +260,7 @@ class ClientSession implements Runnable,CSConstant{
 	}
 	
 
-	private void login(LoginMessage message) throws ClassNotFoundException, IOException {
+	private void login(LoginMessage message) throws ClassNotFoundException, IOException, SQLException {
 		boolean isUserFound=false;
 		DB.connect();
 		User user=(User)message.getUser();
@@ -178,19 +276,26 @@ class ClientSession implements Runnable,CSConstant{
 		}
 		if(isUserFound){
 			message.identify();
+			DB.userOnline(message.getUser().getUserName(), 1);
 			message.getUser().setGender(account.getGender());
 			message.getUser().setRegisterDate(account.getRegisterDate());
 			sessionAccount=message.getUser();
-			objectToClient.writeObject(message);
+			userUpdate();
+			objectToClient.writeObject(message);		
 		}
 		else{
 			objectToClient.writeObject(message);
 		}
+		DB.closeAll();
 	}
 	
-	private void logout(LogoutMessage message) throws IOException{
+	private void logout(LogoutMessage message) throws IOException, SQLException{
+		DB.connect();
 		message.Logout();
+		DB.userOnline(sessionAccount.getUserName(), 0);
 		objectToClient.writeObject(message);
+		userUpdate();
+		DB.closeAll();
 	}
 	
 	private void regeister(LoginMessage message) throws IOException, SQLException{	
@@ -199,6 +304,9 @@ class ClientSession implements Runnable,CSConstant{
 			int result=DB.register(message.getUser().getUserName(), message.getUser().getPwdMd5(), message.getUser().getRegisterDate(), message.getUser().getGender());
 			if(result==0){
 				message.setRegistered(0);
+				sessionAccount=message.getUser();
+				DB.userOnline(sessionAccount.getUserName(), 1);
+				userUpdate();
 			}
 			if(result==1){
 				message.setRegistered(1);
@@ -213,6 +321,5 @@ class ClientSession implements Runnable,CSConstant{
 	}
 
 
-	
 	
 }

@@ -79,12 +79,34 @@ public class DictionaryDB implements Database,DBConstant{
 	@Override
 	public ArrayList<User> searchAccount(String keyWord) throws SQLException {
 		ArrayList<User> users=new ArrayList<User>();
-		ResultSet result = stat.executeQuery("select * from usermessage where name like (\"%"+keyWord+"%\");");
-		
-		 while(result.next())
-		   {
-			 users.add(new User(result.getString(2),result.getString(4),result.getString(3).charAt(0),result.getDate(6)));	
-		   }
+		if(keyWord.length()>0){
+			ResultSet result = stat.executeQuery("select * from usermessage where name like (\"%"+keyWord+"%\");");		
+			while(result.next())
+			{
+				User user=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0),result.getDate(6));
+				if(result.getInt(7)==0){
+					user.setStatus(false);
+				}
+				else{
+					user.setStatus(true);
+				}
+				users.add(user);	
+			}
+		}
+		else{
+				ResultSet result = stat.executeQuery("select * from usermessage");
+				while(result.next())
+				{
+					User user=new User(result.getString(2),result.getString(4),result.getString(3).charAt(0),result.getDate(6));
+					if(result.getInt(7)==0){
+						user.setStatus(false);
+					}
+					else{
+						user.setStatus(true);
+					}
+					users.add(user);	
+				}
+		}
 		return users;
 	}
 
@@ -312,5 +334,17 @@ public class DictionaryDB implements Database,DBConstant{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void userOnline(String userName, int status) throws SQLException {
+		ResultSet result = stat.executeQuery("select * from usermessage where name = '"+userName+"';");
+		result.last();
+		if(result.getRow()!=0){
+			stat.executeUpdate("update "+sheet1+
+					" set Online = '"+status+"'"
+					+ " where name = '"+userName+"';");
+		}
+		
 	}
 }

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import application.model.*;
 import application.model.message.*;
-import application.model.message.Message;
 public class DictionaryFOGLClient implements Client,CSConstant{
 	
 	private Socket socket;
@@ -24,6 +23,8 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	private boolean isSended;
 	private boolean isAdded;
 	private boolean isRecorded;
+	private boolean userUpdate;
+	private boolean cardUpdate;
 	private User account;
 	private ArrayList<User>userList;
 	private ArrayList<WordCard>cards;
@@ -52,6 +53,7 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 		isSended=false;
 		searchhistory=null;
 		isRecorded=false;
+		userUpdate=false;
 		//refreshAll();
 	}
 	
@@ -65,7 +67,6 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	}
 	
 	private void work(Message message) throws ClassNotFoundException, IOException{
-		System.out.println(message.getType());
 		switch(message.getType()){
 		case(RECEIVE_CARD):receiveCard((ResultMessage)message);break;
 		case(SEND_CARD):sendCardResult();break;
@@ -76,21 +77,29 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 		case(INSERT_HISTORY):insertResult();break;
 		case(LIKE_CANCEL):refreshLike((LikeMessage)message);break;
 		case(SEARCH_HISTORY):getSearchHistory((ResultMessage)message);break;
-		case(LOGIN):loginResult((LoginMessage) message);System.out.println("logined11");break;
+		case(LOGIN):loginResult((LoginMessage) message);break;
 		case(LOGOUT):logoutResult((LogoutMessage) message);break;
 		case(REGISTER):regeisterResult((LoginMessage)message);break;
 		case(SEARCH_USER):searchUserResult((ResultMessage)message);break;
-		case(ADD_FRIEND):addFriendResult(message);break;
 		case(SEARCH_FRIEND):getFriendResult((ResultMessage)message);break;
+		case(USER_UPDATE):updateUsers((ResultMessage)message);break;
 		}		
 	}
 	
+	private void updateUsers(ResultMessage message) {
+		System.out.println("received");
+		userList=message.getResults();
+		userUpdate=true;
+		
+	}
+
 	private void insertResult() {
 		isRecorded=true;	
 	}
 
 	private void getFriendResult(ResultMessage message) {
 		friendList=message.getResults();
+		isAdded=true;
 	}
 
 	private void addFriendResult(Message message) {
@@ -120,6 +129,7 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	
 	public void receiveCard(ResultMessage message){		
 		cards=message.getResults();
+		cardUpdate=true;
 	}
 	
 	public void friendOnline(Message message){		
@@ -308,6 +318,15 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	}
 	
 	@Override
+	public boolean isCardUpdated() {
+		if(cardUpdate){
+			cardUpdate=false;
+			return true;
+		}
+		return cardUpdate;
+	}
+	
+	@Override
 	public ArrayList<User> getFriend() {
 		return friendList;
 	}
@@ -322,8 +341,7 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	public void refreshAll() throws IOException {
 		refreshFriendList();
 		refreshLike();
-		refreshCards();
-		
+		refreshCards();	
 	}
 
 	
@@ -336,6 +354,14 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 		return isRecorded;
 	}
 
+	public boolean isUserUpdated() {
+		if(userUpdate){
+			System.out.println("userUpdate");
+			userUpdate=false;
+			return true;
+		}
+		return userUpdate;
+	}
 
 	@Override
 	public void refreshHistory() throws IOException {

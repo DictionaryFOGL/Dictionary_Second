@@ -41,7 +41,7 @@ public class DictionaryDBInit {
 	
 	public static void createDatabaseAndList() {
 		try {
-			stat.execute("CREATE DATABASE "+dbName);
+			//stat.execute("CREATE DATABASE "+dbName);
 			stat.executeQuery("USE "+dbName);
 			conn=stat.getConnection();
 			stat=conn.createStatement();
@@ -50,8 +50,10 @@ public class DictionaryDBInit {
 					+ "gender char(1) NOT NULL default 'm',"
 					+ "password varchar(16) NOT NULL,"
 					+ "pwdmd5 char(32) NOT NULL,"
-					+ "signTime datetime NOT NULL)");
+					+ "signTime datetime NOT NULL,"
+					+ "Online int(1) NOT NULL default 0)");
 			System.out.println(sheet1 +"created!");
+			
 			stat.execute("CREATE TABLE "+sheet2+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
 					+ "keyWord varchar(32) NOT NULL,"
 					+ "userId int(1) NOT NULL default 0,"
@@ -76,6 +78,7 @@ public class DictionaryDBInit {
 					+ "friend int(2) NOT NULL,"
 					+ "relationship int(2) NOT NULL)");
 			System.out.println(sheet5 +"created!");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
