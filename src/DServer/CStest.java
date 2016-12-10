@@ -43,9 +43,6 @@ public class CStest extends JFrame{
 	private ArrayList results;
 	
 	public CStest() {
-	}
-
-	public void init(){
 
 		add(northPanel(),BorderLayout.NORTH);	
 		add(westPanel(),BorderLayout.WEST);
@@ -57,6 +54,10 @@ public class CStest extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
+	}
+
+	public void init(){
+
 		client=new DictionaryFOGLClient();
 		
 		try {
@@ -209,6 +210,7 @@ public class CStest extends JFrame{
 	}//·­Òë½á¹û¿ò¼àÌý
 	
 	public static void main(String[] args){
+		System.out.println(Thread.currentThread().getId());
 		CStest DictionaryGUI=new CStest();
 		DictionaryGUI.init();
 	}

@@ -98,6 +98,7 @@ public class WordLayoutController implements Controller{
 	private CheckBox baiduGet;
 	@FXML
 	private CheckBox youdaoGet;
+	//TODO Œ¥’“µΩµƒfxml…Ë÷√
 	
 	public WordLayoutController() {
 		youdao = new YoudaoSpider();

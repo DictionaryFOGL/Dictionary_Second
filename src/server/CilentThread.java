@@ -1,5 +1,6 @@
 package server;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -34,6 +35,7 @@ public class CilentThread implements Runnable{
 			try {
 				ins = socket.getInputStream();
 				outs = socket.getOutputStream();
+				System.out.println("in and out: "+ins.hashCode()+" "+outs.hashCode());
 				ObjectInputStream in = new ObjectInputStream(ins);
 				PrintWriter out = new PrintWriter(outs,true);
 				
@@ -53,8 +55,13 @@ public class CilentThread implements Runnable{
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch(EOFException e) {
+				ins.close();
+				socket.close();
+				System.out.println("Socket out");
 			} finally {
 				ins.close();
+				socket.close();
 				System.out.println("Socket out");
 			}
 		} catch (IOException e) {

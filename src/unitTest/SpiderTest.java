@@ -79,8 +79,8 @@ public class SpiderTest {
 		Spider s=new BingSpider();
 		s.setWord("new");
 		Word r=s.getResult();
-		System.out.println(r.getTranslation().get(4));
-		assertArrayEquals(new int[]{1,1}, new int[]{r.getTranslation().size(),s.getSuggestion().size()});
+		System.out.println(r.showTranslation());
+		assertArrayEquals(new int[]{5,5}, new int[]{r.getTranslation().size(),s.getSuggestion().size()});
 		//wrong translation size and Suggestion size check
 	}
 	
@@ -100,7 +100,7 @@ public class SpiderTest {
 		s.setWord("pelll");
 		Word r=s.getResult();
 
-		System.out.print("show: "+r.showTranslation());//becuz no result for input pelll!
+		//System.out.print("show: "+r.showTranslation());//becuz no result for input pelll!
 		assertEquals(8, s.getSuggestion().size());
 		assertEquals(null, r);
 	}
@@ -110,13 +110,7 @@ public class SpiderTest {
 		Spider s=new YoudaoSpider();
 		s.setWord("cries");
 		Word r=s.getResult();
-<<<<<<< HEAD
-		assertArrayEquals(new int[]{2,5}, new int[]{r.getTranslation().size(),s.getSuggestion().size()});
-		//wrong Suggestion size check Suggestion size should be zero
-=======
-		//System.out.println(s.getSuggestion().get(0));
 		assertEquals(2, r.getTranslation().size());
->>>>>>> 8baa032fa952eeebe013f4b720ac8b54a9dcc63a
 	}
 
 	@Test

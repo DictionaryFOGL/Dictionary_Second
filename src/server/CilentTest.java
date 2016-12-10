@@ -24,6 +24,8 @@ public class CilentTest {
 		System.out.println("Connect to server..."+socket.hashCode());
 		InputStream in=socket.getInputStream();
 		OutputStream out=socket.getOutputStream();
+		System.out.println("in and out: "+in.hashCode()+" "+out.hashCode());
+		
 		ObjectOutputStream oos=new ObjectOutputStream(out);
 		Scanner sc=new Scanner(System.in);
 		Scanner scin=new Scanner(in);

@@ -58,7 +58,8 @@ public class DictionaryFOGLClient implements Client,CSConstant{
 	@Override
 	public void waitForAction() throws ClassNotFoundException, IOException {
 		while(true){
-			work((Message)objectFromServer.readObject());			
+			System.out.println("client: "+Thread.currentThread().getId());
+			work((Message)objectFromServer.readObject());
 		}
 		
 	}
