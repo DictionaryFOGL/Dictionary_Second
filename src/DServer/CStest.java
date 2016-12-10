@@ -81,7 +81,8 @@ public class CStest extends JFrame{
 		p1.add(search);	
 		
 		add(p1,BorderLayout.NORTH);
-		return p1;}
+		return p1;
+		}
 	
 	private JPanel westPanel(){
 		JButton search2=new JButton("test button2");
@@ -122,9 +123,9 @@ public class CStest extends JFrame{
 			user.setRegisterDate(new Date());
 			try {
 				//client.register(user);
-				client.login("admin", "123456");
+				//client.login("admin", "123456");
 				//client.searchUser("adm");
-				//client.sendCard("testuser", new WordCard(new Word("Dictionary","×Öµä"),client.getUser().getUserName(),"blablabla",client.getUser().getUserID(),new Date(),1));
+				client.sendCard("testuser", new WordCard(new Word("Dictionary","×Öµä"),client.getUser().getUserName(),"blablabla",client.getUser().getUserID(),new Date(),1));
 				//client.refreshCards();
 				/*
 				client.like(Website.Baidu);
@@ -142,11 +143,11 @@ public class CStest extends JFrame{
 				
 				client.refreshFriendList();
 				*/
-				client.insertHistory("spelllllllll");
-				client.insertHistory("wooooooooo");
-				while(!client.isHistoryRecorded()){
-					explains.setText("recorded!");
-				}
+				//client.insertHistory("spelllllllll");
+				//client.insertHistory("wooooooooo");
+				//while(!client.isHistoryRecorded()){
+				//	explains.setText("recorded!");
+				//}
 				
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -194,6 +195,21 @@ public class CStest extends JFrame{
 			else{
 				explains.setText("not login!");
 			}
+			if(client.isCardSended()){
+				try {
+					ArrayList<WordCard>Result=client.getCards();
+					if(Result!=null){
+						String str=" ";
+						for(int i=0;i<Result.size();i++){
+							str+=Result.get(i).getSenderName()+Result.get(i).getWord()+"\n";
+						}
+						explains.setText(str);
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		}
 	}//ËÑË÷°´Å¥¼àÌý
 	
@@ -201,11 +217,7 @@ public class CStest extends JFrame{
 		private int  index=0;
 		public void valueChanged(ListSelectionEvent e){
 			
-		}
-		
-	
-	
-	
+		}	
 	}//·­Òë½á¹û¿ò¼àÌý
 	
 	public static void main(String[] args){

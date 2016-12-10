@@ -1,28 +1,85 @@
 package DServer;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import application.model.*;
-import application.model.message.*;
+import application.model.SearchHistory;
+import application.model.User;
+import application.model.message.AddFriendMessage;
+import application.model.message.InsertHistoryMessage;
+import application.model.message.LikeMessage;
+import application.model.message.LoginMessage;
+import application.model.message.LogoutMessage;
 import application.model.message.Message;
-import database.*;
+import application.model.message.ResultMessage;
+import application.model.message.SearchMessage;
+import application.model.message.SendCardMessage;
+import database.Database;
+import database.DictionaryDB;
 
-
-
-class ClientSession implements Runnable,CSConstant{
+class ClientThread extends Thread implements CSConstant
+{
+	private PipedOutputStream out=new PipedOutputStream();
+	private PipedInputStream in=new PipedInputStream();
 	private Database DB;
 	private User sessionAccount;
 	private Socket socket;
 	private ObjectInputStream objectFromClient;
 	private ObjectOutputStream objectToClient;
-	private boolean waiting;
-	public ClientSession(Socket socket){
+	
+	public ClientThread(Socket socket){
 		this.socket=socket;
 	}
 
+	public PipedOutputStream getOutputStream()
+	{
+		return out;
+	}
+	public PipedInputStream getInputStream()
+	{
+		return in;
+	}
+	
+	class PipeThread extends Thread{
+		@Override
+		public void run() {
+			byte[] b=new byte[1024];
+			while(true){
+				try 
+				{
+					int num=in.read(b);
+					if(num!=-1)
+					{
+						System.out.println("The receiver Thread receices "+new String(b,0,num));
+						SearchMessage message=new SearchMessage(RECEIVE_CARD,sessionAccount.getUserName());
+						sendCardsList((SearchMessage)message);
+					}
+				} 
+				catch (IOException | SQLException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+	}
+	public void userUpdate() throws IOException{
+		RefreshEvent.setRefreshed(true);	
+		RefreshEvent.setUserStateRefreshed(true);
+	}
+	
+	public void newCard() throws IOException{
+		RefreshEvent.setRefreshed(true);	
+		RefreshEvent.setCardRefreshed(true);
+	}
+	
 	@Override
 	public void run() {
 		try {
@@ -30,6 +87,8 @@ class ClientSession implements Runnable,CSConstant{
 			objectToClient.flush();
 			objectFromClient=new ObjectInputStream(socket.getInputStream());
 			DB=new DictionaryDB();
+			(new PipeThread()).start();
+			
 		while(true){
 			work((Message)objectFromClient.readObject());
 		}
@@ -44,13 +103,6 @@ class ClientSession implements Runnable,CSConstant{
 		}
 	}
 
-	private void waitForAction() throws InterruptedException{
-		//boolean waiting=true;
-	     while(waiting){
-	    	 Thread.sleep(100);
-	     }
-	     waiting=true;
-	}
 
 	private void work(Message message) throws ClassNotFoundException, IOException, SQLException{
 		switch(message.getType()){
@@ -181,7 +233,9 @@ class ClientSession implements Runnable,CSConstant{
 			message.getUser().setGender(account.getGender());
 			message.getUser().setRegisterDate(account.getRegisterDate());
 			sessionAccount=message.getUser();
+			userUpdate();
 			objectToClient.writeObject(message);
+			
 		}
 		else{
 			objectToClient.writeObject(message);
@@ -191,6 +245,7 @@ class ClientSession implements Runnable,CSConstant{
 	private void logout(LogoutMessage message) throws IOException{
 		message.Logout();
 		objectToClient.writeObject(message);
+		userUpdate();
 	}
 	
 	private void regeister(LoginMessage message) throws IOException, SQLException{	
@@ -199,6 +254,7 @@ class ClientSession implements Runnable,CSConstant{
 			int result=DB.register(message.getUser().getUserName(), message.getUser().getPwdMd5(), message.getUser().getRegisterDate(), message.getUser().getGender());
 			if(result==0){
 				message.setRegistered(0);
+				userUpdate();
 			}
 			if(result==1){
 				message.setRegistered(1);
@@ -213,6 +269,5 @@ class ClientSession implements Runnable,CSConstant{
 	}
 
 
-	
 	
 }
