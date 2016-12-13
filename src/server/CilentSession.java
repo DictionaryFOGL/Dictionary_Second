@@ -5,17 +5,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import application.model.User;
 
-public class CilentThread implements Runnable{
+public class CilentSession implements Runnable{
 	private Socket socket=null;
 	private ServerSocket server=null;
 	private User user=null;
 	
-	public CilentThread(Socket socket,ServerSocket server) {
+	public CilentSession(Socket socket,ServerSocket server) {
 		this.socket=socket;
 		this.server=server;
 	}
@@ -35,6 +37,7 @@ public class CilentThread implements Runnable{
 			try {
 				ins = socket.getInputStream();
 				outs = socket.getOutputStream();
+				PipedOutputStream p=new PipedOutputStream();
 				System.out.println("in and out: "+ins.hashCode()+" "+outs.hashCode());
 				ObjectInputStream in = new ObjectInputStream(ins);
 				PrintWriter out = new PrintWriter(outs,true);

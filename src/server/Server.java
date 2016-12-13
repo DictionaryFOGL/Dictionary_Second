@@ -1,9 +1,15 @@
 package server;
 
 import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.nio.channels.Pipe;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import application.model.*;
 
@@ -70,8 +76,11 @@ public class Server implements DatabaseConstant{
 		return true;
 	}
 	
+	public void logInToList(String name) {
+		
+	}
 	public static void main(String[] args) throws IOException, InterruptedException{
-		int servPort=20123;
+		int servPort=20123,i=0;
 		ServerSocket servSock=new ServerSocket(servPort);
 		System.out.println("Server starts working...");
 		try {
@@ -80,7 +89,8 @@ public class Server implements DatabaseConstant{
 				System.out.println(clntSock.hashCode());
 				SocketAddress clientAddress = clntSock.getRemoteSocketAddress();
 				System.out.println("Handling client at " + clientAddress);
-				Thread test = new Thread(new CilentThread(clntSock,servSock));
+				CilentSession ct=new CilentSession(clntSock,servSock);
+				Thread test = new Thread(ct);
 				test.start();
 			} 
 		} finally {

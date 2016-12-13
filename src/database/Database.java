@@ -13,7 +13,7 @@ public interface Database {
 
 	public User verify(String name, String passWord) throws SQLException;
 
-	public int register(String name, String passWord, java.util.Date date, char gender) throws SQLException;
+	public void register(String name, String passWord, java.util.Date date, char gender) throws SQLException;
 
 	public ArrayList<User> searchAccount(String keyWord) throws SQLException;
 

@@ -63,17 +63,11 @@ public class DictionaryDB implements Database,DBConstant{
 	}
 
 	@Override
-	public int register(String name, String MD5, java.util.Date date, char gender) throws SQLException {
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '"+name+"';");
-		result.last();
-		if(result.getRow()!=0){
-			return 1;
-		}
-		//String MD5=Encryption.MD5(passWord);
+	public void register(String name, String passWord, java.util.Date date, char gender) throws SQLException {
+		String MD5=Encryption.MD5(passWord);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		stat.executeUpdate("INSERT INTO "+sheet1+"(name,gender,password,pwdmd5,signtime) "
-				+ "values('"+name+"','"+gender+"','"+""+"','"+MD5+"','"+sdf.format(date)+"')");
-		return 0;
+				+ "values('"+name+"','"+gender+"','"+passWord+"','"+MD5+"','"+sdf.format(date)+"')");
 	}
 
 	@Override

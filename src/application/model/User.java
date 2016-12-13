@@ -14,14 +14,14 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int userID;
-	private boolean status;
+	private boolean online;
 	private String userName;
 	private String password;
 	private String pwdMd5;
 	private Date registerDate;
 	private char gender;
 	private ArrayList<WordCard> mailBox=new ArrayList<WordCard>();
-	private ArrayList<User> friendList=new ArrayList<User>();
+	private ArrayList<String> friendList=new ArrayList<String>();
 	private int baidu,youdao,bing;
 	
 	public User(String userName, String password, char gender,Date registerDate) {
@@ -54,6 +54,10 @@ public class User implements Serializable{
 			pwdMd5=Encryption.MD5(password);
 			return true;
 		} else return false;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 	
 	public char getGender() {
@@ -127,11 +131,11 @@ public class User implements Serializable{
 		mailBox.clear();
 	}
 	
-	public ArrayList<User> getFriendList() {
+	public ArrayList<String> getFriendList() {
 		return friendList;
 	}
 	
-	public boolean addNewFriend(User friend) {
+	public boolean addNewFriend(String friend) {
 		if(friendList.contains(friend)) return false;
 		else {
 			friendList.add(friend);
@@ -169,10 +173,10 @@ public class User implements Serializable{
 	}
 
 	public boolean getStatus() {
-		return status;
+		return online;
 	}
 
 	public void setStatus(boolean status) {
-		this.status = status;
+		this.online = status;
 	}
 }

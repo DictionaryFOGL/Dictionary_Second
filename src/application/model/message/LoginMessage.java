@@ -4,40 +4,35 @@ import application.model.*;
 import DServer.*;
 
 public class LoginMessage extends Message{
+	private String name;
+	private String pwdMd5;
+	private User account;
 
-	private  User account;
-	private boolean identified;
-	private int registered;
-	
-	public LoginMessage(byte type,User account){
+	public LoginMessage(byte type,String name,String pwdMd5){
 		super(type);
-		this.account=account;
-		identified=false;
+		this.name=name;
+		this.pwdMd5=pwdMd5;
+	}
+
+	public LoginMessage(byte type, User account) {
+		super(type);
+		this.account = account;
 	}
 
 	@Override
 	public byte getType() {
 		return type;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPwdMd5() {
+		return pwdMd5;
+	}
 	
-	public User getUser(){
+	public User getAccount() {
 		return account;
 	}
-
-	public boolean isIdentified(){
-		return identified;
-	}
-	
-	public void identify(){
-		identified=true;
-	}
-
-	public int getRegistered() {
-		return registered;
-	}
-
-	public void setRegistered(int registered) {
-		this.registered = registered;
-	}
-
 }
