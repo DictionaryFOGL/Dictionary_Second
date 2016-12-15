@@ -37,7 +37,7 @@ public class BingSpider extends Spider{
 	private void init(){
 		preUrl="http://cn.bing.com/dict/search?q=";
 		wordRegex="<li><span class=\"pos\">.*</span><span class=\"def\"><span>.*</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>.*</span></span></li>";
-		wordRegexd="<li><span class=\"pos\">|</span><span class=\"def\"><span>|</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>|</span><span>\\(=</span>.*</a><span>\\)</span><span>";
+		wordRegexd="<li><span class=\"pos\">|</span><span class=\"def\"><span>|</span></span></li>|<li><span class=\"pos web\">.*</span><span class=\"def\"><span>|</span><span>|</span><a href=\".*\">|</a><span>";
 		sentenceRegex="<a class=\"p1-9\" name=\"translation_sen_id.*1\">.*</a>|<span>.*</span>\n       <a class=\"p1-9\"|<span>.*</span>\n      </div>\n     </div>";
 		sentenceRegexd="<a class=\"p1-9\" name=\"translation_sen_id.*1\">|</a>|<span>|</span>\n       <a class=\"p1-9\"|</span>\n      </div>\n     </div>|</span><span>(=</span>.*</a><span>)</span><span>";
 		suggestionRegex="1\">.*</a>\n      <div class=\"df_wb_text\">";
