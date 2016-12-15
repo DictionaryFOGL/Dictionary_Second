@@ -125,8 +125,15 @@ public class ServerDict extends ServerSocket implements CSConstant{
 	public void userLike(CilentSession operator, Message m) {
 		LikeMessage message=(LikeMessage) m;
 		int site=message.getSite();
+		int status=message.isLikeOrNot() ? 1 : 0;
 		boolean likeOrNot=message.isLikeOrNot();
 		String key=message.getKeyWord();
+		try {
+			db.insertHistory(key, operator.getUser().getUserName(), site, status);
+		} catch (SQLException e) {
+			System.out.println("like dberror");
+			e.printStackTrace();
+		}
 		if(site == 0) {
 			if(likeOrNot) operator.getUser().baiduLike();
 			else operator.getUser().baiduDisLike();
@@ -138,6 +145,10 @@ public class ServerDict extends ServerSocket implements CSConstant{
 			else operator.getUser().youdaoDisLike();
 		}
 		System.out.println("like renew");
+	}
+	public void userSendCard(CilentSession operator, Message m) {
+		SendCardMessage message=m;
+		
 	}
 	public void broadCast() {
 		// TODO 通知他人

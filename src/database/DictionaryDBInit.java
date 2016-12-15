@@ -41,30 +41,29 @@ public class DictionaryDBInit {
 	
 	public static void createDatabaseAndList() {
 		try {
-			//stat.execute("CREATE DATABASE "+dbName);
+			stat.execute("CREATE DATABASE "+dbName);
 			stat.executeQuery("USE "+dbName);
 			conn=stat.getConnection();
 			stat=conn.createStatement();
 			stat.execute("CREATE TABLE "+sheet1+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
 					+ "name varchar(11) NOT NULL,"
 					+ "gender char(1) NOT NULL default 'm',"
-					+ "password varchar(16) NOT NULL,"
+					+ "password varchar(16) NOT NULL default '123456',"
 					+ "pwdmd5 char(32) NOT NULL,"
-					+ "signTime datetime NOT NULL,"
-					+ "Online int(1) NOT NULL default 0)");
+					+ "signTime datetime NOT NULL)");
 			System.out.println(sheet1 +"created!");
-			
-			stat.execute("CREATE TABLE "+sheet2+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
+			stat.execute("CREATE TABLE "+sheet2+"(historyNum int(5) PRIMARY KEY AUTO_INCREMENT,"
+					+ "userId int(6) NOT NULL,"
 					+ "keyWord varchar(32) NOT NULL,"
-					+ "userId int(1) NOT NULL default 0,"
 					+ "baidu int(1) NOT NULL default 0,"
 					+ "bing int(1) NOT NULL default 0,"
-					+ "youdao int(1) NOT NULL default 0)");
+					+ "youdao int(1) NOT NULL default 0,"
+					+ "searchTime datetime NOT NULL)");
 			System.out.println(sheet2 +"created!");
 			stat.execute("CREATE TABLE "+sheet3+"(senderID int(6) NOT NULL,"
 					+ "receiverID int(6) NOT NULL,"
 					+ "words varchar(64),"
-					+ "url char(30) NOT NULL,"
+					+ "url int(1) NOT NULL,"
 					+ "time datetime NOT NULL,"
 					+ "say varchar(10))");//TODO 暂定长度
 			System.out.println(sheet3 +"created!");
@@ -73,12 +72,9 @@ public class DictionaryDBInit {
 					+ "bing int(2) NOT NULL,"
 					+ "youdao int(2) NOT NULL)");
 			System.out.println(sheet4 +"created!");
-			stat.execute("CREATE TABLE "+sheet5+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
-					+ "user int(2) NOT NULL,"//TODO 暂定长度
-					+ "friend int(2) NOT NULL,"
-					+ "relationship int(2) NOT NULL)");
+			stat.execute("CREATE TABLE "+sheet5+"(ID1 int(6) NOT NULL,"
+					+ "ID2 int(6) NOT NULL)");
 			System.out.println(sheet5 +"created!");
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

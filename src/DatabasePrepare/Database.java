@@ -42,7 +42,7 @@ public class Database implements DBConstant{
 			stat.execute("CREATE TABLE "+sheet1+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
 					+ "name varchar(11) NOT NULL,"
 					+ "gender char(1) NOT NULL default 'm',"
-					+ "password varchar(16) NOT NULL,"
+					+ "password varchar(16) NOT NULL default '123456',"
 					+ "pwdmd5 char(32) NOT NULL,"
 					+ "signTime datetime NOT NULL)");
 			System.out.println(sheet1 +"created!");

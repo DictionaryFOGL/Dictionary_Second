@@ -39,13 +39,7 @@ public class CilentSession implements Runnable,CSConstant {
 					server.userAddFriend(this, message);
 					break;
 				case (LIKE):
-					like(message);
-					break;
-				case (LIKE_CANCEL):
-					likeCancel(message);
-					break;
-				case (INSERT_HISTORY):
-					insertHistory(message);
+					server.userLike(this, message);
 					break;
 				case (LOGIN):
 					User u = server.userLogin(this, message);

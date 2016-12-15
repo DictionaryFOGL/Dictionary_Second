@@ -17,7 +17,7 @@ public class DictionaryDB implements Database, DBConstant {
 	private Statement stat = null;
 	private String local = "jdbc:mysql://127.0.0.1:3306";// local地址可改为服务器地址
 	private String usr = "root";
-	private String pwd = "24601";
+	private String pwd = "root";
 
 	public void connect() {
 		try {
@@ -354,6 +354,4 @@ public class DictionaryDB implements Database, DBConstant {
 		}
 
 	}
-	
-	public void updateHistory()
 }
