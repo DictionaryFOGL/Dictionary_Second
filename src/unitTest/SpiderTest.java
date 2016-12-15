@@ -99,10 +99,58 @@ public class SpiderTest {
 		Spider s=new BingSpider();
 		s.setWord("pelll");
 		Word r=s.getResult();
-
-		//System.out.print("show: "+r.showTranslation());//becuz no result for input pelll!
 		assertEquals(8, s.getSuggestion().size());
 		assertEquals(null, r);
+	}
+	
+	@Test
+	public void testBing7() {
+		Spider s=new BingSpider();
+		s.setWord("cr");
+		Word r=s.getResult();
+
+		System.out.print("show: "+r.showTranslation());
+		assertEquals(2,r.getTranslation().size());
+	}
+	
+	@Test
+	public void testBing8() {
+		Spider s=new BingSpider();
+		s.setWord("sb");
+		Word r=s.getResult();
+
+		System.out.print("show: "+r.showTranslation());
+		assertEquals(2,r.getTranslation().size());
+	}
+	
+	@Test
+	public void testBing9() {
+		Spider s=new BingSpider();
+		s.setWord("no");
+		Word r=s.getResult();
+
+		System.out.print("show: "+r.showTranslation());
+		assertEquals(2,r.getTranslation().size());
+	}
+	
+	@Test
+	public void testBing10() {
+		Spider s=new BingSpider();
+		s.setWord("lp");
+		Word r=s.getResult();
+
+		System.out.print("show: "+r.showTranslation());
+		assertEquals(2,r.getTranslation().size());
+	}
+	
+	@Test
+	public void testBing11() {
+		Spider s=new BingSpider();
+		s.setWord("bl");
+		Word r=s.getResult();
+
+		System.out.print("show: "+r.showTranslation());
+		assertEquals(2,r.getTranslation().size());
 	}
 
 	@Test
@@ -110,17 +158,11 @@ public class SpiderTest {
 		Spider s=new YoudaoSpider();
 		s.setWord("cries");
 		Word r=s.getResult();
-<<<<<<< HEAD
 		assertEquals(2, r.getTranslation().size());
-=======
-
-		assertArrayEquals(new int[]{2,5}, new int[]{r.getTranslation().size(),s.getSuggestion().size()});
 		//wrong Suggestion size check Suggestion size should be zero
 
 		//System.out.println(s.getSuggestion().get(0));
 		assertEquals(2, r.getTranslation().size());
-
->>>>>>> 8a5ab5fcf8c46172a005db7b5c2df9fbe64e51d0
 	}
 
 	@Test

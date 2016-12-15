@@ -15,7 +15,7 @@ public interface Database {
 
 	public void register(String name, String passWord, java.util.Date date, char gender) throws SQLException;
 
-	public ArrayList<User> searchAccount(String keyWord) throws SQLException;
+	public ArrayList<String> searchAccount(String keyWord) throws SQLException;
 
 	public void sendCard(WordCard card,String receiver) throws SQLException;
 

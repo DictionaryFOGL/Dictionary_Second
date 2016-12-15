@@ -88,6 +88,10 @@ public class FriendLayoutController implements Controller{
 	}
 	
 	public void searchResult(String content) {
-		
+		if(content == null || content.length() == 0) {
+			//TODO empty
+		} else {
+			
+		}
 	}
 }

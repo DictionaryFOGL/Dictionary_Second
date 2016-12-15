@@ -35,9 +35,6 @@ public class CilentSession implements Runnable,CSConstant {
 				case (SEND_CARD):
 					sendCard(message);
 					break;
-				case (FRIEND_ONLINE):
-					friendOnline(message);
-					break;
 				case (ADD_FRIEND):
 					addFriend(message);
 					break;
@@ -62,7 +59,7 @@ public class CilentSession implements Runnable,CSConstant {
 					if (u != null) localLogin(u);
 					break;
 				case (SEARCH_USER):
-					searchUser(message);
+					System.out.println(server.searchUsers(this, message));
 					break;
 				default:
 					break;
@@ -89,9 +86,9 @@ public class CilentSession implements Runnable,CSConstant {
 		}
 	}
 	
-	public void localSearchUser(User u) {
+	public void localSearchUser(User u,ArrayList<String> likeList) {
 		try {
-			SearchResultMessage message=new SearchResultMessage(SEARCH_USER, u);
+			ResultMessage message=new ResultMessage(SEARCH_RESULT, likeList, u);
 			out.writeObject(message);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -101,6 +98,10 @@ public class CilentSession implements Runnable,CSConstant {
 	public void localLogout() {
 		this.user=null;
 		localSimpleMessage(LOGOUT);
+	}
+	
+	public User getUser() {
+		return this.user;
 	}
 	
 	public void localSimpleMessage(byte type) {

@@ -52,6 +52,6 @@ public class Word  implements Serializable{
 	}
 
 	public String showTranslation() {
-		return translation.toString().replaceAll(", ", "\n").replaceAll("\\[|\\]", "");
+		return translation.toString().replaceAll(", ", " | ").replaceAll("\\[|\\]", "");
 	}
 }

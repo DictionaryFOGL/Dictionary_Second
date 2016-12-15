@@ -3,6 +3,7 @@ package serverAndThread;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -84,9 +85,27 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		operator.localLogout();
 		return true;
 	}
-	public User searchUsers(CilentSession operator, Message m) {
+	public boolean searchUsers(CilentSession operator, Message m) {
 		SearchMessage message=(SearchMessage) m;
 		String item=message.getKeyWord();
+		CilentSession online=userList.get(item);
+		User target=null;
+		ArrayList<String> likeList=null;
+		try {
+			likeList=db.searchAccount(item);
+		} catch (SQLException e) {
+			System.out.println("search account");
+			e.printStackTrace();
+			return false;
+		}
+		if(online != null) {
+			target=online.getUser();
+			likeList.remove(item);
+		}
+		operator.localSearchUser(target, likeList);
+		return true;
+	}
+	public void userAddFriend(CilentSession operator, Message m) {
 		
 	}
 	public void broadCast() {

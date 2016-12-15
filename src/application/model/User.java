@@ -4,6 +4,7 @@ package application.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import application.util.*;
 
@@ -21,19 +22,22 @@ public class User implements Serializable{
 	private Date registerDate;
 	private char gender;
 	private ArrayList<WordCard> mailBox=new ArrayList<WordCard>();
-	private ArrayList<String> friendList=new ArrayList<String>();
+	private HashMap<String,Boolean> friendList=new HashMap<String,Boolean>();
 	private int baidu,youdao,bing;
 	
-	public User(String userName, String password, char gender,Date registerDate) {
+	public User(String userName, String password, char gender,Date registerDate,int baidu,int youdao,int bing) {
 		this.setRegisterDate(new Date());
 		this.userName = userName;
 		this.password = password;
 		pwdMd5=Encryption.MD5(password);
 		this.gender = gender;
 		this.registerDate=registerDate;
-		baidu=0;
-		youdao=0;
-		bing=0;
+		this.baidu=baidu;
+		this.youdao=youdao;
+		this.bing=bing;
+	}
+	public User(String userName, String password, char gender,Date registerDate) {
+		this(userName,password,gender,registerDate,0,0,0);
 	}
 	
 	public int getUserID() {
@@ -132,7 +136,7 @@ public class User implements Serializable{
 	}
 	
 	public ArrayList<String> getFriendList() {
-		return friendList;
+		return new ArrayList<String>(friendList.keySet());
 	}
 	
 	public boolean addNewFriend(String friend) {

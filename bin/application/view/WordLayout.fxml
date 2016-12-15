@@ -64,11 +64,11 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="50.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="2">
+                  <HBox fx:id="found1" alignment="TOP_CENTER" layoutX="10.0" layoutY="50.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="2">
                      <children>
-                        <BorderPane fx:id="result1" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="comefrom1" text="www.youdao.com" />
                                  </children>
@@ -80,7 +80,7 @@
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="12.0" top="2.0" />
                                  </BorderPane.margin>
                                  <children>
                                     <Text fx:id="trans1" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
@@ -128,7 +128,7 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="3">
+                  <HBox fx:id="found2" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="3">
                      <children>
                         <BorderPane fx:id="result2" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
                            <center>
@@ -144,7 +144,7 @@
                                     </Text>
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="12.0" top="2.0" />
                                  </BorderPane.margin>
                               </HBox>
                            </center>
@@ -173,7 +173,7 @@
                               </HBox>
                            </right>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="comefrom2" text="www.youdao.com" />
                                  </children>
@@ -194,7 +194,7 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="4">
+                  <HBox fx:id="found3" alignment="TOP_CENTER" layoutX="10.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="4">
                      <children>
                         <BorderPane fx:id="result3" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
                            <center>
@@ -210,7 +210,7 @@
                                     </Text>
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="12.0" top="2.0" />
                                  </BorderPane.margin>
                               </HBox>
                            </center>
@@ -239,7 +239,7 @@
                               </HBox>
                            </right>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="comefrom3" text="www.youdao.com" />
                                  </children>
@@ -260,7 +260,7 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="2">
+                  <HBox fx:id="notFound1" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="2">
                      <children>
                         <BorderPane fx:id="result11" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
                            <center>
@@ -300,12 +300,12 @@
                                     </Text>
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="12.0" top="2.0" />
                                  </BorderPane.margin>
                               </HBox>
                            </center>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="emptyfrom1" text="www.youdao.com" />
                                  </children>
@@ -315,7 +315,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox fx:id="box11" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
                               <ImageView fx:id="questionmark1" fitHeight="48.0" fitWidth="28.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" onMousePressed="#mouseOut1" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -325,9 +325,9 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="3">
+                  <HBox fx:id="notFound2" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="3">
                      <children>
-                        <BorderPane fx:id="result111" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="4.0" BorderPane.alignment="CENTER">
                                  <children>
@@ -365,12 +365,12 @@
                                     </Text>
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="12.0" top="2.0" />
                                  </BorderPane.margin>
                               </HBox>
                            </center>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="emptyfrom2" text="www.youdao.com" />
                                  </children>
@@ -380,7 +380,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox fx:id="box111" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
                               <ImageView fx:id="questionmark2" fitHeight="48.0" fitWidth="28.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" onMousePressed="#mouseOut1" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -390,9 +390,9 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="226.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="4">
+                  <HBox fx:id="notFound3" alignment="TOP_CENTER" layoutX="10.0" layoutY="226.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="4">
                      <children>
-                        <BorderPane fx:id="result1111" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="4.0" BorderPane.alignment="CENTER">
                                  <children>
@@ -430,12 +430,12 @@
                                     </Text>
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="12.0" top="2.0" />
                                  </BorderPane.margin>
                               </HBox>
                            </center>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="emptyfrom3" text="www.youdao.com" />
                                  </children>
@@ -445,7 +445,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox fx:id="box1111" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
                               <ImageView fx:id="questionmark3" fitHeight="48.0" fitWidth="28.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" onMousePressed="#mouseOut1" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
                            </children>
