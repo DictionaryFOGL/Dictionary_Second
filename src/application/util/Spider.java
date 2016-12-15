@@ -26,6 +26,10 @@ public abstract class Spider {
 		suggestions=new ArrayList<String>();
 	}
 	
+	public String getPreUrl() {
+		return preUrl;
+	}
+	
 	public abstract void setWord(String keyWord);// set the keyWord for Searching
 	
 	public abstract Word getResult();// return the words OR SENTENCE

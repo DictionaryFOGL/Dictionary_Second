@@ -48,6 +48,10 @@ public class YoudaoSpider extends Spider{
 		suggestionRegex="class=\"search-js\">.*</a></span>";
 		suggestionRegexd="class=\"search-js\">|</a></span>";
 	}
+	
+	public String getPreUrl() {
+		return preUrl;
+	}
 
 	@Override
 	public Word getResult() {
