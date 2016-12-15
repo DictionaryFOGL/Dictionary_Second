@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import application.model.User;
 import application.model.message.*;
@@ -71,6 +72,9 @@ public class CilentSession implements Runnable,CSConstant {
 			e.printStackTrace();
 		} catch(IOException  e) {
 			System.out.println("end of stream");
+		} finally {
+			socket.close();
+			server.guestQuit(this);
 		}
 	}
 
@@ -81,6 +85,15 @@ public class CilentSession implements Runnable,CSConstant {
 			out.writeObject(message);
 		} catch (IOException e) {
 			System.out.println("localLogin failed");
+			e.printStackTrace();
+		}
+	}
+	
+	public void localSearchUser(User u) {
+		try {
+			SearchResultMessage message=new SearchResultMessage(SEARCH_USER, u);
+			out.writeObject(message);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -21,6 +21,7 @@ public class Main extends Application {
 	private BorderPane startLayout;
 	private BorderPane workLayout;
 	private Controller tempControl;
+	private BaseLayoutController baseCon;
 	
 	public Main() {
 		
@@ -34,7 +35,6 @@ public class Main extends Application {
 		initStartLayout();
 		setStart();
 		initWorkLayout();
-		staticResourceLoad();
 		Parameters p=ParametersImpl.getParameters(this);
 	}
 	
@@ -71,6 +71,7 @@ public class Main extends Application {
 	public void initWorkLayout() {
 		try {
 			WorkLayoutController controller=(WorkLayoutController) FXMLLoadBase("view/WorkLayout.fxml",2);
+			baseCon.setWorkCon(controller);
 			
 			AnchorPane word=FXMLLoadBase("view/WordLayout.fxml");
 			WordLayoutController c1=(WordLayoutController) tempControl;
@@ -78,8 +79,11 @@ public class Main extends Application {
 			AnchorPane friend=FXMLLoadBase("view/FriendLayout.fxml");
 			FriendLayoutController c2=(FriendLayoutController) tempControl;
 			controller.setFriControl(c2);
+			AnchorPane personal=FXMLLoadBase("view/PersonalEditLayout.fxml");
+			PersonalEditLayoutController c3=(PersonalEditLayoutController) tempControl;
+			controller.setPersonControl(c3);
 			
-			controller.setChildPane(word, friend);
+			controller.setChildPane(word, friend, personal);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,10 +103,12 @@ public class Main extends Application {
 		Controller c=loader.getController();
 		c.setMain(this);
 		if(local == 0) {
+			baseCon=(BaseLayoutController) c;
 			c.setPaneMyself(baseLayout);
 		} else if(local == 1) {
 			c.setPaneMyself(startLayout);
 		} else if(local == 2) {
+			baseCon.setWorkPane(workLayout);
 			c.setPaneMyself(workLayout);
 		}
 		return c;

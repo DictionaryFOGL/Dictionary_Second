@@ -51,8 +51,8 @@
                   <TextField fx:id="pwd" layoutX="180.0" layoutY="36.0" maxWidth="357.0" prefHeight="37.0" prefWidth="357.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="vertification" prefHeight="37.0" prefWidth="150.0" />
-                        <Label fx:id="check" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="125.0" rotate="14.0" text="JDBC">
+                        <TextField fx:id="check" prefHeight="37.0" prefWidth="150.0" />
+                        <Label fx:id="vertification" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="125.0" rotate="14.0" text="JDBC">
                            <font>
                               <Font size="26.0" />
                            </font>

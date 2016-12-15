@@ -14,7 +14,7 @@ public class CilentTest {
 	public static void showReturn(Object obj) {
 		User user=(User) obj;
 		System.out.println("Received:");
-		System.out.println(user.getUserID()+"  "+user.getGender()+"  "+user.getUserName()+"  "+user.getFriendList().get(0).getUserName());
+		
 	}
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
 		String serverIP="127.0.0.1";
@@ -24,6 +24,9 @@ public class CilentTest {
 		System.out.println("Connect to server..."+socket.hashCode());
 		InputStream in=socket.getInputStream();
 		OutputStream out=socket.getOutputStream();
+		System.out.println("in and out: "+in.hashCode()+" "+out.hashCode());
+		in=socket.getInputStream();
+		out=socket.getOutputStream();
 		System.out.println("in and out: "+in.hashCode()+" "+out.hashCode());
 		
 		ObjectOutputStream oos=new ObjectOutputStream(out);

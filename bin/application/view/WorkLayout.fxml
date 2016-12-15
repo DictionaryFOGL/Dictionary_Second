@@ -14,7 +14,7 @@
             <Insets left="40.0" right="40.0" />
          </BorderPane.margin>
          <children>
-            <ImageView fx:id="modePic" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="modePic" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#modeChange" pickOnBounds="true" preserveRatio="true" />
             <TextField fx:id="input" prefHeight="32.0" prefWidth="680.0">
                <HBox.margin>
                   <Insets top="12.0" />

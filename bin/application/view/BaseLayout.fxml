@@ -29,8 +29,8 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="personalEdit" fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="test" onMouseClicked="#handleTest" text="Welcome, ">
+                  <ImageView fx:id="personalEdit" fitHeight="50.0" fitWidth="40.0" onMouseClicked="#handleEdit" pickOnBounds="true" preserveRatio="true" />
+                  <Label text="Welcome, ">
                      <font>
                         <Font name="Roboto Thin" size="22.0" />
                      </font>

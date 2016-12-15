@@ -38,7 +38,7 @@ public class ServerDict extends ServerSocket implements CSConstant{
 				user.setStatus(true);
 				guests.remove(operator);
 				userList.put(name, operator);
-				// TODO 通知他人
+				broadCast();
 			}
 		} catch (SQLException e) {
 			System.out.println("register failed");
@@ -84,7 +84,13 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		operator.localLogout();
 		return true;
 	}
+	public User searchUsers(CilentSession operator, Message m) {
+		SearchMessage message=(SearchMessage) m;
+		String item=message.getKeyWord();
+		
+	}
 	public void broadCast() {
+		// TODO 通知他人
 		
 	}
 
