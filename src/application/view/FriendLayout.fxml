@@ -41,7 +41,7 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </Text>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="gender" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">

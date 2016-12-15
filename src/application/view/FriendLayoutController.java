@@ -1,17 +1,32 @@
 package application.view;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 import application.Main;
 import application.model.User;
+import application.model.WordCard;
 import application.util.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class FriendLayoutController implements Controller{
+	private AnchorPane myself;
+	private Main mainApp;
+	private Image male;
+	private Image female;
+	private Image secret;
+	private User user;
+	private WordCard card1;
+	private WordCard card2;
 	
 	@FXML
 	private GridPane found;
@@ -42,6 +57,8 @@ public class FriendLayoutController implements Controller{
 	private Label rSite1;
 	@FXML
 	private Label rSite2;
+	@FXML
+	private ImageView gender;
 	
 	@FXML
 	private Text nameNotFound;
@@ -54,14 +71,20 @@ public class FriendLayoutController implements Controller{
 	
 	@Override
 	public void setMain(Main mainApp) {
-		// TODO Auto-generated method stub
-		
+		this.mainApp=mainApp;
+		try {
+			female=new Image(new File("resources/_0017_female.png").toURI().toURL().toString());
+			male=new Image(new File("resources/_0015_male.png").toURI().toURL().toString());
+			secret=new Image(new File("resources/_0016_secret.png").toURI().toURL().toString());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void setPaneMyself(Pane pane) {
-		// TODO Auto-generated method stub
-		
+		AnchorPane myself=(AnchorPane) pane;
+		this.myself=myself;
 	}
 	
 	public void searchResult(String content) {

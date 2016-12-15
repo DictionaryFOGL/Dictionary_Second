@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import application.Main;
+import application.model.User;
 import application.model.Word;
 import application.util.BaiduSpider;
 import application.util.BingSpider;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -22,8 +24,13 @@ import javafx.scene.text.Text;
 
 public class WordLayoutController implements Controller{
 	private Main mainApp;
+	private AnchorPane myself;
 	private String searchItem;
 	private int count;
+	private static final String youdaoS="www.youdao.com";
+	private static final String bingS="www.bing.com/translator";
+	private static final String baiduS="fanyi.baidu.com";
+	private Text[] trans=new Text[3];
 	
 	private Word youdaoWord=null;
 	private Word baiduWord=null;
@@ -117,6 +124,9 @@ public class WordLayoutController implements Controller{
 	@Override
 	public void setMain(Main mainApp) {
 		this.mainApp=mainApp;
+		trans[0]=trans1;
+		trans[1]=trans2;
+		trans[2]=trans3;
 		try {
 			likeDefault=new Image(new File("resources/_0007_SearchWord_prove_clicked.png").toURI().toURL().toString());
 			likeYes=new Image(new File("resources/_0008_SearchWord_prove.png").toURI().toURL().toString());
@@ -147,23 +157,57 @@ public class WordLayoutController implements Controller{
 
 	@Override
 	public void setPaneMyself(Pane pane) {
-		// TODO Auto-generated method stub
-		
+		AnchorPane myself=(AnchorPane) pane;
+		this.myself=myself;
 	}
 	
 	public void searchResult(String searchItem) {
 		this.searchItem=searchItem;
-		resultShow();
-		searchBase();
 		modeSet();
+		searchBase();
+		resultShow();
 	}
 	
 	private void searchBase() {
 		
 	}
 	
+	private void baiduSearch() {
+		baidu.setWord(searchItem);
+		baiduWord=baidu.getResult();
+		if(baiduWord != null) {
+			trans[1].setText(baiduWord.showTranslation());
+		} else {
+			//TODO
+		}
+	}
+	
+	private void bingSearch() {
+		bing.setWord(searchItem);
+		bingWord=bing.getResult();
+		if(bingWord != null) {
+			trans[2].setText(bingWord.showTranslation());
+		}
+	}
+	
+	private void youdaoSearch() {
+		youdao.setWord(searchItem);
+		youdaoWord=youdao.getResult();
+		if(youdaoWord != null) {
+			trans[0].setText(youdaoWord.showTranslation());
+		}
+	}
+	
 	private void modeSet() {
-		//TODO 找到与没找到不同mode显示
+		User usr=mainApp.getUser();
+		if(usr != null) {
+			int baidulike=usr.getBaidu();
+			int youdaolike=usr.getYoudao();
+			int binglike=usr.getBing();
+			if(baidulike > youdaolike && baidulike > binglike) {
+				trans[0]
+			}
+		}
 	}
 	
 	@FXML

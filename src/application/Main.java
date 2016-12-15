@@ -142,20 +142,9 @@ public class Main extends Application {
 		
 	}
 	
-	public void searchWordSuccessMode() {
-		
-	}
-
-	public void searchWordFailedMode() {
-		
-	}
-	
-	public void searchFriendSuccessMode() {
-		
-	}
-	
-	public void searchFriendFailMode() {
-		
+	public User getUser() {
+		//TODO loginuser
+		return null;
 	}
 	public static void main(String[] args) {
 		launch(args);
