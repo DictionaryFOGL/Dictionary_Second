@@ -139,16 +139,16 @@ public class User implements Serializable{
 		return new ArrayList<String>(friendList.keySet());
 	}
 	
-	public boolean addNewFriend(String friend) {
-		if(friendList.contains(friend)) return false;
+	public boolean addNewFriend(String friend,boolean status) {
+		if(friendList.get(friend) != null) return false;
 		else {
-			friendList.add(friend);
+			friendList.put(friend, status);
 			return true;
 		}
 	}
 	
 	public boolean deleteFriend(User friend) {
-		if(friendList.contains(friend)) {
+		if(friendList.get(friend) != null) {
 			friendList.remove(friend);
 			return true;
 		} else return false;

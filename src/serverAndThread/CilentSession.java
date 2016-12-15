@@ -36,7 +36,7 @@ public class CilentSession implements Runnable,CSConstant {
 					sendCard(message);
 					break;
 				case (ADD_FRIEND):
-					addFriend(message);
+					server.userAddFriend(this, message);
 					break;
 				case (LIKE):
 					like(message);
@@ -102,6 +102,16 @@ public class CilentSession implements Runnable,CSConstant {
 	
 	public User getUser() {
 		return this.user;
+	}
+	
+	public void localGetFriend(String name) {
+		user.addNewFriend(name, true);
+		AddFriendMessage friend=new AddFriendMessage(NEW_FRIEND, name);
+		try {
+			out.writeObject(friend);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void localSimpleMessage(byte type) {

@@ -57,7 +57,7 @@ public class DictionaryDBInit {
 			stat.execute("CREATE TABLE "+sheet2+"(ID int(6) PRIMARY KEY AUTO_INCREMENT,"
 					+ "keyWord varchar(32) NOT NULL,"
 					+ "userId int(1) NOT NULL default 0,"
-					+ "baidu int(2) NOT NULL default 0,"
+					+ "baidu int(1) NOT NULL default 0,"
 					+ "bing int(1) NOT NULL default 0,"
 					+ "youdao int(1) NOT NULL default 0)");
 			System.out.println(sheet2 +"created!");

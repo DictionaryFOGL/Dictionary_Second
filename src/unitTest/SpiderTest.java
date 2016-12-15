@@ -106,11 +106,11 @@ public class SpiderTest {
 	@Test
 	public void testBing7() {
 		Spider s=new BingSpider();
-		s.setWord("cr");
+		s.setWord("ssssssssssssssssssssssssssssssssssssssssssss");
 		Word r=s.getResult();
 
-		System.out.print("show: "+r.showTranslation());
-		assertEquals(2,r.getTranslation().size());
+		//System.out.print("show: "+r.showTranslation());
+		assertEquals(null,r);
 	}
 	
 	@Test
@@ -126,7 +126,7 @@ public class SpiderTest {
 	@Test
 	public void testBing9() {
 		Spider s=new BingSpider();
-		s.setWord("no");
+		s.setWord("XXX");
 		Word r=s.getResult();
 
 		System.out.print("show: "+r.showTranslation());
@@ -136,7 +136,7 @@ public class SpiderTest {
 	@Test
 	public void testBing10() {
 		Spider s=new BingSpider();
-		s.setWord("lp");
+		s.setWord("c");
 		Word r=s.getResult();
 
 		System.out.print("show: "+r.showTranslation());
@@ -163,6 +163,17 @@ public class SpiderTest {
 
 		//System.out.println(s.getSuggestion().get(0));
 		assertEquals(2, r.getTranslation().size());
+	}
+
+	@Test
+	public void testYoudaonn() {
+		Spider s=new YoudaoSpider();
+		s.setWord("mlp");
+		Word r=s.getResult();
+		assertEquals(1, r.getTranslation().size());
+		//wrong Suggestion size check Suggestion size should be zero
+
+		System.out.println(r.showTranslation());
 	}
 
 	@Test

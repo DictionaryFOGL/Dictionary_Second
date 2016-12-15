@@ -1,38 +1,27 @@
 package application.model.message;
 
-import application.model.WordsLike;
-
 public class LikeMessage extends Message {
 
 	private int site;
-	private String userName;
-	private WordsLike wordslike;
-	public LikeMessage(byte type,int site,String userName) {
+	private String keyWord;
+	private boolean likeOrNot;
+
+	public LikeMessage(byte type, boolean likeOrNot,String keyWord) {
 		super(type);
-		setSite(site);
-		setUserName(userName);
+		this.likeOrNot = likeOrNot;
+		this.keyWord=keyWord;
 	}
-	
+
+	public String getKeyWord() {
+		return keyWord;
+	}
+
 	public int getSite() {
 		return site;
 	}
-	public void setSite(int site) {
-		this.site = site;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
-	public WordsLike getWordslike() {
-		return wordslike;
+	public boolean isLikeOrNot() {
+		return likeOrNot;
 	}
-
-	public void setWordslike(WordsLike wordslike) {
-		this.wordslike = wordslike;
-	}
-	
 
 }

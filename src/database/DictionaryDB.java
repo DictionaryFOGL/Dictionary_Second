@@ -257,8 +257,13 @@ public class DictionaryDB implements Database, DBConstant {
 			return false;
 		}
 		friendId = result.getInt(1);
-		stat.executeUpdate("INSERT INTO " + sheet5 + "(user,friend,relationship) " + "values('" + userId + "','"
-				+ friendId + "','" + -1 + "')");
+		if(friendId < userId) {
+			int tmp=userId;
+			userId=friendId;
+			friendId=tmp;
+		}
+		stat.executeUpdate("INSERT INTO " + sheet5 + "(ID1,ID2) " + "values('" + userId + "','"
+				+ friendId + "')");
 		return true;
 	}
 
@@ -286,9 +291,10 @@ public class DictionaryDB implements Database, DBConstant {
 	}
 
 	@Override
-	public boolean insertHistory(String keyWord, String userName) throws SQLException {
+	public boolean insertHistory(String keyWord, String userName, int site, int status) throws SQLException {
 		int userId = -1;
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + userName + "';");
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		ResultSet result = stat.executeQuery("select * from "+sheet1+" where name = '" + userName + "';");
 		result.last();
 		if (result.getRow() == 0) {
 			return false;
@@ -298,11 +304,34 @@ public class DictionaryDB implements Database, DBConstant {
 				"select * from " + sheet2 + " where userId = '" + userId + "' and keyWord = '" + keyWord + "';");
 		result.last();
 		if (result.getRow() != 0) {
-			return true;
+			int affect=0;
+			if(site == 2) {
+				affect+=stat.executeUpdate("UPDATE "+sheet2+" SET youdao='"+status+"' WHERE userId='"+userId+"' AND keyWord='"+keyWord+"'");
+			} else if(site == 1){
+				affect+=stat.executeUpdate("UPDATE "+sheet2+" SET bing='"+status+"' WHERE userId='"+userId+"' AND keyWord='"+keyWord+"'");
+			} else {
+				affect+=stat.executeUpdate("UPDATE "+sheet2+" SET baidu='"+status+"' WHERE userId='"+userId+"' AND keyWord='"+keyWord+"'");
+			}
+			long time=System.currentTimeMillis();
+			affect+=stat.executeUpdate("UPDATE "+sheet2+" SET searchTime='"+formatter.format(time)+"' WHERE userId='"+userId+"' AND keyWord='"+keyWord+"'");
+			if(affect == 2) return true;
+			else return false;
+		} else {
+			int affect=0;
+			long time=System.currentTimeMillis();
+			if(site == 2) {
+				affect=stat.executeUpdate("INSERT INTO " + sheet2 + "(keyWord,userId,youdao,searchTime)" + "values('" + keyWord + "','"
+						+ userId + "','" + status + "','" + formatter.format(time) + "')");
+			} else if(site == 1) {
+				affect=stat.executeUpdate("INSERT INTO " + sheet2 + "(keyWord,userId,bing,searchTime)" + "values('" + keyWord + "','"
+						+ userId + "','" + status + "','" + formatter.format(time) + "')");
+			} else {
+				affect=stat.executeUpdate("INSERT INTO " + sheet2 + "(keyWord,userId,baidu,searchTime)" + "values('" + keyWord + "','"
+						+ userId + "','" + status + "','" + formatter.format(time) + "')");
+			}
+			if(affect == 1) return true;
+			else return false;
 		}
-		stat.executeUpdate("INSERT INTO " + sheet2 + "(keyWord,userId,baidu,bing,youdao)" + "values('" + keyWord + "','"
-				+ userId + "','" + 0 + "','" + 0 + "','" + 0 + "')");
-		return true;
 	}
 
 	@Override
@@ -325,4 +354,6 @@ public class DictionaryDB implements Database, DBConstant {
 		}
 
 	}
+	
+	public void updateHistory()
 }

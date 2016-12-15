@@ -47,7 +47,7 @@ public class Database implements DBConstant{
 					+ "signTime datetime NOT NULL)");
 			System.out.println(sheet1 +"created!");
 			stat.execute("CREATE TABLE "+sheet2+"(historyNum int(5) PRIMARY KEY AUTO_INCREMENT,"
-					+ "ID int(6) NOT NULL,"
+					+ "userId int(6) NOT NULL,"
 					+ "keyWord varchar(32) NOT NULL,"
 					+ "baidu int(1) NOT NULL default 0,"
 					+ "bing int(1) NOT NULL default 0,"
@@ -66,6 +66,9 @@ public class Database implements DBConstant{
 					+ "bing int(2) NOT NULL,"
 					+ "youdao int(2) NOT NULL)");
 			System.out.println(sheet4 +"created!");
+			stat.execute("CREATE TABLE "+sheet5+"(ID1 int(6) NOT NULL,"
+					+ "ID2 int(6) NOT NULL)");
+			System.out.println(sheet5 +"created!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

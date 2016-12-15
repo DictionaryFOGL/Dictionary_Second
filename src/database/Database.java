@@ -23,7 +23,7 @@ public interface Database {
 	
 	public ArrayList<SearchHistory> SearchHistory(String userName) throws SQLException;
 	
-	public boolean insertHistory(String keyWord,String userName) throws SQLException;
+	public boolean insertHistory(String keyWord, String userName, int site, int status) throws SQLException;
 
 	public ArrayList<WordCard> getCard(String receiver) throws SQLException;
 	

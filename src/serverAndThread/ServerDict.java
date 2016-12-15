@@ -106,7 +106,38 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		return true;
 	}
 	public void userAddFriend(CilentSession operator, Message m) {
-		
+		AddFriendMessage message=(AddFriendMessage) m;
+		String name=message.getFriendName();
+		try {
+			db.addFriends(name, operator.getUser().getUserName());
+			CilentSession friend=userList.get(name);
+			if(friend != null) {
+				operator.getUser().addNewFriend(name, true);
+				friend.localGetFriend(operator.getUser().getUserName());
+			} else {
+				operator.getUser().addNewFriend(name, false);
+			}
+		} catch (SQLException e) {
+			System.out.println("friend add error");
+			e.printStackTrace();
+		}
+	}
+	public void userLike(CilentSession operator, Message m) {
+		LikeMessage message=(LikeMessage) m;
+		int site=message.getSite();
+		boolean likeOrNot=message.isLikeOrNot();
+		String key=message.getKeyWord();
+		if(site == 0) {
+			if(likeOrNot) operator.getUser().baiduLike();
+			else operator.getUser().baiduDisLike();
+		} else if(site == 1) {
+			if(likeOrNot) operator.getUser().bingLike();
+			else operator.getUser().bingDisLike();
+		} else if(site == 2) {
+			if(likeOrNot) operator.getUser().youdaoLike();
+			else operator.getUser().youdaoDisLike();
+		}
+		System.out.println("like renew");
 	}
 	public void broadCast() {
 		// TODO 通知他人
@@ -116,5 +147,8 @@ public class ServerDict extends ServerSocket implements CSConstant{
 
 	public void guestQuit(CilentSession c) {
 		guests.remove(c);
+	}
+	public void addGuestSocket(CilentSession cs) {
+		guests.add(cs);
 	}
 }

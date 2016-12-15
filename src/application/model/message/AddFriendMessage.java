@@ -2,29 +2,15 @@ package application.model.message;
 
 public class AddFriendMessage extends Message{
 
-	private String sender;
-	private String receiver;
+	private String friendName;
 	
-	public AddFriendMessage(byte type,String sender,String receiver) {
+	public AddFriendMessage(byte type,String friendName) {
 		super(type);
-		setSender(sender);
-		setReceiver(receiver);
+		this.friendName=friendName;
 	}
 
-	public String getSender() {
-		return sender;
+	public String getFriendName() {
+		return friendName;
 	}
-
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
-
-	public String getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
-
+	
 }
