@@ -15,7 +15,7 @@ import application.util.Encryption;
 public class DictionaryDB implements Database, DBConstant {
 	private Connection conn = null;
 	private Statement stat = null;
-	private String local = "jdbc:mysql://127.0.0.1:3306";// local地址可改为服务器地址
+	private String local = "jdbc:mysql://127.0.0.1:3306/?characterEncoding=utf8";// local地址可改为服务器地址
 	private String usr = "root";
 	private String pwd = "root";
 
@@ -91,11 +91,10 @@ public class DictionaryDB implements Database, DBConstant {
 		result.last();
 		if (result.getRow() != 0) {
 			receiverId = result.getInt(1);
-			Date sendDate = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			stat.executeUpdate("INSERT INTO " + sheet3 + "(senderID,receiverID,words,url,time,say) " + "values('"
-					+ senderId + "','" + receiverId + "','" + card.getWord().getWords() + "','" + card.getSite() + "','"
-					+ sdf.format(sendDate) + "','" + card.getSaySomething() + "')");
+			stat.executeUpdate("INSERT INTO " + sheet3 + "(senderID,receiverID,words,trans,url,time,say) " + "values('"
+					+ senderId + "','" + receiverId + "','" + card.getWord().getWords() + "','" +card.getWord().showTranslation() + "','" + card.getSite() + "','"
+					+ sdf.format(card.getTime()) + "','" + card.getSaySomething() + "')");
 		}
 	}
 
@@ -244,14 +243,14 @@ public class DictionaryDB implements Database, DBConstant {
 	@Override
 	public boolean addFriends(String userName, String friendName) throws SQLException {
 		int userId = -1;
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + userName + "';");
+		ResultSet result = stat.executeQuery("select * from "+sheet1+" where name = '" + userName + "';");
 		result.last();
 		if (result.getRow() == 0) {
 			return false;
 		}
 		userId = result.getInt(1);
 		int friendId = -1;
-		result = stat.executeQuery("select * from usermessage where name = '" + friendName + "';");
+		result = stat.executeQuery("select * from "+sheet1+" where name = '" + friendName + "';");
 		result.last();
 		if (result.getRow() == 0) {
 			return false;
@@ -262,7 +261,7 @@ public class DictionaryDB implements Database, DBConstant {
 			userId=friendId;
 			friendId=tmp;
 		}
-		stat.executeUpdate("INSERT INTO " + sheet5 + "(ID1,ID2) " + "values('" + userId + "','"
+		stat.executeUpdate("insert into " + sheet5 + "(ID1,ID2) " + "values('" + userId + "','"
 				+ friendId + "')");
 		return true;
 	}
@@ -346,12 +345,43 @@ public class DictionaryDB implements Database, DBConstant {
 
 	@Override
 	public void userOnline(String userName, int status) throws SQLException {
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + userName + "';");
+		ResultSet result = stat.executeQuery("select * from "+sheet1+" where name = '" + userName + "';");
 		result.last();
 		if (result.getRow() != 0) {
 			stat.executeUpdate(
 					"update " + sheet1 + " set Online = '" + status + "'" + " where name = '" + userName + "';");
 		}
 
+	}
+	
+	public boolean userResetCards(String userName,int before) throws SQLException {
+		int userId = -1;
+		ResultSet result = stat.executeQuery("select * from "+sheet1+" where name = '" + userName + "';");
+		result.last();
+		if (result.getRow() == 0) {
+			return false;
+		}
+		userId = result.getInt(1);
+		int after=stat.executeUpdate("delete from "+sheet3+" where receiverID='"+userId+"';");
+		if(before == after) return true;
+		else return false;
+	}
+	
+	public boolean deleteCard(int receiverId,WordCard card) throws SQLException {
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		int affect=-1;
+		String command="delete from "+sheet3+" where senderID='"+card.getSenderID()+"' and receiverID='"
+				+receiverId+ "' and time='"+formatter.format(card.getTime())+"' and say='"+card.getSaySomething()+"';";
+		//System.out.println(command);
+		affect=stat.executeUpdate(command);
+		if(affect == 1) return true;
+		else return false;
+	}
+	public static void main(String[] args) throws SQLException {
+		DictionaryDB db=new DictionaryDB();
+		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,new Date(233333333),0);
+		db.connect();
+		//db.sendCard(card, "sh");
+		db.deleteCard(3, card);
 	}
 }

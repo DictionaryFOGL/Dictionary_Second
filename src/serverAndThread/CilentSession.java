@@ -1,6 +1,5 @@
 package serverAndThread;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -8,6 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import application.model.User;
+import application.model.WordCard;
 import application.model.message.*;
 
 public class CilentSession implements Runnable,CSConstant {
@@ -33,7 +33,7 @@ public class CilentSession implements Runnable,CSConstant {
 				Message message=(Message) obj;
 				switch (message.getType()) {
 				case (SEND_CARD):
-					sendCard(message);
+					server.userSendCard(this, message);
 					break;
 				case (ADD_FRIEND):
 					server.userAddFriend(this, message);
@@ -50,10 +50,23 @@ public class CilentSession implements Runnable,CSConstant {
 					break;
 				case (REGISTER):
 					User u1=server.userRegister(this, message);
-					if (u != null) localLogin(u);
+					if (u1 != null) localLogin(u1);
 					break;
 				case (SEARCH_USER):
-					System.out.println(server.searchUsers(this, message));
+					System.out.println("SEARCH_USER: "+server.searchUsers(this, message));
+					break;
+				case (REFRESH_CARDS):
+					//TODO ¡­¡­¡­¡­¡­¡­¡­¡­^_^ÚÀºÙ
+					break;
+				case (RESET_CARDS):
+					boolean status=server.userResetCards(this);
+					if(status) user.clearMailbox();
+					break;
+				case (REFRESH_FRIEND):
+					
+					break;
+				case (DELETE_CARD):
+					server.userDeleteCard(this, message);
 					break;
 				default:
 					break;
@@ -64,7 +77,12 @@ public class CilentSession implements Runnable,CSConstant {
 		} catch(IOException  e) {
 			System.out.println("end of stream");
 		} finally {
-			socket.close();
+			try {
+				socket.close();
+			} catch (IOException e) {
+				System.out.println("socket out error");
+				e.printStackTrace();
+			}
 			server.guestQuit(this);
 		}
 	}
@@ -76,6 +94,15 @@ public class CilentSession implements Runnable,CSConstant {
 			out.writeObject(message);
 		} catch (IOException e) {
 			System.out.println("localLogin failed");
+			e.printStackTrace();
+		}
+	}
+	
+	public void localReceiveCard(WordCard card) {
+		SendCardMessage message=new SendCardMessage(RECEIVE_CARD, null, card);
+		try {
+			out.writeObject(message);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

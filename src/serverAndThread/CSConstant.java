@@ -2,6 +2,8 @@ package serverAndThread;
 
 interface CSConstant {
 	static final byte SEND_CARD=0x20;
+	static final byte SEND_SUCCESS=0x00;
+	static final byte RECEIVE_CARD=0x10;
 	static final byte FRIEND_ONLINE=0x21;
 	static final byte ADD_FRIEND=0x11;
 	static final byte NEW_FRIEND=0x53;
@@ -16,11 +18,9 @@ interface CSConstant {
 	static final byte SEARCH_RESULT=0x23;
 	static final byte REGISTER_SUCCESS=0x51;
 	static final byte EXISTNAME=0x02;
-	
-	static final byte SEARCH_WORD=0x00;
-	static final byte SEARCH_HISTORY=0x14;
-	static final byte RECEIVE_CARD=0x10;
-	static final byte REFRESH=0x50;
 	static final byte REFRESH_CARDS=0x52;
-	static final byte USER_UPDATE=0x60;
+	static final byte RESET_CARDS=0x14;
+	static final byte REFRESH_FRIEND=0x50;
+	static final byte DELETE_FRIEND=0x60;
+	static final byte DELETE_CARD=0x08;
 }

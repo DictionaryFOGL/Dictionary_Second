@@ -1,16 +1,18 @@
 package application.model.message;
 
+import java.util.ArrayList;
+
 import application.model.*;
 
 public class SendCardMessage extends Message{
-	private String receiverName;
+	private ArrayList<String> receivers;
 	private WordCard card;
 	
 
-	public SendCardMessage(byte type, String receiverName,WordCard card) {
+	public SendCardMessage(byte type, ArrayList<String> receivers,WordCard card) {
 		super(type);
-		this.receiverName=receiverName;
-		this.setCard(card);
+		this.receivers=receivers;
+		this.card=card;
 	}
 
 	@Override
@@ -18,23 +20,11 @@ public class SendCardMessage extends Message{
 		return type;
 	}
 
-
-	public String getReceiverName() {
-		return receiverName;
-	}
-
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName;
+	public ArrayList<String> getReceiverName() {
+		return receivers;
 	}
 
 	public WordCard getCard() {
 		return card;
 	}
-
-	public void setCard(WordCard card) {
-		this.card = card;
-	}
-
-
-
 }

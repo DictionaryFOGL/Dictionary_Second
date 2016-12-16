@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import application.model.User;
+import application.model.WordCard;
 import application.model.message.*;
 import application.util.Encryption;
 import database.DictionaryDB;
@@ -55,6 +56,19 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		String pwdMd5 = login.getPwdMd5();
 		User user=loginBase(operator, name, pwdMd5);
 		return user;
+	}
+	
+	public boolean userResetCards(CilentSession operator) {
+		User usr=operator.getUser();
+		String name=usr.getUserName();
+		try {
+			db.userResetCards(name, usr.getMailBox().size());
+		} catch (SQLException e) {
+			System.out.println("reset error");
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public User userRegister(CilentSession operator, Message m) {
@@ -147,11 +161,37 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		System.out.println("like renew");
 	}
 	public void userSendCard(CilentSession operator, Message m) {
-		SendCardMessage message=m;
-		
+		SendCardMessage message=(SendCardMessage) m;
+		WordCard card=message.getCard();
+		ArrayList<String> receivers=message.getReceiverName();
+		for(String name:receivers) {
+			try {
+				db.sendCard(card, name);
+			} catch (SQLException e) {
+				System.out.println("card insert failed");
+				e.printStackTrace();
+			}
+			CilentSession target=userList.get(name);
+			if(target != null) {
+				target.localReceiveCard(card);
+			}
+		}
 	}
+	
+	public void userDeleteCard(CilentSession operator, Message m) {
+		SendCardMessage message=(SendCardMessage) m;
+		WordCard card=message.getCard();
+		int receiverID=operator.getUser().getUserID();
+		try {
+			db.deleteCard(receiverID, card);
+			operator.getUser().deleteWordCard(card);
+		} catch (SQLException e) {
+			System.out.println("delete failed");
+			e.printStackTrace();
+		}
+	}
+	
 	public void broadCast() {
-		// TODO 通知他人
 		
 	}
 

@@ -12,7 +12,7 @@ public class DictionaryDBInit {
 	private static Statement stat=null;
 	private static String local="jdbc:mysql://127.0.0.1:3306";//local地址可改为服务器地址
 	private static String usr="root";
-	private static String pwd="24601";
+	private static String pwd="root";
 	private static String dbName="Dictionary";
 	private static String sheet1="UserMessage";
 	private static String sheet2="history";
@@ -50,7 +50,7 @@ public class DictionaryDBInit {
 					+ "gender char(1) NOT NULL default 'm',"
 					+ "password varchar(16) NOT NULL default '123456',"
 					+ "pwdmd5 char(32) NOT NULL,"
-					+ "signTime datetime NOT NULL)");
+					+ "signTime datetime NOT NULL)ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			System.out.println(sheet1 +"created!");
 			stat.execute("CREATE TABLE "+sheet2+"(historyNum int(5) PRIMARY KEY AUTO_INCREMENT,"
 					+ "userId int(6) NOT NULL,"
@@ -58,22 +58,23 @@ public class DictionaryDBInit {
 					+ "baidu int(1) NOT NULL default 0,"
 					+ "bing int(1) NOT NULL default 0,"
 					+ "youdao int(1) NOT NULL default 0,"
-					+ "searchTime datetime NOT NULL)");
+					+ "searchTime datetime NOT NULL)ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			System.out.println(sheet2 +"created!");
 			stat.execute("CREATE TABLE "+sheet3+"(senderID int(6) NOT NULL,"
 					+ "receiverID int(6) NOT NULL,"
 					+ "words varchar(64),"
+					+ "trans varchar(64),"
 					+ "url int(1) NOT NULL,"
 					+ "time datetime NOT NULL,"
-					+ "say varchar(10))");//TODO 暂定长度
+					+ "say varchar(10))ENGINE=InnoDB DEFAULT CHARSET=utf8");//TODO 暂定长度
 			System.out.println(sheet3 +"created!");
 			stat.execute("CREATE TABLE "+sheet4+"(ID int(6) PRIMARY KEY,"
 					+ "baidu int(2) NOT NULL,"//TODO 暂定长度
 					+ "bing int(2) NOT NULL,"
-					+ "youdao int(2) NOT NULL)");
+					+ "youdao int(2) NOT NULL)ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			System.out.println(sheet4 +"created!");
 			stat.execute("CREATE TABLE "+sheet5+"(ID1 int(6) NOT NULL,"
-					+ "ID2 int(6) NOT NULL)");
+					+ "ID2 int(6) NOT NULL)ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			System.out.println(sheet5 +"created!");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,10 +116,9 @@ public class DictionaryDBInit {
 	
 	public static void main(String[] args) throws SQLException {
 		connect();
-
 		createDatabaseAndList();
 		stat.executeQuery("USE "+dbName);
-		insertTestData();
+		//insertTestData();
 		closeAll();
 	}
 }

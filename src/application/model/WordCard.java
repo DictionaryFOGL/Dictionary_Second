@@ -16,10 +16,14 @@ public class WordCard implements Serializable{
 	private int site;
 	
 	public WordCard(Word word, String senderName, String saySomething, int senderID, Date time, int site) {
+		this(word,senderName,saySomething,time,site);
+		this.senderID = senderID;
+	}
+	
+	public WordCard(Word word, String senderName, String saySomething, Date time, int site) {
 		this.word = word;
 		this.senderName = senderName;
 		this.saySomething=saySomething;
-		this.senderID = senderID;
 		this.time = time;
 		this.site = site;
 	}
@@ -52,7 +56,11 @@ public class WordCard implements Serializable{
 		return time;
 	}
 
-	public String getSite() {
+	public int getSite() {
+		return site;
+	}
+	
+	public String getSiteStr() {
 		if(site == 0) return "fanyi.baidu.com";
 		else if(site == 2) return "www.youdao.com";
 		else return "www.bing.com/translator";
