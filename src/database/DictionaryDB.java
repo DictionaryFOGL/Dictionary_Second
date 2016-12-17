@@ -1,13 +1,14 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 
 import application.model.*;
 import application.util.Encryption;
@@ -18,6 +19,8 @@ public class DictionaryDB implements Database, DBConstant {
 	private String local = "jdbc:mysql://127.0.0.1:3306/?characterEncoding=utf8";// local地址可改为服务器地址
 	private String usr = "root";
 	private String pwd = "root";
+	private HashMap<String, Integer> nameToId=new HashMap<String, Integer>();
+	private HashMap<Integer, String> idToName=new HashMap<Integer, String>();
 
 	public void connect() {
 		try {
@@ -30,10 +33,16 @@ public class DictionaryDB implements Database, DBConstant {
 			conn = DriverManager.getConnection(local, usr, pwd);
 			stat = conn.createStatement();
 			stat.executeQuery("USE " + dbName);
+			ResultSet result = stat.executeQuery("select * from "+sheet1);
+			while(result.next()) {
+				nameToId.put(result.getString(2), result.getInt(1));
+				idToName.put(result.getInt(1), result.getString(2));
+			}
+			result.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
 	public void closeAll() {
@@ -54,24 +63,34 @@ public class DictionaryDB implements Database, DBConstant {
 		if (result.getRow() == 0 || !result.getString(5).equals(pwdMd5)) {
 			account = null;
 		} else {
-			command="select * from "+sheet4+" where ID='"+result.getInt(1)+"';";
+			int id=result.getInt(1);
+			String pwd=result.getString(4);
+			char gen=result.getString(3).charAt(0);
+			Date date=result.getDate(6);
+			command="select * from "+sheet4+" where ID='"+id+"';";
 			ResultSet result1=stat.executeQuery(command);
 			result1.last();
-			if(result.getRow() == 0) return null;
-			account=new User(result.getInt(1),result.getString(2),result.getString(4),result.getString(3).charAt(0)
-					,result.getDate(6),result1.getInt(2),result1.getInt(4),result.getInt(3));
-			ArrayList<String> friends=getFriends(result.getInt(1));
+			if(result1.getRow() == 0) return null;
+			account=new User(id,name,pwd,gen,date,result1.getInt(2),result1.getInt(4),result1.getInt(3));
+			ArrayList<String> friends=getFriends(id);
 			account.setFriendList(friends);
+			account.setMailBox(getCard(id));
 		}
 		return account;
 	}
 
 	@Override
-	public void register(String name, String passWord, java.util.Date date, char gender) throws SQLException {
+	public void register(String name, String passWord, Date date, char gender) throws SQLException {
 		String MD5 = Encryption.MD5(passWord);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		stat.executeUpdate("INSERT INTO " + sheet1 + "(name,gender,password,pwdmd5,signtime) " + "values('" + name
+		stat.executeUpdate("insert into " + sheet1 + "(name,gender,password,pwdmd5,signtime) " + "values('" + name
 				+ "','" + gender + "','" + passWord + "','" + MD5 + "','" + sdf.format(date) + "');");
+		ResultSet re=stat.executeQuery("select * from "+sheet1+" where name='"+name+"';");
+		re.last();
+		int id=re.getInt(1);
+		idToName.put(id, name);
+		nameToId.put(name, id);
+		re.close();
 	}
 
 	@Override
@@ -104,58 +123,23 @@ public class DictionaryDB implements Database, DBConstant {
 
 	@Override
 	public ArrayList<SearchHistory> SearchHistory(String userName) throws SQLException {
-		int userId = -1;
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + userName + "';");
-		result.last();
-		if (result.getRow() == 0) {
-			return null;
-		}
-		userId = result.getInt(1);
+		int userId = nameToId.get(userName);
 		ArrayList<SearchHistory> history = new ArrayList<SearchHistory>();
-		result = stat.executeQuery("select * from history where userId =" + userId + ";");
+		ResultSet result = stat.executeQuery("select * from history where userId =" + userId + ";");
 		while (result.next()) {
-			history.add(new SearchHistory(result.getString(2), result.getInt(3), result.getInt(4), result.getInt(5),
-					result.getInt(6)));
+			history.add(new SearchHistory(result.getString(3), result.getInt(4), result.getInt(5),result.getInt(6)));
 		}
 		return history;
 	}
 
 	@Override
-	public ArrayList<WordCard> getCard(String receiver) throws SQLException {
-		int receiverId = -1;
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + receiver + "';");
-		result.last();
-		if (result.getRow() == 0) {
-			return null;
-		}
-		receiverId = result.getInt(1);
+	public ArrayList<WordCard> getCard(int receiverId) throws SQLException {
 		ArrayList<WordCard> cardList = new ArrayList<WordCard>();
-		result = stat.executeQuery("select * from mailbox where receiverId =" + receiverId + ";");
+		ResultSet result = stat.executeQuery("select * from mailbox where receiverId =" + receiverId + ";");
 		while (result.next()) {
-			int siteNumber = 0;
-			switch (result.getString(4)) {
-			case "fanyi.baidu.com":
-				siteNumber = 2;
-				break;
-			case "www.baidu.com":
-				siteNumber = 1;
-				break;
-			case "www.bing.com/translator":
-				siteNumber = 0;
-				break;
-			}
-
-			cardList.add(new WordCard(new Word(result.getString(3), ""), null, result.getString(6), result.getInt(1),
-					result.getDate(5), siteNumber));
-		}
-		for (int i = 0; i < cardList.size(); i++) {
-			ResultSet name = stat
-					.executeQuery("select * from usermessage where id = '" + cardList.get(i).getSenderID() + "';");
-			name.last();
-			String senderName = name.getString(2);
-			WordCard card = cardList.get(i);
-			card.setSenderName(senderName);
-			cardList.set(i, card);
+			int siteNumber = result.getInt(5);
+			cardList.add(new WordCard(new Word(result.getString(3), result.getString(4)), idToName.get(result.getInt(1)), result.getString(7), result.getInt(1),
+					result.getDate(6), siteNumber));
 		}
 		return cardList;
 	}
@@ -396,9 +380,10 @@ public class DictionaryDB implements Database, DBConstant {
 		else return false;
 	}
 	public static void main(String[] args) throws SQLException {
-//		DictionaryDB db=new DictionaryDB();
-//		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,new Date(233333333),0);
-//		db.connect();
-//		db.delete(3, "jk");
+		DictionaryDB db=new DictionaryDB();
+		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,new Date(233333333),0);
+		db.connect();
+		db.register("fog", "ddd", new Date(System.currentTimeMillis()), 'f');
+		System.out.println();
 	}
 }

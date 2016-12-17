@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import application.model.SearchHistory;
 import application.model.User;
 import application.model.WordCard;
 import application.model.message.*;
@@ -42,15 +43,14 @@ public class CilentSession implements Runnable,CSConstant {
 					server.userLike(this, message);
 					break;
 				case (LOGIN):
-					User u = server.userLogin(this, message);
-					if (u != null) localLogin(u);
+					server.userLogin(this, message);
 					break;
 				case (LOGOUT):
-					if(server.userLogout(this.user.getUserName())) localLogout();
+					if(server.userLogout(user.getUserName())) localLogout();
 					break;
 				case (REGISTER):
 					User u1=server.userRegister(this, message);
-					if (u1 != null) localLogin(u1);
+					if (u1 != null) localLogin(u1,null);
 					break;
 				case (SEARCH_USER):
 					System.out.println("SEARCH_USER: "+server.searchUsers(this, message));
@@ -90,10 +90,10 @@ public class CilentSession implements Runnable,CSConstant {
 		}
 	}
 
-	public void localLogin(User u) {
+	public void localLogin(User u,ArrayList<SearchHistory> history) {
 		try {
 			this.user=u;
-			LoginMessage message=new LoginMessage(LOGIN_SUCCESS, u);
+			LoginMessage message=new LoginMessage(LOGIN_SUCCESS, u, history);
 			out.writeObject(message);
 			out.flush();
 		} catch (IOException e) {
@@ -118,7 +118,7 @@ public class CilentSession implements Runnable,CSConstant {
 	
 	public void localSearchUser(User u,ArrayList<String> likeList) {
 		try {
-			ResultMessage message=new ResultMessage(SEARCH_RESULT, likeList, u);
+			ResultMessage message=new ResultMessage(SEARCH_USER, likeList, u);
 			out.writeObject(message);
 			out.flush();
 		} catch (IOException e) {

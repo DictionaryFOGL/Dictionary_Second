@@ -3,7 +3,7 @@ package application.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 
 import com.mysql.fabric.xmlrpc.base.Array;
@@ -43,7 +43,7 @@ public class User implements Serializable{
 	}
 
 	public User(String userName, String password, Date registerDate) {
-		this.setRegisterDate(new Date());
+		this.registerDate=registerDate;
 		this.userName = userName;
 		this.password = password;
 		pwdMd5=Encryption.MD5(password);
@@ -175,6 +175,10 @@ public class User implements Serializable{
 		for(String s:l) {
 			friendList.put(s, false);
 		}
+	}
+	
+	public void setMailBox(ArrayList<WordCard> mailBox) {
+		this.mailBox = mailBox;
 	}
 	
 	public void resetAll() {

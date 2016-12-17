@@ -1,21 +1,13 @@
 package application.model;
 
-import java.io.Serializable;
-
-public class SearchHistory  implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8273409974117959030L;
+public class SearchHistory{
 	private String keyWord;
-	private int userId;
 	private int likeBaidu;
 	private int likeBing;
 	private int likeYouDao;
 	
-	public SearchHistory(String keyWord,int userId,int likeBaidu,int likeBing,int likeYouDao){
+	public SearchHistory(String keyWord,int likeBaidu,int likeBing,int likeYouDao){
 		this.keyWord=keyWord;
-		this.userId=userId;
 		this.likeBaidu=likeBaidu;
 		this.likeBing=likeBing;
 		this.likeYouDao=likeYouDao;
@@ -26,12 +18,6 @@ public class SearchHistory  implements Serializable{
 	}
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 	public int getLikeBaidu() {
 		return likeBaidu;

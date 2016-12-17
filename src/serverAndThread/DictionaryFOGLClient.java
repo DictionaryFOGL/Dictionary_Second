@@ -3,8 +3,10 @@ package serverAndThread;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import application.Main;
+import application.model.SearchHistory;
 import application.model.User;
 import application.model.WordCard;
 import application.model.message.AddFriendMessage;
@@ -15,6 +17,7 @@ import application.util.InformationDialog;
 
 public class DictionaryFOGLClient implements CSConstant,Runnable {
 	private Main mainApp;
+	private ArrayList<SearchHistory> history;
 	private User user;
 	private Socket socket;
 	private ObjectInputStream objectFromServer;
@@ -71,8 +74,9 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		case (NEW_FRIEND):
 			newFriend(message);
 			break;
+		//Äã±»¶Ô·½É¾³ý
 		case (DELETE_FRIEND):
-			
+			hasbeenDeleted(message);
 			break;
 		case (LOGIN_FAILED):
 			InformationDialog.loginFailed();
@@ -80,7 +84,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		case (LOGIN_SUCCESS):
 			login(message);
 			break;
-		case (SEARCH_RESULT):
+		case (SEARCH_USER):
 			
 			break;
 		case (REGISTER_SUCCESS):
@@ -117,12 +121,21 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 	
 	public void login(Message m) {
 		LoginMessage message=(LoginMessage) m;
-		this.user=message.getAccount();
+		user=message.getAccount();
+		history=message.getHistory();
+		if(this.history == null) {
+			history=new ArrayList<SearchHistory>();
+		}
 	}
 	
 	public void newFriend(Message m){		
 		AddFriendMessage message=(AddFriendMessage) m;
 		String friendName=message.getFriendName();
 		user.addNewFriend(friendName, true);
+	}
+	public void hasbeenDeleted(Message m) {
+		AddFriendMessage message=(AddFriendMessage) m;
+		String friendName=message.getFriendName();
+		user.deleteFriend(friendName);
 	}
 }

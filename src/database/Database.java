@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public interface Database {
 
 	public User verify(String name, String passWord) throws SQLException;
 
-	public void register(String name, String passWord, java.util.Date date, char gender) throws SQLException;
+	public void register(String name, String passWord, Date date, char gender) throws SQLException;
 
 	public ArrayList<String> searchAccount(String keyWord) throws SQLException;
 
@@ -25,7 +26,7 @@ public interface Database {
 	
 	public boolean insertHistory(String keyWord, String userName, int site, int status) throws SQLException;
 
-	public ArrayList<WordCard> getCard(String receiver) throws SQLException;
+	public ArrayList<WordCard> getCard(int receiverId) throws SQLException;
 	
 	public void like(String userName,int site,boolean islike) throws SQLException;
 	

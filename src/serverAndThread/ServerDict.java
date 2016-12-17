@@ -5,11 +5,12 @@ import java.net.ServerSocket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import application.model.SearchHistory;
 import application.model.User;
 import application.model.WordCard;
 import application.model.message.*;
@@ -52,13 +53,19 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		return user;
 	}
 
-	public User userLogin(CilentSession operator, Message m) {
+	public void userLogin(CilentSession operator, Message m) {
 		LoginMessage login = (LoginMessage) m;
 		String name = login.getName();
-		if(isOnline(name)) return null;
+		ArrayList<SearchHistory> history=null;
+		try {
+			history=db.SearchHistory(operator.getUser().getUserName());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(isOnline(name)) return;
 		String pwdMd5 = login.getPwdMd5();
 		User user=loginBase(operator, name, pwdMd5);
-		return user;
+		operator.localLogin(user,history);
 	}
 	
 	public boolean userResetCards(CilentSession operator) {

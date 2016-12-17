@@ -18,7 +18,6 @@ interface CSConstant {
 	static final byte LOGUT_SUCCESS=0x16;
 	static final byte REGISTER=0x32;
 	static final byte SEARCH_USER=0x15;
-	static final byte SEARCH_RESULT=0x23;
 	static final byte REGISTER_SUCCESS=0x51;
 	static final byte EXISTNAME=0x02;
 	static final byte REFRESH_CARDS=0x52;
