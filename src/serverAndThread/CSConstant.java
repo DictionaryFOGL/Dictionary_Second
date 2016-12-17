@@ -1,6 +1,6 @@
 package serverAndThread;
 
-interface CSConstant {
+public interface CSConstant {
 	static final byte SEND_CARD=0x20;
 	static final byte SEND_SUCCESS=0x00;
 	static final byte RECEIVE_CARD=0x10;

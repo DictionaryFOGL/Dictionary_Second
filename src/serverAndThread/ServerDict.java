@@ -43,7 +43,7 @@ public class ServerDict implements CSConstant{
 				user.setStatus(true);
 				guests.remove(operator);
 				userList.put(name, operator);
-				broadCastOnLine(name);
+				broadCastOnLine(operator,name);
 			}
 		} catch (SQLException e) {
 			System.out.println("register failed");
@@ -65,7 +65,7 @@ public class ServerDict implements CSConstant{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		String pwdMd5 = login.getPwdMd5();
+		String pwdMd5 = login.getPwd();
 		User user=loginBase(operator, name, pwdMd5);
 		operator.localLogin(user,history);
 	}
@@ -86,9 +86,9 @@ public class ServerDict implements CSConstant{
 	public User userRegister(CilentSession operator, Message m) {
 		LoginMessage login = (LoginMessage) m;
 		String name = login.getName();
-		String password = login.getAccount().getPassword();
-		Date date = login.getAccount().getRegisterDate();
-		char gender = login.getAccount().getGender();
+		String password = login.getPwd();
+		Date date = new Date(System.currentTimeMillis());
+		char gender = login.getGender();
 		try {
 			if (db.isUserNameRepeated(name)) {
 				operator.localSimpleMessage(EXISTNAME);
@@ -221,11 +221,12 @@ public class ServerDict implements CSConstant{
 		}
 	}
 	
-	public void broadCastOnLine(String name) {
+	public void broadCastOnLine(CilentSession operator,String name) {
 		Collection<CilentSession> collection=userList.values();
 		Iterator<CilentSession> iter=collection.iterator();
 		while(iter.hasNext()) {
 			CilentSession target=iter.next();
+			if(target == operator) continue;
 			User usr=target.getUser();
 			if(usr.hasFriend(name)) {
 				usr.friendOnLine(name);

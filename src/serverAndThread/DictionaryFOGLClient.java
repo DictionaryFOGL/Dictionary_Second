@@ -14,6 +14,7 @@ import application.model.message.LoginMessage;
 import application.model.message.Message;
 import application.model.message.SendCardMessage;
 import application.util.InformationDialog;
+import javafx.application.Platform;
 
 public class DictionaryFOGLClient implements CSConstant,Runnable {
 	private ArrayList<SearchHistory> history;
@@ -39,6 +40,11 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 			while((obj=objectFromServer.readObject()) !=null) {
 				Message message=(Message) obj;
 				work(message);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		} catch (ClassNotFoundException | IOException e) {
 			System.out.println("client read error");
@@ -48,47 +54,54 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 
 	//TODO All the UI show
 	private void work(Message message) {
-		switch (message.getType()) {
-		case (SEND_SUCCESS):
-			InformationDialog.sendSucceeded();
-			break;
-		case (RECEIVE_CARD):
-			receiveCard(message);
-			break;
-		case (FRIEND_ONLINE):
-			friendOnline(message);
-			break;
-		case (FRIEND_OFFLINE):
-			friendOffline(message);
-			break;
-		case (NEW_FRIEND):
-			newFriend(message);
-			break;
-		//你被对方删除
-		case (DELETE_FRIEND):
-			hasbeenDeleted(message);
-			break;
-		case (LOGIN_FAILED):
-			InformationDialog.loginFailed();
-			break;
-		case (LOGIN_SUCCESS):
-			login(message);
-			break;
-		case (SEARCH_USER):
-			
-			break;
-		case (REGISTER_SUCCESS):
-			login(message);
-			break;
-		case (EXISTNAME):
-			InformationDialog.existName();
-			break;
-		case (LOGUT_SUCCESS):
-			this.user=null;
-			break;
-		default:
-			break;
-		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				switch (message.getType()) {
+				case (SEND_SUCCESS):
+					InformationDialog.sendSucceeded();
+					break;
+				case (RECEIVE_CARD):
+					receiveCard(message);
+					break;
+				case (FRIEND_ONLINE):
+					friendOnline(message);
+					break;
+				case (FRIEND_OFFLINE):
+					friendOffline(message);
+					break;
+				case (NEW_FRIEND):
+					newFriend(message);
+					break;
+				//你被对方删除
+				case (DELETE_FRIEND):
+					hasbeenDeleted(message);
+					break;
+				case (LOGIN_FAILED):
+					InformationDialog.loginFailed();
+					break;
+				case (LOGIN_SUCCESS):
+					login(message);
+					break;
+				case (SEARCH_USER):
+					
+					break;
+				case (REGISTER_SUCCESS):
+					login(message);
+					System.out.println("success");
+					break;
+				case (EXISTNAME):
+					InformationDialog.existName();
+					break;
+				case (LOGUT_SUCCESS):
+					//this.user=null;
+					break;
+				default:
+					break;
+				}
+			}
+		});
+		
 	}
 	
 	public void receiveCard(Message m) {

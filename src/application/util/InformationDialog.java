@@ -65,4 +65,25 @@ public class InformationDialog {
 		alert.setContentText("Fail to get socket stream");
 		alert.showAndWait();
 	}
+	public static void invalidUserName() {
+		Alert alert=new Alert(AlertType.WARNING);
+		alert.setTitle("InvalidUserName");
+		alert.setHeaderText(null);
+		alert.setContentText("Username: 2 to 10 letters or numbers");
+		alert.showAndWait();
+	}
+	public static void differentPwd() {
+		Alert alert=new Alert(AlertType.WARNING);
+		alert.setTitle("Password");
+		alert.setHeaderText(null);
+		alert.setContentText("The passwords you entered must be the same");
+		alert.showAndWait();
+	}
+	public static void invalidPwd() {
+		Alert alert=new Alert(AlertType.WARNING);
+		alert.setTitle("Password");
+		alert.setHeaderText(null);
+		alert.setContentText("Password: 4 to 16 letters or numbers");
+		alert.showAndWait();
+	}
 }

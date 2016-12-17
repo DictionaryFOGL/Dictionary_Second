@@ -36,4 +36,9 @@ public class SignInLayoutController implements Controller{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@FXML
+	private void ok() {
+		
+	}
 }

@@ -16,6 +16,8 @@ import application.util.BingSpider;
 import application.util.Controller;
 import application.util.ValidInput;
 import application.util.YoudaoSpider;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -201,6 +203,9 @@ public class WordLayoutController implements Controller {
 		modeRank();
 		searchBase();
 		findCheck();
+		System.out.println(notFound1.isVisible()+" "+notFound2.isVisible()+" "+notFound3.isVisible());
+		System.out.println(found1.isVisible()+" "+found2.isVisible()+" "+found3.isVisible());
+		
 	}
 
 	private void searchBase() {
@@ -493,29 +498,6 @@ public class WordLayoutController implements Controller {
 			count++;
 		if (bingGet.isSelected())
 			count++;
-
-		if (count == 0 || count == 3) {
-			notFound1.setVisible(true);
-			notFound2.setVisible(true);
-			notFound3.setVisible(true);
-			found1.setVisible(true);
-			found2.setVisible(true);
-			found3.setVisible(true);
-		} else if (count == 2) {
-			notFound1.setVisible(true);
-			notFound2.setVisible(true);
-			notFound3.setVisible(false);
-			found1.setVisible(true);
-			found2.setVisible(true);
-			found3.setVisible(false);
-		} else if (count == 1) {
-			notFound1.setVisible(true);
-			notFound2.setVisible(false);
-			notFound3.setVisible(false);
-			found1.setVisible(true);
-			found2.setVisible(false);
-			found3.setVisible(false);
-		}
 	}
 	
 	private void find1(boolean status) {
@@ -525,15 +507,25 @@ public class WordLayoutController implements Controller {
 	}
 	
 	private void find2(boolean status) {
-		boolean opposite=!status;
-		found2.setVisible(status);
-		notFound2.setVisible(opposite);
+		if(count == 0 || count >= 2 ) {
+			boolean opposite=!status;
+			found2.setVisible(status);
+			notFound2.setVisible(opposite);
+		} else {
+			found2.setVisible(false);
+			notFound2.setVisible(false);
+		}
 	}
 	
 	private void find3(boolean status) {
-		boolean opposite=!status;
-		found3.setVisible(status);
-		notFound3.setVisible(opposite);
+		if(count == 0 || count == 3) {
+			boolean opposite=!status;
+			found3.setVisible(status);
+			notFound3.setVisible(opposite);
+		} else {
+			found3.setVisible(false);
+			notFound3.setVisible(false);
+		}
 	}
 	
 	private void findCheck() {

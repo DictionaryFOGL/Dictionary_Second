@@ -31,8 +31,9 @@ public class CilentSession implements Runnable,CSConstant {
 		Object obj=null;
 		boolean done=false;
 		try {
-			while(!done && (obj=in.readObject()) != null) {
+			while((obj=in.readObject()) != null) {
 				Message message=(Message) obj;
+				System.out.println("receive "+message);
 				switch (message.getType()) {
 				case (SEND_CARD):
 					server.userSendCard(this, message);
@@ -50,6 +51,7 @@ public class CilentSession implements Runnable,CSConstant {
 					if(server.userLogout(user.getUserName())) localLogout();
 					break;
 				case (REGISTER):
+					System.out.println("receive");
 					User u1=server.userRegister(this, message);
 					if (u1 != null) localLogin(u1,null);
 					break;

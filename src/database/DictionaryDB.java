@@ -62,6 +62,7 @@ public class DictionaryDB implements Database, DBConstant {
 		result.last();
 		if (result.getRow() == 0 || !result.getString(5).equals(pwdMd5)) {
 			account = null;
+			System.out.println("here");
 		} else {
 			int id=result.getInt(1);
 			String pwd=result.getString(4);
@@ -71,6 +72,7 @@ public class DictionaryDB implements Database, DBConstant {
 			ResultSet result1=stat.executeQuery(command);
 			result1.last();
 			if(result1.getRow() == 0) return null;
+System.out.println("not here");
 			account=new User(id,name,pwd,gen,date,result1.getInt(2),result1.getInt(4),result1.getInt(3));
 			ArrayList<String> friends=getFriends(id);
 			account.setFriendList(friends);
@@ -91,6 +93,7 @@ public class DictionaryDB implements Database, DBConstant {
 		idToName.put(id, name);
 		nameToId.put(name, id);
 		re.close();
+		stat.executeUpdate("insert into "+sheet4+" (ID,baidu,bing,youdao) values ("+id+",0,0,0);");
 	}
 
 	@Override
