@@ -2,6 +2,7 @@ package application.util;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,24 +10,15 @@ import database.Database;
 import database.DictionaryDB;
 
 public class ValidInput {
-	//已存在用户名？？？？？？
+	public static String randomVerify() {
+		Random r=new Random();
+		String alpha="abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String result=""+alpha.charAt(r.nextInt(50))+alpha.charAt(r.nextInt(50))+alpha.charAt(r.nextInt(50))+alpha.charAt(r.nextInt(50));
+		return result;
+	}
 	public static boolean validUsername(String userName) {
-		Pattern p=Pattern.compile("^[a-zA-Z0-9_\u4e00-\u9fa5]{2,10}$");
-		//return patternCheck(p, userName);
-		Database DB=new DictionaryDB();
-		DB.connect();
-		try {
-			if (DB.isUserNameRepeated(userName)){
-				return false;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			DB.closeAll();
-		}
-		return true;
-		
+		Pattern p=Pattern.compile("^[a-zA-Z0-9]{2,10}$");
+		return patternCheck(p, userName);
 	}
 	public static boolean validPwd(String password) {
 		Pattern p=Pattern.compile("^[a-zA-Z0-9]{4,16}$");
@@ -87,5 +79,8 @@ public class ValidInput {
 			result.append(m.group());
 		}
 		return result;
+	}
+	public static void main(String[] args) {
+		System.out.println(randomVerify());
 	}
 }

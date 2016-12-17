@@ -23,11 +23,13 @@ import application.model.*;
 import application.model.message.Message;
 import application.util.*;
 import application.view.*;
+import serverAndThread.CSConstant;
 import serverAndThread.DictionaryFOGLClient;
 
-public class Main extends Application {
+public class Main extends Application implements CSConstant{
 	private final String host="127.0.0.1";
 	private final int port=20123;
+	private Main myself=this;
 	private Stage primaryStage;
 	private BorderPane baseLayout;
 	private BorderPane startLayout;
@@ -47,7 +49,7 @@ public class Main extends Application {
 					objectToServer=new ObjectOutputStream(socket.getOutputStream());
 					ObjectInputStream objectFromServer=new ObjectInputStream(socket.getInputStream());
 					history=new ArrayList<SearchHistory>();
-					client=new DictionaryFOGLClient(socket, objectFromServer, history);
+					client=new DictionaryFOGLClient(myself, socket, objectFromServer, history);
 					Thread socketHeard=new Thread(client);
 					socketHeard.start();
 				} catch (UnknownHostException e) {
@@ -86,6 +88,7 @@ public class Main extends Application {
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
+					myself.writeToServer(new Message(LOGOUT));
 					System.exit(0);
 				}
 			});

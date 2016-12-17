@@ -61,9 +61,10 @@ public class ServerDict implements CSConstant{
 		}
 		ArrayList<SearchHistory> history=null;
 		try {
-			history=db.SearchHistory(operator.getUser().getUserName());
+			history=db.SearchHistory(name);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return;
 		}
 		String pwdMd5 = login.getPwd();
 		User user=loginBase(operator, name, pwdMd5);

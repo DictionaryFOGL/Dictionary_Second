@@ -8,25 +8,13 @@ import javafx.scene.control.ButtonType;
 
 public class InformationDialog {
 	public static void sendSucceeded() {
-		Alert alert=new Alert(AlertType.INFORMATION);
-		alert.setTitle("Congratulation!");
-		alert.setHeaderText(null);
-		alert.setContentText("Your word card has been sent");
-		alert.showAndWait();
+		baseAlert(AlertType.INFORMATION,"Congratulation!",null,"Your word card has been sent");
 	}
 	public static void existName() {
-		Alert alert=new Alert(AlertType.ERROR);
-		alert.setTitle("ExistedName!");
-		alert.setHeaderText(null);
-		alert.setContentText("The name has been used! Please choose another one!");
-		alert.showAndWait();
+		baseAlert(AlertType.ERROR,"ExistedName",null,"The name has been used! Please choose another one!");
 	}
 	public static void loginFailed() {
-		Alert alert=new Alert(AlertType.ERROR);
-		alert.setTitle("Error!");
-		alert.setHeaderText("Login failed");
-		alert.setContentText("Check your username or password again!\nOr maybe you have landed on other clients");
-		alert.showAndWait();
+		baseAlert(AlertType.ERROR,"Error!","Login failed","Check your username or password again!\nOr maybe you have landed on other clients");
 	}
 	public static boolean logoutCheck() {
 		Alert alert=new Alert(AlertType.CONFIRMATION);
@@ -38,52 +26,34 @@ public class InformationDialog {
 		else return false;
 	}
 	public static void registerSucceeded() {
-		Alert alert=new Alert(AlertType.INFORMATION);
-		alert.setTitle("Congratulation!");
-		alert.setHeaderText(null);
-		alert.setContentText("You have a new account!");
-		alert.showAndWait();
+		baseAlert(AlertType.INFORMATION,"Congratulation!",null,"You have a new account!");
 	}
 	public static void operationSucceeded() {
-		Alert alert=new Alert(AlertType.INFORMATION);
-		alert.setTitle("Congratulation!");
-		alert.setHeaderText(null);
-		alert.setContentText("Operation succeeded!");
-		alert.showAndWait();
+		baseAlert(AlertType.INFORMATION,"Congratulation!",null,"Operation succeeded!");
 	}
 	public static void connectError() {
-		Alert alert=new Alert(AlertType.WARNING);
-		alert.setTitle("UnknownHostException");
-		alert.setHeaderText(null);
-		alert.setContentText("Fail to connect to server!");
-		alert.showAndWait();
+		baseAlert(AlertType.WARNING,"UnknownHostException",null,"Fail to connect to server!");
 	}
 	public static void socketError() {
-		Alert alert=new Alert(AlertType.WARNING);
-		alert.setTitle("IOException");
-		alert.setHeaderText(null);
-		alert.setContentText("Fail to get socket stream");
-		alert.showAndWait();
+		baseAlert(AlertType.WARNING,"IOException",null,"Fail to get socket stream");
 	}
 	public static void invalidUserName() {
-		Alert alert=new Alert(AlertType.WARNING);
-		alert.setTitle("InvalidUserName");
-		alert.setHeaderText(null);
-		alert.setContentText("Username: 2 to 10 letters or numbers");
-		alert.showAndWait();
+		baseAlert(AlertType.WARNING,"InvalidUserName",null,"Username: 2 to 10 letters or numbers");
 	}
 	public static void differentPwd() {
-		Alert alert=new Alert(AlertType.WARNING);
-		alert.setTitle("Password");
-		alert.setHeaderText(null);
-		alert.setContentText("The passwords you entered must be the same");
-		alert.showAndWait();
+		baseAlert(AlertType.WARNING,"Password",null,"The passwords you entered must be the same");
 	}
 	public static void invalidPwd() {
-		Alert alert=new Alert(AlertType.WARNING);
-		alert.setTitle("Password");
-		alert.setHeaderText(null);
-		alert.setContentText("Password: 4 to 16 letters or numbers");
+		baseAlert(AlertType.WARNING,"Password",null,"Password: 4 to 16 letters or numbers");
+	}
+	public static void invalidCheck() {
+		baseAlert(AlertType.WARNING, "Verification", null, "Verification code is not correct");
+	}
+	private static void baseAlert(AlertType type,String title,String headerText,String contentText) {
+		Alert alert=new Alert(type);
+		alert.setTitle(title);
+		alert.setHeaderText(headerText);
+		alert.setContentText(contentText);
 		alert.showAndWait();
 	}
 }

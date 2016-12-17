@@ -17,13 +17,15 @@ import application.util.InformationDialog;
 import javafx.application.Platform;
 
 public class DictionaryFOGLClient implements CSConstant,Runnable {
+	private Main mainApp;
 	private ArrayList<SearchHistory> history;
 	private User user;
 	private Socket socket;
 	private ObjectInputStream objectFromServer;
 	
-	public DictionaryFOGLClient(Socket socket, ObjectInputStream objectFromServer,ArrayList<SearchHistory> history) {
+	public DictionaryFOGLClient(Main mainApp,Socket socket, ObjectInputStream objectFromServer,ArrayList<SearchHistory> history) {
 		super();
+		this.mainApp=mainApp;
 		this.socket = socket;
 		this.objectFromServer = objectFromServer;
 		this.history=history;
@@ -49,6 +51,12 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		} catch (ClassNotFoundException | IOException e) {
 			System.out.println("client read error");
 			e.printStackTrace();
+			try {
+				socket.close();
+			} catch (IOException e1) {
+				System.out.println("socket close error");
+				e1.printStackTrace();
+			}
 		}	
 	}
 
