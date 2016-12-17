@@ -2,11 +2,14 @@ package application.model.message;
 
 import application.model.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import DServer.*;
-
-public class LoginMessage extends Message{
+public class LoginMessage extends Message implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String pwdMd5;
 	private User account;

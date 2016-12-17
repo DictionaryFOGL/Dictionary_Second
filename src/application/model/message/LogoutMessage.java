@@ -1,7 +1,13 @@
 package application.model.message;
 
-public class LogoutMessage extends Message{
+import java.io.Serializable;
+
+public class LogoutMessage extends Message implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2053060538000955190L;
 	private boolean isLogout;
 	
 	public LogoutMessage(byte type){

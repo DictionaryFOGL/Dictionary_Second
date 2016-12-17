@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import application.util.*;
 
 public class User implements Serializable{

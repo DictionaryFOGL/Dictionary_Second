@@ -16,17 +16,16 @@ import application.model.message.SendCardMessage;
 import application.util.InformationDialog;
 
 public class DictionaryFOGLClient implements CSConstant,Runnable {
-	private Main mainApp;
 	private ArrayList<SearchHistory> history;
 	private User user;
 	private Socket socket;
 	private ObjectInputStream objectFromServer;
 	
-	public DictionaryFOGLClient(Main mainApp,Socket socket, ObjectInputStream objectFromServer) {
+	public DictionaryFOGLClient(Socket socket, ObjectInputStream objectFromServer,ArrayList<SearchHistory> history) {
 		super();
-		this.mainApp=mainApp;
 		this.socket = socket;
 		this.objectFromServer = objectFromServer;
+		this.history=history;
 	}
 
 	public User getUser() {
@@ -35,25 +34,16 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
-			javafx.application.Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						work((Message) objectFromServer.readObject());
-					} catch (ClassNotFoundException | IOException e) {
-						e.printStackTrace();
-						System.out.println("client socket readObj error");
-						try {
-							socket.close();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-							System.out.println("client socket close error");
-						}
-					}
-				}
-			});
-		}
+		Object obj;
+		try {
+			while((obj=objectFromServer.readObject()) !=null) {
+				Message message=(Message) obj;
+				work(message);
+			}
+		} catch (ClassNotFoundException | IOException e) {
+			System.out.println("client read error");
+			e.printStackTrace();
+		}	
 	}
 
 	//TODO All the UI show
@@ -122,10 +112,12 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 	public void login(Message m) {
 		LoginMessage message=(LoginMessage) m;
 		user=message.getAccount();
-		history=message.getHistory();
-		if(this.history == null) {
-			history=new ArrayList<SearchHistory>();
+		ArrayList<SearchHistory> h=message.getHistory();
+		if(h != null) {
+			for(SearchHistory s:h)
+				history.add(s);
 		}
+		System.out.println("history looged");
 	}
 	
 	public void newFriend(Message m){		
@@ -133,6 +125,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		String friendName=message.getFriendName();
 		user.addNewFriend(friendName, true);
 	}
+	
 	public void hasbeenDeleted(Message m) {
 		AddFriendMessage message=(AddFriendMessage) m;
 		String friendName=message.getFriendName();

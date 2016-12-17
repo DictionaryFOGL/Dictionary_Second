@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.security.Guard;
 import java.util.ArrayList;
 
 import application.model.SearchHistory;
@@ -87,6 +88,7 @@ public class CilentSession implements Runnable,CSConstant {
 				e.printStackTrace();
 			}
 			server.guestQuit(this);
+			server.userstatus();
 		}
 	}
 

@@ -1,7 +1,13 @@
 package application.model.message;
 
-public class InsertHistoryMessage extends Message{
+import java.io.Serializable;
 
+public class InsertHistoryMessage extends Message implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7187252627850702895L;
 	private String keyWord;
 	private String userName;
 	

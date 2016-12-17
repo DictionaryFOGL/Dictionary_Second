@@ -1,7 +1,13 @@
 package application.model.message;
 
-public class LikeMessage extends Message {
+import java.io.Serializable;
 
+public class LikeMessage extends Message  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2858603891108762929L;
 	private int site;
 	private String keyWord;
 	private boolean likeOrNot;

@@ -1,6 +1,12 @@
 package application.model.message;
 
-public class SearchMessage extends Message {
+import java.io.Serializable;
+
+public class SearchMessage extends Message implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2004650355884995940L;
 	private String keyWord;
 
 	public SearchMessage(byte type,String keyWord) {

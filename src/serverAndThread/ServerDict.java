@@ -17,13 +17,12 @@ import application.model.message.*;
 import application.util.Encryption;
 import database.DictionaryDB;
 
-public class ServerDict extends ServerSocket implements CSConstant{
+public class ServerDict implements CSConstant{
 	private DictionaryDB db;
 	private HashMap<String, CilentSession> userList;
 	private HashSet<CilentSession> guests;
 
-	public ServerDict(int port) throws IOException {
-		super(port);
+	public ServerDict() {
 		userList = new HashMap<String, CilentSession>();
 		guests = new HashSet<CilentSession>();
 		db = new DictionaryDB();
@@ -56,13 +55,16 @@ public class ServerDict extends ServerSocket implements CSConstant{
 	public void userLogin(CilentSession operator, Message m) {
 		LoginMessage login = (LoginMessage) m;
 		String name = login.getName();
+		if(isOnline(name)) {
+			operator.localSimpleMessage(LOGIN_FAILED);
+			return;
+		}
 		ArrayList<SearchHistory> history=null;
 		try {
 			history=db.SearchHistory(operator.getUser().getUserName());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if(isOnline(name)) return;
 		String pwdMd5 = login.getPwdMd5();
 		User user=loginBase(operator, name, pwdMd5);
 		operator.localLogin(user,history);
@@ -247,6 +249,13 @@ public class ServerDict extends ServerSocket implements CSConstant{
 
 	public void guestQuit(CilentSession c) {
 		guests.remove(c);
+	}
+	public void userstatus() {
+		System.out.print("Users("+userList.size()+"): ");
+		Iterator<String> iter=userList.keySet().iterator();
+		while(iter.hasNext()) System.out.print(iter.next()+"  ");
+		System.out.println();
+		System.out.println("guests("+guests.size()+")");
 	}
 	public void addGuestSocket(CilentSession cs) {
 		guests.add(cs);

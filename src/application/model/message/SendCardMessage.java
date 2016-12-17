@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import application.model.*;
 
 public class SendCardMessage extends Message{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3920663053182906949L;
 	private ArrayList<String> receivers;
 	private WordCard card;
 	

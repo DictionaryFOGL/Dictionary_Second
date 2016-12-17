@@ -1,22 +1,34 @@
 package application;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import com.sun.javafx.application.ParametersImpl;
 
 import application.model.*;
+import application.model.message.Message;
 import application.util.*;
 import application.view.*;
 import serverAndThread.DictionaryFOGLClient;
 
 public class Main extends Application {
+	private final String host="127.0.0.1";
+	private final int port=20123;
 	private Stage primaryStage;
 	private BorderPane baseLayout;
 	private BorderPane startLayout;
@@ -24,9 +36,35 @@ public class Main extends Application {
 	private Controller tempControl;
 	private BaseLayoutController baseCon;
 	private DictionaryFOGLClient client;
+	private ArrayList<SearchHistory> history;
+	private ObjectOutputStream objectToServer;
 	
 	public Main() {
-		
+		Task<Void> task=new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				try {
+					Socket socket=new Socket(host, port);
+					objectToServer=new ObjectOutputStream(socket.getOutputStream());
+					ObjectInputStream objectFromServer=new ObjectInputStream(socket.getInputStream());
+					history=new ArrayList<SearchHistory>();
+					client=new DictionaryFOGLClient(socket, objectFromServer, history);
+					Thread socketHeard=new Thread(client);
+					socketHeard.start();
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+					InformationDialog.connectError();
+					System.exit(0);
+				} catch (IOException e) {
+					e.printStackTrace();
+					InformationDialog.socketError();
+					System.exit(0);
+				}
+				return null;
+			}
+		};
+		System.out.println("connected!");
+		new Thread(task).start();
 	}
 	
 	@Override
@@ -46,12 +84,15 @@ public class Main extends Application {
 			Scene scene=new Scene(baseLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent event) {
+					System.exit(0);
+				}
+			});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void initStartLayout() {
@@ -127,10 +168,6 @@ public class Main extends Application {
 		return pane;
 	}
 	
-	public void staticResourceLoad() {
-		
-	}
-	
 	public void setStart() {
 		baseLayout.setCenter(startLayout);
 		
@@ -145,9 +182,18 @@ public class Main extends Application {
 	}
 	
 	public User getUser() {
-		//TODO loginuser
-		return null;
+		return client.getUser();
 	}
+	
+	public void writeToServer(Message m) {
+		try {
+			objectToServer.writeObject(m);
+		} catch (IOException e) {
+			System.out.println("objectToServer error");
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

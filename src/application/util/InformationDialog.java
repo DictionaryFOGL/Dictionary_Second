@@ -25,7 +25,7 @@ public class InformationDialog {
 		Alert alert=new Alert(AlertType.ERROR);
 		alert.setTitle("Error!");
 		alert.setHeaderText("Login failed");
-		alert.setContentText("Check your username or password again!");
+		alert.setContentText("Check your username or password again!\nOr maybe you have landed on other clients");
 		alert.showAndWait();
 	}
 	public static boolean logoutCheck() {
@@ -49,6 +49,20 @@ public class InformationDialog {
 		alert.setTitle("Congratulation!");
 		alert.setHeaderText(null);
 		alert.setContentText("Operation succeeded!");
+		alert.showAndWait();
+	}
+	public static void connectError() {
+		Alert alert=new Alert(AlertType.WARNING);
+		alert.setTitle("UnknownHostException");
+		alert.setHeaderText(null);
+		alert.setContentText("Fail to connect to server!");
+		alert.showAndWait();
+	}
+	public static void socketError() {
+		Alert alert=new Alert(AlertType.WARNING);
+		alert.setTitle("IOException");
+		alert.setHeaderText(null);
+		alert.setContentText("Fail to get socket stream");
 		alert.showAndWait();
 	}
 }

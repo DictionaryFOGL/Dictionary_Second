@@ -1,11 +1,16 @@
 package application.model.message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import application.model.User;
 
-public class ResultMessage extends Message {
+public class ResultMessage extends Message implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6145673003052551474L;
 	private ArrayList<String> Results;
 	private User target;
 

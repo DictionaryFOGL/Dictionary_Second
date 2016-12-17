@@ -1,7 +1,13 @@
 package application.model.message;
 
-public class AddFriendMessage extends Message{
+import java.io.Serializable;
 
+public class AddFriendMessage extends Message implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4800306582117499225L;
 	private String friendName;
 	
 	public AddFriendMessage(byte type,String friendName) {
