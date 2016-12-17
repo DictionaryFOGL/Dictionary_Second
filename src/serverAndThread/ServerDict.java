@@ -34,9 +34,10 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		User user=null;
 		try {
 			user = db.verify(name, pwdMd5);
-			if (user == null)
+			if (user == null) {
+				operator.localVerifyFailed();
 				return null;
-			else {
+			} else {
 				user.setStatus(true);
 				guests.remove(operator);
 				userList.put(name, operator);
@@ -192,7 +193,7 @@ public class ServerDict extends ServerSocket implements CSConstant{
 	}
 	
 	public void broadCast() {
-		
+		//TODO
 	}
 
 

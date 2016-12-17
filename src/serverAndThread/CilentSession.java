@@ -56,17 +56,20 @@ public class CilentSession implements Runnable,CSConstant {
 					System.out.println("SEARCH_USER: "+server.searchUsers(this, message));
 					break;
 				case (REFRESH_CARDS):
-					//TODO ¡­¡­¡­¡­¡­¡­¡­¡­^_^ÚÀºÙ
+					//TODO maybe not
 					break;
 				case (RESET_CARDS):
 					boolean status=server.userResetCards(this);
 					if(status) user.clearMailbox();
 					break;
 				case (REFRESH_FRIEND):
-					
+					//TODO maybe not
 					break;
 				case (DELETE_CARD):
 					server.userDeleteCard(this, message);
+					break;
+				case (DELETE_FRIEND):
+					//TODO
 					break;
 				default:
 					break;
@@ -92,16 +95,22 @@ public class CilentSession implements Runnable,CSConstant {
 			this.user=u;
 			LoginMessage message=new LoginMessage(LOGIN_SUCCESS, u);
 			out.writeObject(message);
+			out.flush();
 		} catch (IOException e) {
 			System.out.println("localLogin failed");
 			e.printStackTrace();
 		}
 	}
 	
+	public void localVerifyFailed() {
+		localSimpleMessage(LOGIN_FAILED);
+	}
+	
 	public void localReceiveCard(WordCard card) {
 		SendCardMessage message=new SendCardMessage(RECEIVE_CARD, null, card);
 		try {
 			out.writeObject(message);
+			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -111,6 +120,7 @@ public class CilentSession implements Runnable,CSConstant {
 		try {
 			ResultMessage message=new ResultMessage(SEARCH_RESULT, likeList, u);
 			out.writeObject(message);
+			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -130,6 +140,7 @@ public class CilentSession implements Runnable,CSConstant {
 		AddFriendMessage friend=new AddFriendMessage(NEW_FRIEND, name);
 		try {
 			out.writeObject(friend);
+			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -139,6 +150,7 @@ public class CilentSession implements Runnable,CSConstant {
 		try {
 			Message message=new Message(type);
 			out.writeObject(message);
+			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

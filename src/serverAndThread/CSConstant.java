@@ -12,7 +12,9 @@ interface CSConstant {
 	static final byte INSERT_HISTORY=0x01;
 	static final byte LOGIN=0x30;
 	static final byte LOGIN_SUCCESS=0x22;
+	static final byte LOGIN_FAILED=0x29;
 	static final byte LOGOUT=0x31;
+	static final byte LOGUT_SUCCESS=0x16;
 	static final byte REGISTER=0x32;
 	static final byte SEARCH_USER=0x15;
 	static final byte SEARCH_RESULT=0x23;

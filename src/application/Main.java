@@ -14,6 +14,7 @@ import com.sun.javafx.application.ParametersImpl;
 import application.model.*;
 import application.util.*;
 import application.view.*;
+import serverAndThread.DictionaryFOGLClient;
 
 public class Main extends Application {
 	private Stage primaryStage;
@@ -22,6 +23,7 @@ public class Main extends Application {
 	private BorderPane workLayout;
 	private Controller tempControl;
 	private BaseLayoutController baseCon;
+	private DictionaryFOGLClient client;
 	
 	public Main() {
 		
@@ -148,6 +150,5 @@ public class Main extends Application {
 	}
 	public static void main(String[] args) {
 		launch(args);
-		System.out.println("here");
 	}
 }
