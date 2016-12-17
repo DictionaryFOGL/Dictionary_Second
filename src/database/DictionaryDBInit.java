@@ -68,7 +68,7 @@ public class DictionaryDBInit {
 					+ "time datetime NOT NULL,"
 					+ "say varchar(10))ENGINE=InnoDB DEFAULT CHARSET=utf8");//TODO 暂定长度
 			System.out.println(sheet3 +"created!");
-			stat.execute("CREATE TABLE "+sheet4+"(ID int(6) PRIMARY KEY,"
+			stat.execute("CREATE TABLE "+sheet4+"(ID int(6) NOT NULL,"
 					+ "baidu int(2) NOT NULL,"//TODO 暂定长度
 					+ "bing int(2) NOT NULL,"
 					+ "youdao int(2) NOT NULL)ENGINE=InnoDB DEFAULT CHARSET=utf8");

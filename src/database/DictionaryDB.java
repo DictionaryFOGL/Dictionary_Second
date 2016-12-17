@@ -46,18 +46,22 @@ public class DictionaryDB implements Database, DBConstant {
 	}
 
 	@Override
-	public User verify(String name, String passWord) throws SQLException {
+	public User verify(String name, String pwdMd5) throws SQLException {
 		User account = null;
-		// System.out.println(name+' '+passWord);
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + name + "';");
+		String command="select * from usermessage where name = '" + name + "';";
+		ResultSet result = stat.executeQuery(command);
 		result.last();
-		if (result.getRow() == 0 || !result.getString(5).equals(passWord)) {
+		if (result.getRow() == 0 || !result.getString(5).equals(pwdMd5)) {
 			account = null;
 		} else {
-
-			account = new User(result.getString(2), result.getString(4), result.getString(3).charAt(0),
-					result.getDate(6));
-
+			command="select * from "+sheet4+" where ID='"+result.getInt(1)+"';";
+			ResultSet result1=stat.executeQuery(command);
+			result1.last();
+			if(result.getRow() == 0) return null;
+			account=new User(result.getInt(1),result.getString(2),result.getString(4),result.getString(3).charAt(0)
+					,result.getDate(6),result1.getInt(2),result1.getInt(4),result.getInt(3));
+			ArrayList<String> friends=getFriends(result.getInt(1));
+			account.setFriendList(friends);
 		}
 		return account;
 	}
@@ -67,7 +71,7 @@ public class DictionaryDB implements Database, DBConstant {
 		String MD5 = Encryption.MD5(passWord);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		stat.executeUpdate("INSERT INTO " + sheet1 + "(name,gender,password,pwdmd5,signtime) " + "values('" + name
-				+ "','" + gender + "','" + passWord + "','" + MD5 + "','" + sdf.format(date) + "')");
+				+ "','" + gender + "','" + passWord + "','" + MD5 + "','" + sdf.format(date) + "');");
 	}
 
 	@Override
@@ -262,29 +266,43 @@ public class DictionaryDB implements Database, DBConstant {
 			friendId=tmp;
 		}
 		stat.executeUpdate("insert into " + sheet5 + "(ID1,ID2) " + "values('" + userId + "','"
-				+ friendId + "')");
+				+ friendId + "');");
 		return true;
+	}
+	
+	public boolean deleteFriend(int userID,String friendName) throws SQLException {
+		int friendId = -1;
+		ResultSet result = stat.executeQuery("select * from "+sheet1+" where name = '" + friendName + "';");
+		result.last();
+		friendId = result.getInt(1);
+		if(friendId < userID) {
+			int tmp=userID;
+			userID=friendId;
+			friendId=tmp;
+		}
+		String command="delete from "+sheet5+" where ID1='"+userID+"' and ID2='"+friendId+"';";
+		int affect=-1;
+		affect=stat.executeUpdate(command);
+		if(affect == 1) return true;
+		else return false;
 	}
 
 	@Override
-	public ArrayList<User> getFriends(String userName) throws SQLException {
-		int userId = -1;
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + userName + "';");
-		result.last();
-		if (result.getRow() == 0) {
-			return null;
-		}
-		userId = result.getInt(1);
+	public ArrayList<String> getFriends(int userId) throws SQLException {
 		ArrayList<Integer> idArray = new ArrayList<Integer>();
-		ArrayList<User> users = new ArrayList<User>();
-		result = stat.executeQuery("select * from relationship where user =" + userId + ";");
+		ArrayList<String> users = new ArrayList<String>();
+		ResultSet result = stat.executeQuery("select * from relationship where ID1 =" + userId + ";");
 		while (result.next()) {
-			idArray.add(result.getInt(3));
+			idArray.add(result.getInt(2));
+		}
+		result = stat.executeQuery("select * from relationship where ID2 =" + userId + ";");
+		while (result.next()) {
+			idArray.add(result.getInt(1));
 		}
 		for (int i = 0; i < idArray.size(); i++) {
 			result = stat.executeQuery("select * from usermessage where ID =" + (int) idArray.get(i) + ";");
 			result.last();
-			users.add(new User(result.getString(2), "", result.getString(3).charAt(0), result.getDate(6)));
+			users.add(result.getString(2));
 		}
 		return users;
 	}
@@ -378,10 +396,9 @@ public class DictionaryDB implements Database, DBConstant {
 		else return false;
 	}
 	public static void main(String[] args) throws SQLException {
-		DictionaryDB db=new DictionaryDB();
-		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,new Date(233333333),0);
-		db.connect();
-		//db.sendCard(card, "sh");
-		db.deleteCard(3, card);
+//		DictionaryDB db=new DictionaryDB();
+//		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,new Date(233333333),0);
+//		db.connect();
+//		db.delete(3, "jk");
 	}
 }

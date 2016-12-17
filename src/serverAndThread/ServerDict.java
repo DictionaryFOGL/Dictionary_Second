@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import application.model.User;
 import application.model.WordCard;
@@ -41,7 +43,7 @@ public class ServerDict extends ServerSocket implements CSConstant{
 				user.setStatus(true);
 				guests.remove(operator);
 				userList.put(name, operator);
-				broadCast();
+				broadCastOnLine(name);
 			}
 		} catch (SQLException e) {
 			System.out.println("register failed");
@@ -98,6 +100,7 @@ public class ServerDict extends ServerSocket implements CSConstant{
 		CilentSession operator= userList.remove(name);
 		guests.add(operator);
 		operator.localLogout();
+		broadCastOffLine(name);
 		return true;
 	}
 	public boolean searchUsers(CilentSession operator, Message m) {
@@ -187,15 +190,53 @@ public class ServerDict extends ServerSocket implements CSConstant{
 			db.deleteCard(receiverID, card);
 			operator.getUser().deleteWordCard(card);
 		} catch (SQLException e) {
-			System.out.println("delete failed");
+			System.out.println("delete card failed");
 			e.printStackTrace();
 		}
 	}
 	
-	public void broadCast() {
-		//TODO
+	public void userDeleteFriend(CilentSession operator, Message m) {
+		AddFriendMessage message=(AddFriendMessage) m;
+		String name=message.getFriendName();
+		User usr=operator.getUser();
+		usr.deleteFriend(name);
+		try {
+			db.deleteFriend(usr.getUserID(), name);
+			CilentSession friend=userList.get(name);
+			if(friend != null) {
+				friend.localLoseFriend(name);
+			}
+		} catch (SQLException e) {
+			System.out.println("delete friend failed");
+			e.printStackTrace();
+		}
 	}
-
+	
+	public void broadCastOnLine(String name) {
+		Collection<CilentSession> collection=userList.values();
+		Iterator<CilentSession> iter=collection.iterator();
+		while(iter.hasNext()) {
+			CilentSession target=iter.next();
+			User usr=target.getUser();
+			if(usr.hasFriend(name)) {
+				usr.friendOnLine(name);
+				target.localFriendOnLine(name);
+			}
+		}
+	}
+	
+	public void broadCastOffLine(String name) {
+		Collection<CilentSession> collection=userList.values();
+		Iterator<CilentSession> iter=collection.iterator();
+		while(iter.hasNext()) {
+			CilentSession target=iter.next();
+			User usr=target.getUser();
+			if(usr.hasFriend(name)) {
+				usr.friendOffLine(name);
+				target.localFriendOffLine(name);
+			}
+		}
+	}
 
 	public void guestQuit(CilentSession c) {
 		guests.remove(c);

@@ -5,6 +5,7 @@ interface CSConstant {
 	static final byte SEND_SUCCESS=0x00;
 	static final byte RECEIVE_CARD=0x10;
 	static final byte FRIEND_ONLINE=0x21;
+	static final byte FRIEND_OFFLINE=0x64;
 	static final byte ADD_FRIEND=0x11;
 	static final byte NEW_FRIEND=0x53;
 	static final byte LIKE=0x12;

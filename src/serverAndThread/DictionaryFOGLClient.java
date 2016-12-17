@@ -63,10 +63,16 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 			receiveCard(message);
 			break;
 		case (FRIEND_ONLINE):
-			
+			friendOnline(message);
+			break;
+		case (FRIEND_OFFLINE):
+			friendOffline(message);
 			break;
 		case (NEW_FRIEND):
 			newFriend(message);
+			break;
+		case (DELETE_FRIEND):
+			
 			break;
 		case (LOGIN_FAILED):
 			InformationDialog.loginFailed();
@@ -98,7 +104,15 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 	}
 	
 	public void friendOnline(Message m){		
-		
+		AddFriendMessage message=(AddFriendMessage) m;
+		String name=message.getFriendName();
+		user.friendOnLine(name);
+	}
+	
+	public void friendOffline(Message m){		
+		AddFriendMessage message=(AddFriendMessage) m;
+		String name=message.getFriendName();
+		user.friendOffLine(name);
 	}
 	
 	public void login(Message m) {

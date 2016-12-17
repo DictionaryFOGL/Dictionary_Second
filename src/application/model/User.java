@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 import application.util.*;
 
 public class User implements Serializable{
@@ -25,19 +27,15 @@ public class User implements Serializable{
 	private HashMap<String,Boolean> friendList=new HashMap<String,Boolean>();
 	private int baidu,youdao,bing;
 	
-	public User(String userName, String password, char gender,Date registerDate,int baidu,int youdao,int bing) {
-		this.setRegisterDate(new Date());
-		this.userName = userName;
-		this.password = password;
-		pwdMd5=Encryption.MD5(password);
-		this.gender = gender;
-		this.registerDate=registerDate;
+	public User(int userID,String userName, String password, char gender,Date registerDate,int baidu,int youdao,int bing) {
+		this(userName,password,gender,registerDate);
 		this.baidu=baidu;
 		this.youdao=youdao;
 		this.bing=bing;
 	}
 	public User(String userName, String password, char gender,Date registerDate) {
-		this(userName,password,gender,registerDate,0,0,0);
+		this(userName,password,registerDate);
+		this.gender=gender;
 	}
 	
 	public int getUserID() {
@@ -45,7 +43,14 @@ public class User implements Serializable{
 	}
 
 	public User(String userName, String password, Date registerDate) {
-		this(userName,password,'s',registerDate);
+		this.setRegisterDate(new Date());
+		this.userName = userName;
+		this.password = password;
+		pwdMd5=Encryption.MD5(password);
+		this.gender='s';
+		baidu=0;
+		youdao=0;
+		bing=0;
 	}
 
 	public String getUserName() {
@@ -139,6 +144,18 @@ public class User implements Serializable{
 		return new ArrayList<String>(friendList.keySet());
 	}
 	
+	public boolean hasFriend(String name) {
+		return friendList.containsKey(name);
+	}
+	
+	public void friendOnLine(String friend) {
+		friendList.put(friend, true);
+	}
+	
+	public void friendOffLine(String friend) {
+		friendList.put(friend, false);
+	}
+	
 	public boolean addNewFriend(String friend,boolean status) {
 		if(friendList.get(friend) != null) return false;
 		else {
@@ -147,11 +164,17 @@ public class User implements Serializable{
 		}
 	}
 	
-	public boolean deleteFriend(User friend) {
+	public boolean deleteFriend(String friend) {
 		if(friendList.get(friend) != null) {
 			friendList.remove(friend);
 			return true;
 		} else return false;
+	}
+	
+	public void setFriendList(ArrayList<String> l){
+		for(String s:l) {
+			friendList.put(s, false);
+		}
 	}
 	
 	public void resetAll() {

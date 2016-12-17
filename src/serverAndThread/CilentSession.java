@@ -69,7 +69,7 @@ public class CilentSession implements Runnable,CSConstant {
 					server.userDeleteCard(this, message);
 					break;
 				case (DELETE_FRIEND):
-					//TODO
+					server.userDeleteFriend(this, message);
 					break;
 				default:
 					break;
@@ -146,12 +146,44 @@ public class CilentSession implements Runnable,CSConstant {
 		}
 	}
 	
+	public void localLoseFriend(String name) {
+		AddFriendMessage message=new AddFriendMessage(DELETE_FRIEND, name);
+		try {
+			out.writeObject(message);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void localSimpleMessage(byte type) {
 		try {
 			Message message=new Message(type);
 			out.writeObject(message);
 			out.flush();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void localFriendOnLine(String name) {
+		try {
+			AddFriendMessage message=new AddFriendMessage(FRIEND_ONLINE, name);
+			out.writeObject(message);
+			out.flush();
+		} catch (IOException e) {
+			System.out.print("localFriendOnLine error");
+			e.printStackTrace();
+		}
+	}
+	
+	public void localFriendOffLine(String name) {
+		try {
+			AddFriendMessage message=new AddFriendMessage(FRIEND_OFFLINE, name);
+			out.writeObject(message);
+			out.flush();
+		} catch (IOException e) {
+			System.out.print("localFriendOffLine error");
 			e.printStackTrace();
 		}
 	}
