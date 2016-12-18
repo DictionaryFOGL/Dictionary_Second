@@ -146,7 +146,7 @@ public class SpiderTest {
 	@Test
 	public void testBing11() {
 		Spider s=new BingSpider();
-		s.setWord("bl");
+		s.setWord("c");
 		Word r=s.getResult();
 
 		System.out.print("show: "+r.showTranslation());

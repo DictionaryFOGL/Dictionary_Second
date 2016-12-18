@@ -108,10 +108,11 @@ public class BaiduSpider extends Spider{
 		}  
 	}
 	public static void main(String[] args) {
-		Spider s=new BaiduSpider();
-		s.setWord("you");
+		Spider s=new BingSpider();
+		s.setWord("c");
 		Word r=s.getResult();
-		for(String ss:r.getTranslation())
-			System.out.println(ss);
+		for(int i=0;i<r.getTranslation().size();i++){
+			System.out.println(r.getTranslation().get(i));
+		}
 	}
 }
