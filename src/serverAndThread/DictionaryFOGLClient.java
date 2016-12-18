@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import application.Main;
 import application.model.SearchHistory;
@@ -18,21 +19,33 @@ import javafx.application.Platform;
 
 public class DictionaryFOGLClient implements CSConstant,Runnable {
 	private Main mainApp;
-	private ArrayList<SearchHistory> history;
+	private HashMap<String, Boolean> hBaidu;
+	private HashMap<String, Boolean> hBing;
+	private HashMap<String, Boolean> hYoudao;
 	private User user;
 	private Socket socket;
 	private ObjectInputStream objectFromServer;
 	
-	public DictionaryFOGLClient(Main mainApp,Socket socket, ObjectInputStream objectFromServer,ArrayList<SearchHistory> history) {
+	public DictionaryFOGLClient(Main mainApp,Socket socket, ObjectInputStream objectFromServer,HashMap<String, Boolean> hBaidu, HashMap<String, Boolean> hBing, HashMap<String, Boolean> hYoudao) {
 		super();
 		this.mainApp=mainApp;
 		this.socket = socket;
 		this.objectFromServer = objectFromServer;
-		this.history=history;
+		this.hBaidu=hBaidu;
+		this.hBing=hBing;
+		this.hYoudao=hYoudao;
 	}
 
 	public User getUser() {
 		return user;
+	}
+	
+	public void closeAll() {
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -90,6 +103,8 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 					break;
 				case (LOGIN_SUCCESS):
 					login(message);
+					mainApp.loadUILoginData();
+					System.out.println(user.hasFriend("QNMD"));
 					break;
 				case (SEARCH_USER):
 					
@@ -103,6 +118,12 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 					break;
 				case (LOGUT_SUCCESS):
 					//this.user=null;
+					break;
+				case (PASSWORD_CHANGE):
+					InformationDialog.pwdChanged();
+					break;
+				case (PASSWORD_CHANGEFAILED):
+					InformationDialog.pwdChangFailed();
 					break;
 				default:
 					break;
@@ -135,8 +156,15 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		user=message.getAccount();
 		ArrayList<SearchHistory> h=message.getHistory();
 		if(h != null) {
-			for(SearchHistory s:h)
-				history.add(s);
+			for(SearchHistory s:h) {
+				boolean youdao=(s.getLikeYouDao() == 1) ? true : false;
+				boolean baidu=(s.getLikeBaidu() == 1) ? true : false;
+				boolean bing=(s.getLikeBing() == 1) ? true : false;
+				
+				hYoudao.put(s.getKeyWord(), youdao);
+				hBaidu.put(s.getKeyWord(), baidu);
+				hBing.put(s.getKeyWord(), bing);
+			}
 		}
 		System.out.println("history looged");
 	}

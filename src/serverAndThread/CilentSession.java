@@ -74,6 +74,9 @@ public class CilentSession implements Runnable,CSConstant {
 				case (DELETE_FRIEND):
 					server.userDeleteFriend(this, message);
 					break;
+				case (PASSWORD_CHANGE):
+					server.userPwdChange(this, message);
+					break;
 				default:
 					break;
 				}

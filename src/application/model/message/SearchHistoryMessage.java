@@ -7,6 +7,7 @@ import application.model.SearchHistory;
 import application.model.message.Message;
 
 public class SearchHistoryMessage extends Message implements Serializable{
+
 	/**
 	 * 
 	 */

@@ -49,6 +49,12 @@ public class InformationDialog {
 	public static void invalidCheck() {
 		baseAlert(AlertType.WARNING, "Verification", null, "Verification code is not correct");
 	}
+	public static void pwdChangFailed() {
+		baseAlert(AlertType.ERROR, "New password not save", null, "Password save failed! Please try again");
+	}
+	public static void pwdChanged() {
+		baseAlert(AlertType.INFORMATION, "Saved!", null, "Your new password has been saved!");
+	}
 	private static void baseAlert(AlertType type,String title,String headerText,String contentText) {
 		Alert alert=new Alert(type);
 		alert.setTitle(title);

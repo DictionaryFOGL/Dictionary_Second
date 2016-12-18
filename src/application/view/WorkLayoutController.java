@@ -122,4 +122,8 @@ public class WorkLayoutController implements Controller {
 			wordSearchMode();
 		}
 	}
+	
+	public void loadDataPersonal() {
+		personCon.loadData();
+	}
 }

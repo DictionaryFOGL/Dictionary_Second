@@ -12,10 +12,11 @@ public class LikeMessage extends Message  implements Serializable{
 	private String keyWord;
 	private boolean likeOrNot;
 
-	public LikeMessage(byte type, boolean likeOrNot,String keyWord) {
+	public LikeMessage(byte type, boolean likeOrNot,String keyWord,int site) {
 		super(type);
 		this.likeOrNot = likeOrNot;
 		this.keyWord=keyWord;
+		this.site=site;
 	}
 
 	public String getKeyWord() {

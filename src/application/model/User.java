@@ -146,6 +146,11 @@ public class User implements Serializable{
 		return friendList.containsKey(name);
 	}
 	
+	public boolean friendStatus(String name) {
+		if(!hasFriend(name)) return false;
+		else return friendList.get(name);
+	}
+	
 	public void friendOnLine(String friend) {
 		friendList.put(friend, true);
 	}

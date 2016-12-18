@@ -23,14 +23,6 @@ public class Word  implements Serializable{
 			this.translation.add(translation);
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		Word another=(Word) obj;
-		if(words.equals(another.words)) return true;
-		if(showTranslation().equals(another.showTranslation())) return true;
-		return false;
-	}
-	
 	public Word(String words) {
 		this.words=words;
 	}

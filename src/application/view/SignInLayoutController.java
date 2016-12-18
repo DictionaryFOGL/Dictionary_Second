@@ -36,6 +36,10 @@ public class SignInLayoutController implements Controller,CSConstant{
 	public void setMain(Main mainApp) {
 		this.mainApp=mainApp;
 		vertification.setText(ValidInput.randomVerify());
+		
+		check.setText(vertification.getText());
+		name.setText("HELL");
+		pwd.setText("12345");
 	}
 
 	@Override

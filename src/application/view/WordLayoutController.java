@@ -11,13 +11,12 @@ import java.net.MalformedURLException;
 import application.Main;
 import application.model.User;
 import application.model.Word;
+import application.model.message.LikeMessage;
 import application.util.BaiduSpider;
 import application.util.BingSpider;
 import application.util.Controller;
 import application.util.ValidInput;
 import application.util.YoudaoSpider;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -25,21 +24,23 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import serverAndThread.CSConstant;
 
-public class WordLayoutController implements Controller {
+public class WordLayoutController implements Controller,CSConstant {
+	private static int YOUDAO=2;
+	private static int BAIDU=0;
+	private static int BING=1;
 	private Main mainApp;
 	private AnchorPane myself;
 	private String searchItem;
-	private int count;
 	private static final String youdaoS = "www.youdao.com";
 	private static final String bingS = "www.bing.com/translator";
 	private static final String baiduS = "fanyi.baidu.com";
 	private Text[] trans = new Text[3];
+	private ImageView[] likerank=new ImageView[3];
 
 	private Word youdaoWord = null;
 	private Word baiduWord = null;
@@ -199,13 +200,28 @@ public class WordLayoutController implements Controller {
 
 	public void searchResult(String searchItem) {
 		this.searchItem = ValidInput.wordSearchProcessed(searchItem);
-		resultShow();
 		modeRank();
 		searchBase();
 		findCheck();
-		System.out.println(notFound1.isVisible()+" "+notFound2.isVisible()+" "+notFound3.isVisible());
-		System.out.println(found1.isVisible()+" "+found2.isVisible()+" "+found3.isVisible());
-		
+		historyLoad();
+	}
+	
+	private void historyLoad() {
+		if(mainApp.getBaiduHistory(searchItem)) {
+			likerank[1].setImage(likeYes);
+		} else {
+			likerank[1].setImage(likeDefault);
+		}
+		if(mainApp.getYoudaoHistory(searchItem)) {
+			likerank[0].setImage(likeYes);
+		} else {
+			likerank[0].setImage(likeDefault);
+		}
+		if(mainApp.getBingHistory(searchItem)) {
+			likerank[2].setImage(likeYes);
+		} else {
+			likerank[2].setImage(likeDefault);
+		}
 	}
 
 	private void searchBase() {
@@ -219,8 +235,6 @@ public class WordLayoutController implements Controller {
 		baiduWord = baidu.getResult();
 		if (baiduWord != null) {
 			trans[1].setText(baiduWord.showTranslation());
-		} else {
-			// TODO
 		}
 	}
 
@@ -248,59 +262,97 @@ public class WordLayoutController implements Controller {
 			int binglike = usr.getBing();
 			if (baidulike >= youdaolike && baidulike >= binglike) {
 				trans[1] = trans1;
+				likerank[1] =like1;
 				comefrom1(baiduS);
 				if (youdaolike > binglike) {
 					trans[0] = trans2;
+					likerank[0]=like2;
 					comefrom2(youdaoS);
 					trans[2] = trans3;
+					likerank[2]=like3;
 					comefrom3(bingS);
 				} else {
 					trans[0] = trans3;
+					likerank[0]=like3;
 					comefrom3(youdaoS);
 					trans[2] = trans2;
+					likerank[2]=like2;
 					comefrom2(bingS);
 				}
 			} else if (binglike >= youdaolike && binglike >= baidulike) {
 				trans[2] = trans1;
+				likerank[2] =like1;
+				comefrom1(bingS);
 				if (youdaolike >= baidulike) {
 					trans[0] = trans2;
+					likerank[0]=like2;
+					comefrom2(youdaoS);
 					trans[1] = trans3;
+					likerank[1]=like3;
+					comefrom3(baiduS);
 				} else {
 					trans[1] = trans2;
+					likerank[1]=like2;
+					comefrom2(baiduS);
 					trans[0] = trans3;
+					likerank[0]=like3;
+					comefrom3(youdaoS);
 				}
 			} else if (youdaolike >= binglike && youdaolike >= baidulike) {
 				trans[0] = trans1;
+				likerank[0] =like1;
+				comefrom1(youdaoS);
 				if (binglike >= baidulike) {
 					trans[2] = trans2;
+					likerank[2]=like2;
+					comefrom2(bingS);
 					trans[1] = trans3;
+					likerank[1]=like3;
+					comefrom3(baiduS);
 				} else {
 					trans[1] = trans2;
+					likerank[1]=like2;
+					comefrom2(baiduS);
 					trans[2] = trans3;
+					likerank[2]=like3;
+					comefrom3(bingS);
 				}
 			}
-		} else
-			modeDefault();
+		} else modeDefault();
 	}
 
-	// TODO 服务器通信
 	@FXML
 	private void like1() {
 		if (like1.getImage() == likeDefault) {
-			if (trans[0] == trans1)
+			if (trans[0] == trans1) {
 				mainApp.getUser().youdaoLike();
-			else if (trans[1] == trans1)
+				mainApp.changeHistory(searchItem, YOUDAO, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, YOUDAO));
+			} else if (trans[1] == trans1) {
 				mainApp.getUser().baiduLike();
-			else if (trans[2] == trans1)
+				mainApp.changeHistory(searchItem, BAIDU, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, BAIDU));
+			}
+			else if (trans[2] == trans1) {
 				mainApp.getUser().bingLike();
+				mainApp.changeHistory(searchItem, BING, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, BING));
+			}
 			like1.setImage(likeYes);
 		} else {
-			if (trans[0] == trans1)
+			if (trans[0] == trans1) {
 				mainApp.getUser().youdaoDisLike();
-			else if (trans[1] == trans1)
+				mainApp.changeHistory(searchItem, YOUDAO, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, YOUDAO));
+			} else if (trans[1] == trans1) {
 				mainApp.getUser().baiduDisLike();
-			else if (trans[2] == trans1)
+				mainApp.changeHistory(searchItem, BAIDU, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, BAIDU));
+			} else if (trans[2] == trans1) {
 				mainApp.getUser().bingDisLike();
+				mainApp.changeHistory(searchItem, BING, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, BING));
+			}
 			like1.setImage(likeDefault);
 		}
 	}
@@ -308,20 +360,33 @@ public class WordLayoutController implements Controller {
 	@FXML
 	private void like2() {
 		if (like2.getImage() == likeDefault) {
-			if (trans[0] == trans2)
+			if (trans[0] == trans2) {
 				mainApp.getUser().youdaoLike();
-			else if (trans[1] == trans2)
+				mainApp.changeHistory(searchItem, YOUDAO, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, YOUDAO));
+			} else if (trans[1] == trans2) {
 				mainApp.getUser().baiduLike();
-			else if (trans[2] == trans2)
+				mainApp.changeHistory(searchItem, BAIDU, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, BAIDU));
+			} else if (trans[2] == trans2) {
 				mainApp.getUser().bingLike();
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, BING));
+			}
 			like2.setImage(likeYes);
 		} else {
-			if (trans[0] == trans2)
+			if (trans[0] == trans2) {
 				mainApp.getUser().youdaoDisLike();
-			else if (trans[1] == trans2)
+				mainApp.changeHistory(searchItem, YOUDAO, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, YOUDAO));
+			} else if (trans[1] == trans2) {
 				mainApp.getUser().baiduDisLike();
-			else if (trans[2] == trans2)
+				mainApp.changeHistory(searchItem, BAIDU, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, BAIDU));
+			} else if (trans[2] == trans2) {
 				mainApp.getUser().bingDisLike();
+				mainApp.changeHistory(searchItem, BING, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, BING));
+			}
 			like2.setImage(likeDefault);
 		}
 	}
@@ -329,20 +394,34 @@ public class WordLayoutController implements Controller {
 	@FXML
 	private void like3() {
 		if (like3.getImage() == likeDefault) {
-			if (trans[0] == trans3)
+			if (trans[0] == trans3) {
 				mainApp.getUser().youdaoLike();
-			else if (trans[1] == trans3)
+				mainApp.changeHistory(searchItem, YOUDAO, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, YOUDAO));
+			} else if (trans[1] == trans3) {
 				mainApp.getUser().baiduLike();
-			else if (trans[2] == trans3)
+				mainApp.changeHistory(searchItem, BAIDU, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, BAIDU));
+			} else if (trans[2] == trans3) {
 				mainApp.getUser().bingLike();
+				mainApp.changeHistory(searchItem, BING, true);
+				mainApp.writeToServer(new LikeMessage(LIKE, true, searchItem, BING));
+			}
 			like3.setImage(likeYes);
 		} else {
-			if (trans[0] == trans3)
+			if (trans[0] == trans3) {
 				mainApp.getUser().youdaoDisLike();
-			else if (trans[1] == trans3)
+				mainApp.changeHistory(searchItem, YOUDAO, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, YOUDAO));
+			} else if (trans[1] == trans3) {
 				mainApp.getUser().baiduDisLike();
-			else if (trans[2] == trans3)
+				mainApp.changeHistory(searchItem, BAIDU, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, BAIDU));
+			} else if (trans[2] == trans3) {
 				mainApp.getUser().bingDisLike();
+				mainApp.changeHistory(searchItem, BING, false);
+				mainApp.writeToServer(new LikeMessage(LIKE, false, searchItem, BING));
+			}
 			like3.setImage(likeDefault);
 		}
 	}
@@ -460,6 +539,36 @@ public class WordLayoutController implements Controller {
 		send3.setImage(sendDefault);
 	}
 
+	@FXML
+	private void likeIn1() {
+		like1.setImage(likeYes);
+	}
+	
+	@FXML
+	private void likeIn2() {
+		like2.setImage(likeYes);
+	}
+	
+	@FXML
+	private void likeIn3() {
+		like3.setImage(likeYes);
+	}
+
+	@FXML
+	private void likeOut1() {
+		like1.setImage(likeDefault);
+	}
+
+	@FXML
+	private void likeOut2() {
+		like2.setImage(likeDefault);
+	}
+
+	@FXML
+	private void likeOut3() {
+		like3.setImage(likeDefault);
+	}
+
 	private void setBoardContent(String content) {
 		Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
 		Transferable text = new StringSelection(content);
@@ -489,77 +598,63 @@ public class WordLayoutController implements Controller {
 		trans[2] = trans3;
 		comefrom3.setText(bingS);
 	}
-
-	private void resultShow() {
-		count = 0;
-		if (youdaoGet.isSelected())
-			count++;
-		if (baiduGet.isSelected())
-			count++;
-		if (bingGet.isSelected())
-			count++;
-	}
 	
-	private void find1(boolean status) {
-		boolean opposite=!status;
+	private void find1(boolean status,boolean opposite) {
 		found1.setVisible(status);
 		notFound1.setVisible(opposite);
 	}
 	
-	private void find2(boolean status) {
-		if(count == 0 || count >= 2 ) {
-			boolean opposite=!status;
-			found2.setVisible(status);
-			notFound2.setVisible(opposite);
-		} else {
-			found2.setVisible(false);
-			notFound2.setVisible(false);
-		}
+	private void find2(boolean status,boolean opposite) {
+		found2.setVisible(status);
+		notFound2.setVisible(opposite);
 	}
 	
-	private void find3(boolean status) {
-		if(count == 0 || count == 3) {
-			boolean opposite=!status;
-			found3.setVisible(status);
-			notFound3.setVisible(opposite);
-		} else {
-			found3.setVisible(false);
-			notFound3.setVisible(false);
-		}
+	private void find3(boolean status,boolean opposite) {
+		found3.setVisible(status);
+		notFound3.setVisible(opposite);
 	}
 	
 	private void findCheck() {
 		if (trans[0] == trans1) {
-			if(youdaoWord != null) find1(true);
-			else find1(false);
+			if(!youdaoGet.isSelected() && (baiduGet.isSelected() || bingGet.isSelected())) find1(false,false);
+			else if(youdaoWord != null) find1(true,false);
+			else find1(false,true);
 		} else if (trans[1] == trans1) {
-			if(baiduWord != null) find1(true);
-			else find1(false);
+			if(!baiduGet.isSelected() && (youdaoGet.isSelected() || bingGet.isSelected())) find1(false,false);
+			else if(baiduWord != null) find1(true,false);
+			else find1(false,true);
 		} else if (trans[2] == trans1) {
-			if(bingWord != null) find1(true);
-			else find1(false);
+			if(!bingGet.isSelected() && (youdaoGet.isSelected() || baiduGet.isSelected())) find1(false,false);
+			else if(bingWord != null) find1(true,false);
+			else find1(false,true);
 		}
 		
 		if (trans[0] == trans2) {
-			if(youdaoWord != null) find2(true);
-			else find2(false);
+			if(!youdaoGet.isSelected() && (baiduGet.isSelected() || bingGet.isSelected())) find2(false,false);
+			else if(youdaoWord != null) find2(true,false);
+			else find2(false,true);
 		} else if (trans[1] == trans2) {
-			if(baiduWord != null) find2(true);
-			else find2(false);
+			if(!baiduGet.isSelected() && (youdaoGet.isSelected() || bingGet.isSelected())) find2(false,false);
+			else if(baiduWord != null) find2(true,false);
+			else find2(false,true);
 		} else if (trans[2] == trans2) {
-			if(bingWord != null) find2(true);
-			else find2(false);
+			if(!bingGet.isSelected() && (youdaoGet.isSelected() || baiduGet.isSelected())) find2(false,false);
+			else if(bingWord != null) find2(true,false);
+			else find2(false,true);
 		}
 		
 		if (trans[0] == trans3) {
-			if(youdaoWord != null) find3(true);
-			else find3(false);
+			if(!youdaoGet.isSelected() && (baiduGet.isSelected() || bingGet.isSelected())) find3(false,false);
+			else if(youdaoWord != null) find3(true,false);
+			else find3(false,true);
 		} else if (trans[1] == trans3) {
-			if(baiduWord != null) find3(true);
-			else find3(false);
+			if(!baiduGet.isSelected() && (youdaoGet.isSelected() || bingGet.isSelected())) find3(false,false);
+			else if(baiduWord != null) find3(true,false);
+			else find3(false,true);
 		} else if (trans[2] == trans3) {
-			if(bingWord != null) find3(true);
-			else find3(false);
+			if(!bingGet.isSelected() && (youdaoGet.isSelected() || baiduGet.isSelected())) find3(false,false);
+			else if(bingWord != null) find3(true,false);
+			else find3(false,true);
 		}
 	}
 }

@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import redis.clients.util.Hashing;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.sun.javafx.application.ParametersImpl;
 
@@ -37,7 +39,9 @@ public class Main extends Application implements CSConstant{
 	private Controller tempControl;
 	private BaseLayoutController baseCon;
 	private DictionaryFOGLClient client;
-	private ArrayList<SearchHistory> history;
+	private HashMap<String, Boolean> hBaidu=new HashMap<String, Boolean>();
+	private HashMap<String, Boolean> hBing=new HashMap<String, Boolean>();
+	private HashMap<String, Boolean> hYoudao=new HashMap<String, Boolean>();
 	private ObjectOutputStream objectToServer;
 	
 	public Main() {
@@ -48,8 +52,7 @@ public class Main extends Application implements CSConstant{
 					Socket socket=new Socket(host, port);
 					objectToServer=new ObjectOutputStream(socket.getOutputStream());
 					ObjectInputStream objectFromServer=new ObjectInputStream(socket.getInputStream());
-					history=new ArrayList<SearchHistory>();
-					client=new DictionaryFOGLClient(myself, socket, objectFromServer, history);
+					client=new DictionaryFOGLClient(myself, socket, objectFromServer, hBaidu, hBing, hYoudao);
 					Thread socketHeard=new Thread(client);
 					socketHeard.start();
 				} catch (UnknownHostException e) {
@@ -88,7 +91,8 @@ public class Main extends Application implements CSConstant{
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
-					myself.writeToServer(new Message(LOGOUT));
+					if(myself.client.getUser() != null)
+						myself.writeToServer(new Message(LOGOUT));
 					System.exit(0);
 				}
 			});
@@ -183,8 +187,33 @@ public class Main extends Application implements CSConstant{
 		
 	}
 	
+	public void loadUILoginData() {
+		baseCon.loadDataPersonal();
+	}
+	
 	public User getUser() {
 		return client.getUser();
+	}
+	
+	public void changeHistory(String key,int site,boolean likeornot) {
+		if(site == 2) hYoudao.put(key, likeornot);
+		else if(site == 1) hBing.put(key, likeornot);
+		else hBaidu.put(key, likeornot);
+	}
+	
+	public boolean getYoudaoHistory(String key) {
+		if(!hYoudao.containsKey(key)) return false;
+		return hYoudao.get(key);
+	}
+	
+	public boolean getBingHistory(String key) {
+		if(!hBing.containsKey(key)) return false;
+		return hBing.get(key);
+	}
+	
+	public boolean getBaiduHistory(String key) {
+		if(!hBaidu.containsKey(key)) return false;
+		return hBaidu.get(key);
 	}
 	
 	public void writeToServer(Message m) {

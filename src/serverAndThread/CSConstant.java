@@ -9,7 +9,6 @@ public interface CSConstant {
 	static final byte ADD_FRIEND=0x11;
 	static final byte NEW_FRIEND=0x53;
 	static final byte LIKE=0x12;
-	static final byte LIKE_CANCEL=0x13;
 	static final byte INSERT_HISTORY=0x01;
 	static final byte LOGIN=0x30;
 	static final byte LOGIN_SUCCESS=0x22;
@@ -25,4 +24,6 @@ public interface CSConstant {
 	static final byte REFRESH_FRIEND=0x50;
 	static final byte DELETE_FRIEND=0x60;
 	static final byte DELETE_CARD=0x08;
+	static final byte PASSWORD_CHANGE=0x05;
+	static final byte PASSWORD_CHANGEFAILED=0x077;
 }

@@ -61,9 +61,9 @@ public class WordCard implements Serializable{
 	}
 	
 	public String getSiteStr() {
-		if(site == 0) return "fanyi.baidu.com";
-		else if(site == 2) return "www.youdao.com";
-		else return "www.bing.com/translator";
+		if(site == 0) return "Baidu";
+		else if(site == 2) return "Youdao";
+		else return "Bing";
 	}
 
 	public boolean isTheSameOne(WordCard another) {
@@ -71,11 +71,5 @@ public class WordCard implements Serializable{
 		if(senderID == another.getSenderID()) return true;
 		if(site == another.site) return true;
 		return false;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		WordCard another=(WordCard) obj;
-		return isTheSameOne(another);
 	}
 }

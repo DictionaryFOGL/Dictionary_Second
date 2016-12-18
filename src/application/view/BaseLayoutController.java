@@ -61,4 +61,8 @@ public class BaseLayoutController implements Controller{
 		BorderPane myself=(BorderPane) pane;
 		this.myself=myself;
 	}
+	
+	public void loadDataPersonal() {
+		workCon.loadDataPersonal();
+	}
 }

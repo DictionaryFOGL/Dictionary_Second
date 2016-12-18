@@ -38,7 +38,6 @@ public class DictionaryDB implements Database, DBConstant {
 				nameToId.put(result.getString(2), result.getInt(1));
 				idToName.put(result.getInt(1), result.getString(2));
 			}
-			result.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,7 +71,6 @@ public class DictionaryDB implements Database, DBConstant {
 			ResultSet result1=stat.executeQuery(command);
 			result1.last();
 			if(result1.getRow() == 0) return null;
-System.out.println("not here");
 			account=new User(id,name,pwd,gen,date,result1.getInt(2),result1.getInt(4),result1.getInt(3));
 			ArrayList<String> friends=getFriends(id);
 			account.setFriendList(friends);
@@ -92,7 +90,6 @@ System.out.println("not here");
 		int id=re.getInt(1);
 		idToName.put(id, name);
 		nameToId.put(name, id);
-		re.close();
 		stat.executeUpdate("insert into "+sheet4+" (ID,baidu,bing,youdao) values ("+id+",0,0,0);");
 	}
 
@@ -156,17 +153,8 @@ System.out.println("not here");
 
 	@Override
 	public void like(String userName, int site, boolean islike) throws SQLException {
-		if (site == 3) {
-			return;
-		}
-		int userId = 0;
-		ResultSet result = stat.executeQuery("select * from usermessage where name = '" + userName + "';");
-		result.last();
-		if (result.getRow() == 0) {
-			return;
-		}
-		userId = result.getInt(1);
-		result = stat.executeQuery("select * from " + sheet4 + " where ID = " + userId + ";");
+		int userId = nameToId.get(userName);
+		ResultSet result = stat.executeQuery("select * from " + sheet4 + " where ID = " + userId + ";");
 		result.last();
 		int p;
 		if (islike) {
@@ -278,18 +266,19 @@ System.out.println("not here");
 	public ArrayList<String> getFriends(int userId) throws SQLException {
 		ArrayList<Integer> idArray = new ArrayList<Integer>();
 		ArrayList<String> users = new ArrayList<String>();
-		ResultSet result = stat.executeQuery("select * from relationship where ID1 =" + userId + ";");
+		String command="select * from "+sheet5+" where ID1 ='" + userId + "';";
+		ResultSet result = stat.executeQuery(command);
 		while (result.next()) {
 			idArray.add(result.getInt(2));
 		}
-		result = stat.executeQuery("select * from relationship where ID2 =" + userId + ";");
+		result = stat.executeQuery("select * from "+sheet5+" where ID2 =" + userId + ";");
 		while (result.next()) {
 			idArray.add(result.getInt(1));
 		}
 		for (int i = 0; i < idArray.size(); i++) {
-			result = stat.executeQuery("select * from usermessage where ID =" + (int) idArray.get(i) + ";");
-			result.last();
-			users.add(result.getString(2));
+			String name=idToName.get((int) idArray.get(i));
+			users.add(name);
+			System.out.println(name);
 		}
 		return users;
 	}
@@ -382,11 +371,28 @@ System.out.println("not here");
 		if(affect == 1) return true;
 		else return false;
 	}
+	
+	public boolean pwdChange(int id,String pwd) throws SQLException {
+		String pwdmd5=Encryption.MD5(pwd);
+		String command="update "+sheet1+" set password='"+pwd+"',pwdmd5='"+pwdmd5+"' where ID="+id+";";
+		int affect=stat.executeUpdate(command);
+		if(affect == 1) return true;
+		else return false;
+	}
+	
+	public boolean genderChage(int id,char gender) throws SQLException {
+		String command="update usermessage set gender='"+gender+"' where ID="+id+";";
+		int affect=stat.executeUpdate(command);
+		if(affect == 1) return true;
+		else return false;
+	}
+	
 	public static void main(String[] args) throws SQLException {
 		DictionaryDB db=new DictionaryDB();
 		WordCard card=new WordCard(new Word("hhh","ÊÇµÄ"),"jk","quuu",2,new Date(233333333),0);
 		db.connect();
-		db.register("fog", "ddd", new Date(System.currentTimeMillis()), 'f');
-		System.out.println();
+		for(String s:db.getFriends(2)) {
+			System.out.println(s);
+		}
 	}
 }

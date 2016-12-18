@@ -1,6 +1,12 @@
 package application.model;
 
-public class SearchHistory{
+import java.io.Serializable;
+
+public class SearchHistory implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2807371741182291669L;
 	private String keyWord;
 	private int likeBaidu;
 	private int likeBing;

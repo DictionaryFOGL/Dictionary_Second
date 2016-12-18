@@ -113,6 +113,20 @@ public class ServerDict implements CSConstant{
 		broadCastOffLine(name);
 		return true;
 	}
+	public void userPwdChange(CilentSession operator, Message m) {
+		LoginMessage login = (LoginMessage) m;
+		String pwdnew=login.getPwd();
+		try {
+			boolean status=db.pwdChange(operator.getUser().getUserID(), pwdnew);
+			if(status) {
+				operator.localSimpleMessage(PASSWORD_CHANGE);
+			} else {
+				operator.localSimpleMessage(PASSWORD_CHANGEFAILED);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public boolean searchUsers(CilentSession operator, Message m) {
 		SearchMessage message=(SearchMessage) m;
 		String item=message.getKeyWord();
@@ -158,6 +172,7 @@ public class ServerDict implements CSConstant{
 		String key=message.getKeyWord();
 		try {
 			db.insertHistory(key, operator.getUser().getUserName(), site, status);
+			db.like(operator.getUser().getUserName(), site, likeOrNot);
 		} catch (SQLException e) {
 			System.out.println("like dberror");
 			e.printStackTrace();
