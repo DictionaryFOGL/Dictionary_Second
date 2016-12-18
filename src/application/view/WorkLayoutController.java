@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import application.Main;
+import application.model.WordCard;
 import application.util.Controller;
 import application.util.ValidInput;
 import javafx.fxml.FXML;
@@ -121,6 +122,22 @@ public class WorkLayoutController implements Controller {
 			modePic.setImage(mode1);
 			wordSearchMode();
 		}
+	}
+	
+	public void observableRcvCard(WordCard card) {
+		personCon.observableRcvCard(card);
+	}
+	
+	public void observableRcvFriend(String friend) {
+		personCon.observableRcvFriend(friend);
+	}
+	
+	public void observableDelFriend(String friend) {
+		personCon.observableDelFriend(friend);
+	}
+	
+	public void observableDelCard(WordCard card) {
+		personCon.observableDelCard(card);
 	}
 	
 	public void loadDataPersonal() {

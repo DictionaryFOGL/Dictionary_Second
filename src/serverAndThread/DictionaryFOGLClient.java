@@ -137,6 +137,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		SendCardMessage message=(SendCardMessage) m;
 		WordCard card=message.getCard();
 		user.addWordCard(card);
+		mainApp.observableRcvCard(card);
 	}
 	
 	public void friendOnline(Message m){		
@@ -174,11 +175,13 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		AddFriendMessage message=(AddFriendMessage) m;
 		String friendName=message.getFriendName();
 		user.addNewFriend(friendName, true);
+		mainApp.observableRcvFriend(friendName);
 	}
 	
 	public void hasbeenDeleted(Message m) {
 		AddFriendMessage message=(AddFriendMessage) m;
 		String friendName=message.getFriendName();
 		user.deleteFriend(friendName);
+		mainApp.observableDelFriend(friendName);
 	}
 }

@@ -27,4 +27,8 @@ public class ProcessTimeFormat {
 		return null;
 		//TODO
 	}
+	
+	public static String standard(long mills) {
+		return sdf.format(mills);
+	}
 }

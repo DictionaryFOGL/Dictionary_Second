@@ -140,6 +140,23 @@ public class PersonalEditLayoutController implements Controller {
 		w.setAll(me.getMailBox());
 	}
 	
+	public void observableRcvCard(WordCard card) {
+		w.add(card);
+	}
+	
+	public void observableRcvFriend(String friend) {
+		f.add(friend);
+	}
+	
+	public void observableDelFriend(String friend) {
+		f.remove(friend);
+	}
+	
+	public void observableDelCard(WordCard card) {
+		w.remove(card);
+	}
+	
+	
 	@FXML
 	private void ok() {
 		

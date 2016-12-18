@@ -9,21 +9,28 @@ import application.model.WordCard;
 import application.model.message.SendCardMessage;
 import application.util.Controller;
 import application.util.InformationDialog;
+import application.util.ProcessTimeFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import serverAndThread.CSConstant;
 
 public class SendCardController implements Controller,CSConstant{
 	private Main mainApp;
 	private Stage dialogStage;
 	private Word word;
+	private long presentTimeStamp;
 	private int site;
 	private ObservableList<String> l=FXCollections.observableArrayList();
 	private ArrayList<String> receiverList=new ArrayList<>();
@@ -53,6 +60,30 @@ public class SendCardController implements Controller,CSConstant{
 	@Override
 	public void setMain(Main mainApp) {
 		this.mainApp = mainApp;
+		friend.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+			
+			@Override
+			public ListCell<String> call(ListView<String> param) {
+				return new ListCell<String>() {
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						if(item != null) {
+							super.updateItem(item, empty);
+							CheckBox select=new CheckBox(item);
+							this.setGraphic(select);
+							select.setOnAction(new EventHandler<ActionEvent>() {
+								@Override
+								public void handle(ActionEvent event) {
+									if(select.isSelected()) receiverList.add(select.getText());
+									else receiverList.remove(select.getText());
+									sendTo.setText(receiverList.toString().replaceAll(", ", "/").replaceAll("\\[|\\]", ""));
+								}
+							});
+						}
+					}
+				};
+			}
+		});
 		friend.setItems(l);
 		l.setAll(mainApp.getUser().getFriendList());
 		receiverList.clear();
@@ -65,6 +96,12 @@ public class SendCardController implements Controller,CSConstant{
 	public void setWordAndSite(Word word,int site) {
 		this.word = word;
 		this.site=site;
+		sendTo.setText("");
+		say.setText("A wonderful card!");
+		presentTimeStamp=System.currentTimeMillis();
+		english.setText(word.getWords());
+		chinese.setText(word.showTranslation());
+		time.setText(ProcessTimeFormat.standard(presentTimeStamp));
 	}
 	
 	@FXML
@@ -80,7 +117,7 @@ public class SendCardController implements Controller,CSConstant{
 			return;
 		}
 		for(String name:receiverList) {
-			WordCard card=new WordCard(word, mainApp.getUser().getUserName(), saysome, new Date(System.currentTimeMillis()), site);
+			WordCard card=new WordCard(word, mainApp.getUser().getUserName(), saysome, new Date(presentTimeStamp), site);
 			SendCardMessage message=new SendCardMessage(SEND_CARD, name, card);
 			mainApp.writeToServer(message);
 			try {
@@ -91,6 +128,7 @@ public class SendCardController implements Controller,CSConstant{
 				e.printStackTrace();
 			}
 		}
+		dialogStage.close();
 	}
 	
 	@FXML
@@ -121,7 +159,5 @@ public class SendCardController implements Controller,CSConstant{
 	}
 
 	@Override
-	public void setPaneMyself(Pane pane) {
-		
-	}
+	public void setPaneMyself(Pane pane) {}
 }

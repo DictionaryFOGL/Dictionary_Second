@@ -226,6 +226,22 @@ public class Main extends Application implements CSConstant{
 		}
 	}
 	
+	public void observableRcvCard(WordCard card) {
+		baseCon.observableRcvCard(card);
+	}
+	
+	public void observableRcvFriend(String friend) {
+		baseCon.observableRcvFriend(friend);
+	}
+	
+	public void observableDelFriend(String friend) {
+		baseCon.observableDelFriend(friend);
+	}
+	
+	public void observableDelCard(WordCard card) {
+		baseCon.observableDelCard(card);
+	}
+	
 	public void showSendCardDialog(Word spell,int site) {
 		try {
 			FXMLLoader loader=new FXMLLoader();

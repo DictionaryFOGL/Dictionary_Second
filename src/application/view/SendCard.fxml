@@ -24,8 +24,8 @@
                   <ListView fx:id="friend" prefWidth="200.0" />
                   <HBox prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="selectAll" maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="SelectAll" />
-                        <Button fx:id="deleteAll" layoutX="10.0" layoutY="10.0" maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="DeleteAll" />
+                        <Button fx:id="selectAll" maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="40.0" prefWidth="85.0" text="SelectAll" />
+                        <Button fx:id="deleteAll" layoutX="10.0" layoutY="10.0" maxHeight="40.0" maxWidth="85.0" mnemonicParsing="false" onAction="#resetAll" prefHeight="40.0" prefWidth="85.0" text="DeleteAll" />
                      </children>
                   </HBox>
                </children>
@@ -42,8 +42,8 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="38.0" GridPane.rowIndex="2">
                      <children>
-                        <Button fx:id="ok" mnemonicParsing="false" prefHeight="34.0" prefWidth="106.0" text="Send" />
-                        <Button fx:id="cancel" layoutX="428.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="132.0" text="Cancel" />
+                        <Button fx:id="ok" mnemonicParsing="false" onAction="#ok" prefHeight="34.0" prefWidth="106.0" text="Send" />
+                        <Button fx:id="cancel" layoutX="428.0" layoutY="43.0" mnemonicParsing="false" onAction="#cancel" prefHeight="34.0" prefWidth="132.0" text="Cancel" />
                      </children>
                      <GridPane.margin>
                         <Insets left="22.0" right="32.0" />

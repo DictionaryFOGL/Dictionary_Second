@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import application.Main;
+import application.model.WordCard;
 import application.util.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -61,6 +62,23 @@ public class BaseLayoutController implements Controller{
 		BorderPane myself=(BorderPane) pane;
 		this.myself=myself;
 	}
+
+	public void observableRcvCard(WordCard card) {
+		workCon.observableRcvCard(card);
+	}
+	
+	public void observableRcvFriend(String friend) {
+		workCon.observableRcvFriend(friend);
+	}
+	
+	public void observableDelFriend(String friend) {
+		workCon.observableDelFriend(friend);
+	}
+	
+	public void observableDelCard(WordCard card) {
+		workCon.observableDelCard(card);
+	}
+	
 	
 	public void loadDataPersonal() {
 		workCon.loadDataPersonal();
