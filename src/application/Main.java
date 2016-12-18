@@ -249,6 +249,29 @@ public class Main extends Application implements CSConstant{
 			e.printStackTrace();
 		}
 	}
+	
+	public void showCardDialog(WordCard card) {
+		try {
+			FXMLLoader loader=new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/WordCardLayout.fxml"));
+			AnchorPane page=(AnchorPane) loader.load();
+			
+			Stage dialog=new Stage();
+			dialog.setTitle("WordCard");
+			dialog.initModality(Modality.WINDOW_MODAL);
+			dialog.initOwner(primaryStage);
+			Scene scene=new Scene(page);
+			dialog.setScene(scene);
+			
+			WordCardLayoutController controller=loader.getController();
+			controller.setMain(this);
+			controller.setWordCard(card);
+			
+			dialog.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

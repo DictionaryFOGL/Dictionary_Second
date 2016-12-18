@@ -1,13 +1,14 @@
 package application.view;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import application.Main;
 import application.model.Word;
 import application.model.WordCard;
 import application.model.message.SendCardMessage;
 import application.util.Controller;
+import application.util.InformationDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -68,11 +69,22 @@ public class SendCardController implements Controller,CSConstant{
 	
 	@FXML
 	private void ok() {
+		String saysome=say.getText();
+		if(saysome.length() > 10) {
+			InformationDialog.sayTooMuch();
+			say.setText("");
+			return;
+		}
+		if(receiverList.size() == 0) {
+			InformationDialog.noBodySent();
+			return;
+		}
 		for(String name:receiverList) {
-			WordCard card=new WordCard(word, mainApp.getUser().getUserName(), say.getText(), new Date(System.currentTimeMillis()), site);
+			WordCard card=new WordCard(word, mainApp.getUser().getUserName(), saysome, new Date(System.currentTimeMillis()), site);
 			SendCardMessage message=new SendCardMessage(SEND_CARD, name, card);
 			mainApp.writeToServer(message);
 			try {
+				//每隔0.1s发一张单词卡
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				System.out.println("send error");
@@ -88,8 +100,18 @@ public class SendCardController implements Controller,CSConstant{
 	
 	@FXML
 	private void selectAll() {
+		int limit=10;
+		String namelist="";
 		receiverList.clear();
 		receiverList.addAll(l);
+		for(String rcvr:receiverList) {
+			namelist+=rcvr+"/";
+			if(namelist.length() > limit) {
+				namelist=namelist.substring(0, limit)+"......";
+				break;
+			}
+		}
+		sendTo.setText(namelist);
 	}
 	
 	@FXML

@@ -55,6 +55,12 @@ public class InformationDialog {
 	public static void pwdChanged() {
 		baseAlert(AlertType.INFORMATION, "Saved!", null, "Your new password has been saved!");
 	}
+	public static void sayTooMuch() {
+		baseAlert(AlertType.INFORMATION, "Invalid", "Too much words", "10 characters most!");
+	}
+	public static void noBodySent() {
+		baseAlert(AlertType.INFORMATION, "SendNothing", null, "No friend has been choosen!");
+	}
 	private static void baseAlert(AlertType type,String title,String headerText,String contentText) {
 		Alert alert=new Alert(type);
 		alert.setTitle(title);
