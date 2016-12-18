@@ -391,8 +391,8 @@ public class DictionaryDB implements Database, DBConstant {
 		DictionaryDB db=new DictionaryDB();
 		WordCard card=new WordCard(new Word("hhh","ÊÇµÄ"),"jk","quuu",2,new Date(233333333),0);
 		db.connect();
-		for(String s:db.getFriends(2)) {
-			System.out.println(s);
+		for(application.model.SearchHistory s:db.SearchHistory("HELL")) {
+			System.out.println(s.getLikeBaidu()+" "+s.getLikeYouDao()+" "+s.getLikeBing());
 		}
 	}
 }

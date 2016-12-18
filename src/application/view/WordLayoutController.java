@@ -200,6 +200,7 @@ public class WordLayoutController implements Controller,CSConstant {
 
 	public void searchResult(String searchItem) {
 		this.searchItem = ValidInput.wordSearchProcessed(searchItem);
+		searchCon.setText(searchItem);
 		modeRank();
 		searchBase();
 		findCheck();
@@ -428,17 +429,35 @@ public class WordLayoutController implements Controller,CSConstant {
 
 	@FXML
 	private void send1() {
-
+		System.out.println("send1");
+		if (trans[0] == trans1)
+			mainApp.showSendCardDialog(youdaoWord,YOUDAO);
+		else if (trans[1] == trans1)
+			mainApp.showSendCardDialog(baiduWord,BAIDU);
+		else if (trans[2] == trans1)
+			mainApp.showSendCardDialog(bingWord,BING);
 	}
 
 	@FXML
 	private void send2() {
-
+		System.out.println("send2");
+		if (trans[0] == trans2)
+			mainApp.showSendCardDialog(youdaoWord,YOUDAO);
+		else if (trans[1] == trans2)
+			mainApp.showSendCardDialog(baiduWord,BAIDU);
+		else if (trans[2] == trans2)
+			mainApp.showSendCardDialog(bingWord,BING);
 	}
 
 	@FXML
 	private void send3() {
-
+		System.out.println("send3");
+		if (trans[0] == trans3)
+			mainApp.showSendCardDialog(youdaoWord,YOUDAO);
+		else if (trans[1] == trans3)
+			mainApp.showSendCardDialog(baiduWord,BAIDU);
+		else if (trans[2] == trans3)
+			mainApp.showSendCardDialog(bingWord,BING);
 	}
 
 	@FXML
@@ -537,36 +556,6 @@ public class WordLayoutController implements Controller,CSConstant {
 	@FXML
 	private void mouseOut3() {
 		send3.setImage(sendDefault);
-	}
-
-	@FXML
-	private void likeIn1() {
-		like1.setImage(likeYes);
-	}
-	
-	@FXML
-	private void likeIn2() {
-		like2.setImage(likeYes);
-	}
-	
-	@FXML
-	private void likeIn3() {
-		like3.setImage(likeYes);
-	}
-
-	@FXML
-	private void likeOut1() {
-		like1.setImage(likeDefault);
-	}
-
-	@FXML
-	private void likeOut2() {
-		like2.setImage(likeDefault);
-	}
-
-	@FXML
-	private void likeOut3() {
-		like3.setImage(likeDefault);
 	}
 
 	private void setBoardContent(String content) {

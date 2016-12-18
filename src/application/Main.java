@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import redis.clients.util.Hashing;
@@ -225,6 +226,29 @@ public class Main extends Application implements CSConstant{
 		}
 	}
 	
+	public void showSendCardDialog(Word spell,int site) {
+		try {
+			FXMLLoader loader=new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/SendCard.fxml"));
+			AnchorPane page=(AnchorPane) loader.load();
+			
+			Stage dialog=new Stage();
+			dialog.setTitle("SendWordCard");
+			dialog.initModality(Modality.WINDOW_MODAL);
+			dialog.initOwner(primaryStage);
+			Scene scene=new Scene(page);
+			dialog.setScene(scene);
+			
+			SendCardController controller=loader.getController();
+			controller.setMain(this);
+			controller.setDialogStage(dialog);
+			controller.setWordAndSite(spell,site);
+			
+			dialog.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

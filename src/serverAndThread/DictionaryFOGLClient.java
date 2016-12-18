@@ -160,7 +160,8 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 				boolean youdao=(s.getLikeYouDao() == 1) ? true : false;
 				boolean baidu=(s.getLikeBaidu() == 1) ? true : false;
 				boolean bing=(s.getLikeBing() == 1) ? true : false;
-				
+
+				System.out.println("history looged");
 				hYoudao.put(s.getKeyWord(), youdao);
 				hBaidu.put(s.getKeyWord(), baidu);
 				hBing.put(s.getKeyWord(), bing);

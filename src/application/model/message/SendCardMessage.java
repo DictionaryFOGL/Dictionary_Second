@@ -9,13 +9,13 @@ public class SendCardMessage extends Message{
 	 * 
 	 */
 	private static final long serialVersionUID = 3920663053182906949L;
-	private ArrayList<String> receivers;
+	private String receiver;
 	private WordCard card;
 	
 
-	public SendCardMessage(byte type, ArrayList<String> receivers,WordCard card) {
+	public SendCardMessage(byte type, String receiver,WordCard card) {
 		super(type);
-		this.receivers=receivers;
+		this.receiver=receiver;
 		this.card=card;
 	}
 
@@ -24,8 +24,8 @@ public class SendCardMessage extends Message{
 		return type;
 	}
 
-	public ArrayList<String> getReceiverName() {
-		return receivers;
+	public String getReceiverName() {
+		return receiver;
 	}
 
 	public WordCard getCard() {

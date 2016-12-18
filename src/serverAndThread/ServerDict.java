@@ -69,6 +69,7 @@ public class ServerDict implements CSConstant{
 		String pwdMd5 = login.getPwd();
 		User user=loginBase(operator, name, pwdMd5);
 		operator.localLogin(user,history);
+		System.out.println("history sent");
 	}
 	
 	public boolean userResetCards(CilentSession operator) {
@@ -192,18 +193,16 @@ public class ServerDict implements CSConstant{
 	public void userSendCard(CilentSession operator, Message m) {
 		SendCardMessage message=(SendCardMessage) m;
 		WordCard card=message.getCard();
-		ArrayList<String> receivers=message.getReceiverName();
-		for(String name:receivers) {
-			try {
-				db.sendCard(card, name);
-			} catch (SQLException e) {
-				System.out.println("card insert failed");
-				e.printStackTrace();
-			}
-			CilentSession target=userList.get(name);
-			if(target != null) {
-				target.localReceiveCard(card);
-			}
+		String name=message.getReceiverName();
+		try {
+			db.sendCard(card, name);
+		} catch (SQLException e) {
+			System.out.println("card insert failed");
+			e.printStackTrace();
+		}
+		CilentSession target = userList.get(name);
+		if (target != null) {
+			target.localReceiveCard(card);
 		}
 	}
 	

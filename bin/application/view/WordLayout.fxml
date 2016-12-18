@@ -120,8 +120,8 @@
                            </right></BorderPane>
                         <VBox fx:id="box1" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
-                              <ImageView fx:id="like1" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like1" onMouseEntered="#likeIn1" onMouseExited="#likeOut1" onMousePressed="#likeOut1" onMouseReleased="#likeIn1" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="send1" fitHeight="28.0" fitWidth="30.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" onMousePressed="#mouseOut1" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="like1" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like1" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="send1" fitHeight="28.0" fitWidth="30.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" pickOnBounds="true" preserveRatio="true" />
                            </children></VBox>
                      </children>
                      <GridPane.margin>
@@ -185,7 +185,7 @@
                         </BorderPane>
                         <VBox fx:id="box2" alignment="CENTER" prefHeight="100.0" prefWidth="80.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
-                              <ImageView fx:id="like2" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like2" onMouseEntered="#likeIn2" onMouseExited="#likeOut2" onMousePressed="#likeOut2" onMouseReleased="#likeIn2" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="like2" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like2" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="send2" fitHeight="30.0" fitWidth="32.0" layoutX="18.0" layoutY="45.0" onMouseClicked="#send2" onMouseEntered="#mouseIn2" onMouseExited="#mouseOut2" onMousePressed="#mouseOut2" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
@@ -251,7 +251,7 @@
                         </BorderPane>
                         <VBox fx:id="box3" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
                            <children>
-                              <ImageView fx:id="like3" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like3" onMouseEntered="#likeIn3" onMouseExited="#likeOut3" onMousePressed="#likeOut3" onMouseReleased="#likeIn3" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="like3" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like3" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="send3" fitHeight="28.0" fitWidth="30.0" layoutX="18.0" layoutY="45.0" onMouseClicked="#send3" onMouseEntered="#mouseIn3" onMouseExited="#mouseOut3" onMousePressed="#mouseOut3" onMouseReleased="#mouseIn3" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
