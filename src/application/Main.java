@@ -242,6 +242,10 @@ public class Main extends Application implements CSConstant{
 		baseCon.observableDelCard(card);
 	}
 	
+	public void friendRcvResult(User userResult,ArrayList<String> resemble) {
+		baseCon.friendRcvResult(userResult, resemble);
+	}
+	
 	public void showSendCardDialog(Word spell,int site) {
 		try {
 			FXMLLoader loader=new FXMLLoader();

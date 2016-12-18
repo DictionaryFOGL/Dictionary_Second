@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import application.model.*;
+import application.model.message.ResultMessage;
 import application.util.Encryption;
+import serverAndThread.CSConstant;
 
-public class DictionaryDB implements Database, DBConstant {
+public class DictionaryDB implements Database, DBConstant ,CSConstant{
 	private Connection conn = null;
 	private Statement stat = null;
 	private String local = "jdbc:mysql://127.0.0.1:3306/?characterEncoding=utf8";// local地址可改为服务器地址
@@ -94,13 +96,27 @@ public class DictionaryDB implements Database, DBConstant {
 	}
 
 	@Override
-	public ArrayList<String> searchAccount(String keyWord) throws SQLException {
+	public ResultMessage searchAccount(String keyWord) throws SQLException {
 		ArrayList<String> users = new ArrayList<String>();
+		User target=null;
 		ResultSet result = stat.executeQuery("select * from usermessage where name like (\"%" + keyWord + "%\");");
 		while (result.next()) {
-			users.add(result.getString(2));
+			String name=result.getString(2);
+			if(!name.equals(keyWord)) {
+				users.add(name);
+			} else {
+				int id=result.getInt(1);
+				String pwd=result.getString(4);
+				String pwdmd5=result.getString(5);
+				Date date=result.getDate(6);
+				char gender=result.getString(3).charAt(0);
+				String command="select * from "+sheet4+" where ID='"+id+"';";
+				result = stat.executeQuery(command);
+				result.last();
+				target=new User(id, name, pwd, gender, date, result.getInt(2), result.getInt(4), result.getInt(3));
+			}
 		}
-		return users;
+		return new ResultMessage(SEARCH_USER, users, target);
 	}
 
 	@Override
@@ -391,8 +407,8 @@ public class DictionaryDB implements Database, DBConstant {
 		DictionaryDB db=new DictionaryDB();
 		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,new Date(233333333),0);
 		db.connect();
-		for(application.model.SearchHistory s:db.SearchHistory("HELL")) {
-			System.out.println(s.getLikeBaidu()+" "+s.getLikeYouDao()+" "+s.getLikeBing());
-		}
+		ResultMessage s=db.searchAccount("HELL");
+		for(String ss:s.getResults()) System.out.println(ss);
+		System.out.println(s.getTarget().getUserName());
 	}
 }

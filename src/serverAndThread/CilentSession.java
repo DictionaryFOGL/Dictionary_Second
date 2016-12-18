@@ -123,11 +123,9 @@ public class CilentSession implements Runnable,CSConstant {
 		}
 	}
 	
-	public void localSearchUser(User u,ArrayList<String> likeList) {
+	public void localSearchUser(ResultMessage message) {
 		try {
-			ResultMessage message=new ResultMessage(SEARCH_USER, likeList, u);
 			out.writeObject(message);
-			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

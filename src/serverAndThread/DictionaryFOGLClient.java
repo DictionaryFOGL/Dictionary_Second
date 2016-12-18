@@ -13,6 +13,7 @@ import application.model.WordCard;
 import application.model.message.AddFriendMessage;
 import application.model.message.LoginMessage;
 import application.model.message.Message;
+import application.model.message.ResultMessage;
 import application.model.message.SendCardMessage;
 import application.util.InformationDialog;
 import javafx.application.Platform;
@@ -107,7 +108,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 					System.out.println(user.hasFriend("QNMD"));
 					break;
 				case (SEARCH_USER):
-					
+					receiveUserResult(message);
 					break;
 				case (REGISTER_SUCCESS):
 					login(message);
@@ -131,6 +132,12 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 			}
 		});
 		
+	}
+	public void receiveUserResult(Message m) {
+		ResultMessage message=(ResultMessage) m;
+		User target=message.getTarget();
+		ArrayList<String> resemble=message.getResults();
+		mainApp.friendRcvResult(target, resemble);
 	}
 	
 	public void receiveCard(Message m) {

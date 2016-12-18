@@ -2,8 +2,10 @@ package application.view;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import application.Main;
+import application.model.User;
 import application.model.WordCard;
 import application.util.Controller;
 import application.util.ValidInput;
@@ -86,6 +88,7 @@ public class WorkLayoutController implements Controller {
 
 	private void friendSearchMode() {
 		myself.setCenter(friendLay);
+		friendCon.resetPage();
 	}
 
 	public void editMode() {
@@ -117,10 +120,8 @@ public class WorkLayoutController implements Controller {
 		mode = -mode;
 		if (mode == -1) {
 			modePic.setImage(mode2);
-			friendSearchMode();
 		} else {
 			modePic.setImage(mode1);
-			wordSearchMode();
 		}
 	}
 	
@@ -138,6 +139,10 @@ public class WorkLayoutController implements Controller {
 	
 	public void observableDelCard(WordCard card) {
 		personCon.observableDelCard(card);
+	}
+	
+	public void friendRcvResult(User userResult,ArrayList<String> resemble) {
+		friendCon.rcvResult(userResult, resemble);
 	}
 	
 	public void loadDataPersonal() {

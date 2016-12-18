@@ -12,7 +12,7 @@
    <children>
       <GridPane layoutX="10.0" layoutY="10.0" prefHeight="490.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="16.0">
          <children>
-            <GridPane style="-fx-background-color: blue;" GridPane.columnIndex="1">
+            <GridPane fx:id="found" disable="true" style="-fx-background-color: blue;" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -33,7 +33,7 @@
                               <Font name="Roboto Light Italic" size="20.0" />
                            </font>
                         </Label>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Trumph2016">
+                        <Text fx:id="nameFound" strokeType="OUTSIDE" strokeWidth="0.0" text="Trumph2016">
                            <font>
                               <Font name="Microsoft JhengHei" size="22.0" />
                            </font>
@@ -61,7 +61,7 @@
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label text="126">
+                                    <Label fx:id="baidu" text="126">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -84,7 +84,7 @@
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label text="126">
+                                    <Label fx:id="youdao" text="126">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -117,7 +117,7 @@
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label text="126">
+                                    <Label fx:id="bing" text="126">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -154,24 +154,24 @@
                               <Font name="Roboto Light Italic" size="20.0" />
                            </font>
                         </Label>
-                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="48.0" prefWidth="500.0" text="Youdao">
+                        <Button fx:id="recent1" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="48.0" prefWidth="500.0" text="Youdao">
                            <font>
                               <Font name="Roboto Light Italic" size="16.0" />
                            </font>
                            <graphic>
-                              <Label prefHeight="20.0" prefWidth="412.0" text="There is">
+                              <Label fx:id="rContent1" prefHeight="20.0" prefWidth="412.0" text="There is">
                                  <font>
                                     <Font name="Roboto Light Italic" size="16.0" />
                                  </font>
                               </Label>
                            </graphic>
                         </Button>
-                        <Button alignment="CENTER_RIGHT" layoutX="10.0" layoutY="105.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="500.0" text="Baidu">
+                        <Button fx:id="recent2" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="105.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="500.0" text="Baidu">
                            <font>
                               <Font name="Roboto Light Italic" size="16.0" />
                            </font>
                            <graphic>
-                              <Label prefHeight="20.0" prefWidth="428.0" text="There is">
+                              <Label fx:id="rContent2" prefHeight="20.0" prefWidth="428.0" text="There is">
                                  <font>
                                     <Font name="Roboto Light Italic" size="16.0" />
                                  </font>
@@ -182,7 +182,7 @@
                   </VBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="58.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="20.0" prefWidth="175.0" text="Add the new friend">
+                        <Button fx:id="add" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="20.0" prefWidth="175.0" text="Add the new friend">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
@@ -197,12 +197,12 @@
                   <Insets bottom="30.0" left="65.0" right="35.0" top="42.0" />
                </padding>
             </GridPane>
-            <ListView prefHeight="200.0" prefWidth="200.0">
+            <ListView fx:id="resembleSuggest" prefHeight="200.0" prefWidth="200.0">
                <GridPane.margin>
                   <Insets right="25.0" />
                </GridPane.margin>
             </ListView>
-            <GridPane layoutX="235.0" layoutY="13.0" style="-fx-background-color: yellow;" visible="false" GridPane.columnIndex="1">
+            <GridPane fx:id="notFound" layoutX="235.0" layoutY="13.0" style="-fx-background-color: yellow;" visible="false" GridPane.columnIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -223,7 +223,7 @@
                               <Font name="Microsoft YaHei" size="24.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trump">
+                        <Text fx:id="nameNotFound" layoutX="10.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trump">
                            <font>
                               <Font name="Microsoft YaHei" size="24.0" />
                            </font>
@@ -251,17 +251,17 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" layoutX="75.0" layoutY="55.0" prefHeight="38.0" prefWidth="551.0" spacing="10.0" GridPane.rowIndex="3">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
+                        <Button fx:id="recommend1" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
                            <font>
                               <Font name="Microsoft YaHei UI" size="20.0" />
                            </font>
                         </Button>
-                        <Button layoutX="396.0" layoutY="10.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
+                        <Button fx:id="recommend2" layoutX="396.0" layoutY="10.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
                            <font>
                               <Font name="Microsoft YaHei UI" size="20.0" />
                            </font>
                         </Button>
-                        <Button layoutX="396.0" layoutY="10.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
+                        <Button fx:id="recommend3" layoutX="396.0" layoutY="10.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Trumpldog">
                            <font>
                               <Font name="Microsoft YaHei UI" size="20.0" />
                            </font>

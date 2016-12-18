@@ -61,6 +61,9 @@ public class InformationDialog {
 	public static void noBodySent() {
 		baseAlert(AlertType.INFORMATION, "SendNothing", null, "No friend has been choosen!");
 	}
+	public static void invalidInputForUsr() {
+		baseAlert(AlertType.INFORMATION, "Empty", null, "Empty Username!");
+	}
 	private static void baseAlert(AlertType type,String title,String headerText,String contentText) {
 		Alert alert=new Alert(type);
 		alert.setTitle(title);

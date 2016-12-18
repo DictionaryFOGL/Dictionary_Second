@@ -131,21 +131,15 @@ public class ServerDict implements CSConstant{
 	public boolean searchUsers(CilentSession operator, Message m) {
 		SearchMessage message=(SearchMessage) m;
 		String item=message.getKeyWord();
-		CilentSession online=userList.get(item);
-		User target=null;
-		ArrayList<String> likeList=null;
+		ResultMessage R;
 		try {
-			likeList=db.searchAccount(item);
+			R=db.searchAccount(item);
 		} catch (SQLException e) {
-			System.out.println("search account");
+			System.out.println("search account error");
 			e.printStackTrace();
 			return false;
 		}
-		if(online != null) {
-			target=online.getUser();
-			likeList.remove(item);
-		}
-		operator.localSearchUser(target, likeList);
+		operator.localSearchUser(R);
 		return true;
 	}
 	public void userAddFriend(CilentSession operator, Message m) {

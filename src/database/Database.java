@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import application.model.*;
+import application.model.message.ResultMessage;
 
 public interface Database {	
 	
@@ -16,7 +17,7 @@ public interface Database {
 
 	public void register(String name, String passWord, Date date, char gender) throws SQLException;
 
-	public ArrayList<String> searchAccount(String keyWord) throws SQLException;
+	public ResultMessage searchAccount(String keyWord) throws SQLException;
 
 	public void sendCard(WordCard card,String receiver) throws SQLException;
 

@@ -2,8 +2,10 @@ package application.view;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import application.Main;
+import application.model.User;
 import application.model.WordCard;
 import application.util.Controller;
 import javafx.fxml.FXML;
@@ -79,6 +81,9 @@ public class BaseLayoutController implements Controller{
 		workCon.observableDelCard(card);
 	}
 	
+	public void friendRcvResult(User userResult,ArrayList<String> resemble) {
+		workCon.friendRcvResult(userResult, resemble);
+	}
 	
 	public void loadDataPersonal() {
 		workCon.loadDataPersonal();
