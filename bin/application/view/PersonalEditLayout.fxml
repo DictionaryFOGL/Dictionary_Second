@@ -39,7 +39,7 @@
                         <Insets top="6.0" />
                      </padding>
                   </HBox>
-                  <ListView fx:id="wordCards" prefWidth="200.0" />
+                  <ListView fx:id="wordCards" onMouseClicked="#handleCardSelected" prefWidth="200.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">

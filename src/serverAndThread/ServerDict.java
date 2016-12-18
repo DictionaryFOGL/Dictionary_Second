@@ -43,11 +43,21 @@ public class ServerDict implements CSConstant{
 				user.setStatus(true);
 				guests.remove(operator);
 				userList.put(name, operator);
+				Iterator<String> online=userList.keySet().iterator();
+				while(online.hasNext()) {
+					String n=online.next();
+					if(user.hasFriend(n)) {
+						user.friendOnLine(n);
+					}
+				}
 				broadCastOnLine(operator,name);
 			}
 		} catch (SQLException e) {
 			System.out.println("register failed");
 			e.printStackTrace();
+		}
+		for(String nam:user.getFriendList()) {
+			System.out.println(nam+" "+user.friendStatus(nam));
 		}
 		return user;
 	}
@@ -153,6 +163,7 @@ public class ServerDict implements CSConstant{
 			if(friend != null) {
 				operator.getUser().addNewFriend(name, true);
 				friend.localGetFriend(operator.getUser().getUserName());
+				operator.localGetFriend(name);
 			} else {
 				operator.getUser().addNewFriend(name, false);
 			}

@@ -23,6 +23,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -82,24 +84,7 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 		female.setToggleGroup(group);
 		secret.setToggleGroup(group);
 		
-		friends.setItems(f);
-		friends.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-			
-			@Override
-			public ListCell<String> call(ListView<String> param) {
-				return new ListCell<String>() {
-					@Override
-					protected void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						this.setText(item);
-						if(mainApp.getUser().friendStatus(item)) {
-							//TODO css
-							System.out.println(item);
-						}
-					}
-				};
-			}
-		});
+		friendListRenew();
 		wordCards.setItems(w);
 		wordCards.setCellFactory(new Callback<ListView<WordCard>, ListCell<WordCard>>() {
 			
@@ -114,6 +99,26 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 							String content=words+"......"+"\t"+item.getSiteStr();
 							this.setText(content);
 						}
+					}
+				};
+			}
+		});
+	}
+	
+	public void friendListRenew() {
+		friends.setItems(f);
+		friends.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+			
+			@Override
+			public ListCell<String> call(ListView<String> param) {
+				return new ListCell<String>() {
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if(mainApp.getUser().friendStatus(item)) {
+							this.setText(item+" 在线");
+							System.out.println(item+" 在线");
+						} else this.setText(item);
 					}
 				};
 			}
@@ -151,6 +156,9 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 		f.setAll(me.getFriendList());
 		w.setAll(me.getMailBox());
 	}
+	public void renewfriendData() {
+		f.setAll(mainApp.getUser().getFriendList());
+	}
 	
 	public void observableRcvCard(WordCard card) {
 		w.add(card);
@@ -168,6 +176,16 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 		w.remove(card);
 	}
 	
+	@FXML
+	private void handleCardSelected(MouseEvent arg) {
+		if(arg.getButton().equals(MouseButton.PRIMARY)) {
+			System.out.println(wordCards.getSelectionModel());
+			System.out.println(wordCards.getSelectionModel().getSelectedItem());
+			mainApp.showCardDialog(wordCards.getSelectionModel().getSelectedItem());
+		} else if(arg.getButton().equals(MouseButton.SECONDARY)) {
+			
+		}
+	}
 	
 	@FXML
 	private void ok() {

@@ -32,8 +32,7 @@ public class WordCardLayoutController implements Controller {
 	
 	@Override
 	public void setPaneMyself(Pane pane) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

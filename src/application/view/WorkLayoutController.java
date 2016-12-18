@@ -141,6 +141,10 @@ public class WorkLayoutController implements Controller {
 		personCon.observableDelCard(card);
 	}
 	
+	public void renewfriendData() {
+		personCon.renewfriendData();
+	}
+	
 	public void friendRcvResult(User userResult,ArrayList<String> resemble) {
 		friendCon.rcvResult(userResult, resemble);
 	}

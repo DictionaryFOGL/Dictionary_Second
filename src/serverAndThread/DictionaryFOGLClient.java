@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import application.Main;
 import application.model.SearchHistory;
@@ -158,12 +159,14 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		AddFriendMessage message=(AddFriendMessage) m;
 		String name=message.getFriendName();
 		user.friendOnLine(name);
+		mainApp.renewfriendData();
 	}
 	
 	public void friendOffline(Message m){		
 		AddFriendMessage message=(AddFriendMessage) m;
 		String name=message.getFriendName();
 		user.friendOffLine(name);
+		mainApp.renewfriendData();
 	}
 	
 	public void login(Message m) {
@@ -182,7 +185,9 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 				hBing.put(s.getKeyWord(), bing);
 			}
 		}
-		System.out.println("history looged");
+		for(String nam:user.getFriendList()) {
+			System.out.println(nam+" "+user.friendStatus(nam));
+		}
 	}
 	
 	public void newFriend(Message m){		

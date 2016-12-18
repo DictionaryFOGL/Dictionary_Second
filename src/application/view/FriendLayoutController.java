@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import application.Main;
 import application.model.User;
 import application.model.WordCard;
+import application.model.message.AddFriendMessage;
 import application.model.message.SearchMessage;
 import application.util.Controller;
 import application.util.InformationDialog;
@@ -90,6 +91,23 @@ public class FriendLayoutController implements Controller,CSConstant{
 	@FXML
 	private void initialize() {
 		resembleSuggest.setItems(suggest);
+	}
+	
+	@FXML
+	private void addFriend() {
+		String name=userResult.getUserName();
+		AddFriendMessage message=new AddFriendMessage(ADD_FRIEND, name);
+		mainApp.writeToServer(message);
+	}
+	
+	@FXML
+	private void recentCard1() {
+		
+	}
+	
+	@FXML
+	private void recentCard2() {
+		
 	}
 
 	@Override

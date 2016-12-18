@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import application.Main;
 import application.model.User;
 import application.model.WordCard;
+import application.model.message.Message;
 import application.util.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,8 +16,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import serverAndThread.CSConstant;
 
-public class BaseLayoutController implements Controller{
+public class BaseLayoutController implements Controller,CSConstant{
 	private Main mainApp;
 	private WorkLayoutController workCon;
 	private BorderPane myself;
@@ -58,6 +60,16 @@ public class BaseLayoutController implements Controller{
 		myself.setCenter(workPane);
 		workCon.editMode();
 	}
+	
+	@FXML
+	private void handleLogout() {
+		mainApp.writeToServer(new Message(LOGOUT));
+	}
+	
+	@FXML
+	private void handleBackStart() {
+		mainApp.setStart();
+	}
 
 	@Override
 	public void setPaneMyself(Pane pane) {
@@ -83,6 +95,10 @@ public class BaseLayoutController implements Controller{
 	
 	public void friendRcvResult(User userResult,ArrayList<String> resemble) {
 		workCon.friendRcvResult(userResult, resemble);
+	}
+	
+	public void renewfriendData() {
+		workCon.renewfriendData();
 	}
 	
 	public void loadDataPersonal() {

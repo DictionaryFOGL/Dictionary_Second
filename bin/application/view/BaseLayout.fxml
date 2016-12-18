@@ -20,7 +20,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="DictionaryPro" GridPane.columnIndex="1" />
+            <Label onMouseClicked="#handleBackStart" text="DictionaryPro" GridPane.columnIndex="1" />
             <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2">
                <children>
                   <Label fx:id="time" text="Label" GridPane.columnIndex="2" />
@@ -40,7 +40,7 @@
                         <Font name="Roboto Thin" size="22.0" />
                      </font>
                   </Label>
-                  <Button fx:id="logout" mnemonicParsing="false" prefHeight="5.0" prefWidth="5.0">
+                  <Button fx:id="logout" mnemonicParsing="false" onAction="#handleLogout" prefHeight="5.0" prefWidth="5.0">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>

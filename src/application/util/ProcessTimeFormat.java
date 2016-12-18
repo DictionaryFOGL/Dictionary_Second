@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 public class ProcessTimeFormat {
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static String[] month={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+	private static String[] day={"1st","2nd","3rd"};
 	public static String timeStr(Date sqldate) {
 		String mark;
 		String local=sdf.format(sqldate);
@@ -18,17 +19,27 @@ public class ProcessTimeFormat {
 			mark="AM";
 		}
 		int min=Integer.parseInt(local.substring(3,5));
-		return hour+":"+min+" "+mark;
+		String h=(hour < 10) ? ("0"+hour) :(""+hour);
+		String m=(min < 10) ? ("0"+min) : (""+min);
+		return h+":"+m+" "+mark;
 	}
 	
 	public static String dateStr(Date sqldate) {
 		String local=sdf.format(sqldate);
 		local=local.substring(0, 10);
-		return null;
-		//TODO
+		String year=local.substring(0,4);
+		String mon=month[Integer.parseInt(local.substring(5,7))-1];
+		int Day=Integer.parseInt(local.substring(8,10));
+		String d="th";
+		if(Day < 4) d=day[Day];
+		else d=Day+d;
+		return mon+" "+d+" -- "+year;
 	}
 	
 	public static String standard(long mills) {
 		return sdf.format(mills);
+	}
+	public static void main(String[] args) {
+		System.out.println(dateStr(new Date(System.currentTimeMillis())));
 	}
 }

@@ -246,6 +246,10 @@ public class Main extends Application implements CSConstant{
 		baseCon.friendRcvResult(userResult, resemble);
 	}
 	
+	public void renewfriendData() {
+		baseCon.renewfriendData();
+	}
+	
 	public void showSendCardDialog(Word spell,int site) {
 		try {
 			FXMLLoader loader=new FXMLLoader();
