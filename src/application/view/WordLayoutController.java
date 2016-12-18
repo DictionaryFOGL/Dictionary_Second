@@ -7,6 +7,7 @@ import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import application.Main;
 import application.model.User;
@@ -17,6 +18,8 @@ import application.util.BingSpider;
 import application.util.Controller;
 import application.util.ValidInput;
 import application.util.YoudaoSpider;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -41,6 +44,7 @@ public class WordLayoutController implements Controller,CSConstant {
 	private static final String baiduS = "fanyi.baidu.com";
 	private Text[] trans = new Text[3];
 	private ImageView[] likerank=new ImageView[3];
+	private ObservableList<String> suggest=FXCollections.observableArrayList();
 
 	private Word youdaoWord = null;
 	private Word baiduWord = null;
@@ -154,6 +158,11 @@ public class WordLayoutController implements Controller,CSConstant {
 		bing = new BingSpider();
 		baidu = new BaiduSpider();
 	}
+	
+	@FXML
+	private void initialize() {
+		result.setItems(suggest);
+	}
 
 	@Override
 	public void setMain(Main mainApp) {
@@ -229,6 +238,21 @@ public class WordLayoutController implements Controller,CSConstant {
 		bingSearch();
 		baiduSearch();
 		youdaoSearch();
+		getSuggestion();
+	}
+	
+	private void getSuggestion() {
+		suggest.clear();
+		ArrayList<String> Sug=bing.getSuggestion();
+		if(Sug != null && Sug.size() != 0) {
+			for(String s:Sug)
+				suggest.add(s);
+		}
+		Sug=youdao.getSuggestion();
+		if(Sug != null && Sug.size() != 0) {
+			for(String s:Sug)
+				suggest.add(s);
+		}
 	}
 
 	private void baiduSearch() {

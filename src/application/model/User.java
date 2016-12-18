@@ -30,6 +30,7 @@ public class User implements Serializable{
 		this.baidu=baidu;
 		this.youdao=youdao;
 		this.bing=bing;
+		this.userID=userID;
 	}
 	public User(String userName, String password, char gender,Date registerDate) {
 		this(userName,password,registerDate);

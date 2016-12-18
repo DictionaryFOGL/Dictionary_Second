@@ -55,6 +55,9 @@ public class InformationDialog {
 	public static void pwdChanged() {
 		baseAlert(AlertType.INFORMATION, "Saved!", null, "Your new password has been saved!");
 	}
+	public static void wrongOldPwd() {
+		baseAlert(AlertType.ERROR, "Password error", null, "Old password error!");
+	}
 	public static void sayTooMuch() {
 		baseAlert(AlertType.INFORMATION, "Invalid", "Too much words", "10 characters most!");
 	}

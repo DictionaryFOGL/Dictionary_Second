@@ -63,7 +63,6 @@ public class DictionaryDB implements Database, DBConstant ,CSConstant{
 		result.last();
 		if (result.getRow() == 0 || !result.getString(5).equals(pwdMd5)) {
 			account = null;
-			System.out.println("here");
 		} else {
 			int id=result.getInt(1);
 			String pwd=result.getString(4);
@@ -392,6 +391,7 @@ public class DictionaryDB implements Database, DBConstant ,CSConstant{
 		String pwdmd5=Encryption.MD5(pwd);
 		String command="update "+sheet1+" set password='"+pwd+"',pwdmd5='"+pwdmd5+"' where ID="+id+";";
 		int affect=stat.executeUpdate(command);
+		System.out.println(affect);
 		if(affect == 1) return true;
 		else return false;
 	}
@@ -407,8 +407,6 @@ public class DictionaryDB implements Database, DBConstant ,CSConstant{
 		DictionaryDB db=new DictionaryDB();
 		WordCard card=new WordCard(new Word("hhh","ÊÇµÄ"),"jk","quuu",2,new Date(233333333),0);
 		db.connect();
-		ResultMessage s=db.searchAccount("HELL");
-		for(String ss:s.getResults()) System.out.println(ss);
-		System.out.println(s.getTarget().getUserName());
+		System.out.println(db.pwdChange(3, "12345"));
 	}
 }

@@ -24,6 +24,11 @@ public class LoginMessage extends Message implements Serializable{
 		this.gender=gender;
 	}
 
+	public LoginMessage(byte type, String pwd) {
+		super(type);
+		this.pwd = pwd;
+	}
+
 	public ArrayList<SearchHistory> getHistory() {
 		return history;
 	}

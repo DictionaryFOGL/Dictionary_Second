@@ -3,10 +3,14 @@ package application.view;
 import java.io.File;
 import java.net.MalformedURLException;
 
+import javax.sound.midi.MidiDevice.Info;
+
 import application.Main;
 import application.model.User;
 import application.model.WordCard;
+import application.model.message.LoginMessage;
 import application.util.Controller;
+import application.util.InformationDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,16 +20,19 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import serverAndThread.CSConstant;
 
-public class PersonalEditLayoutController implements Controller {
+public class PersonalEditLayoutController implements Controller ,CSConstant{
 	private Main mainApp;
 	private ObservableList<String> f = FXCollections.observableArrayList();
 	private ObservableList<WordCard> w = FXCollections.observableArrayList();
+	private ToggleGroup group;
 	
 	@FXML
 	private ListView<WordCard> wordCards;
@@ -70,6 +77,11 @@ public class PersonalEditLayoutController implements Controller {
 
 	@FXML
 	private void initialize() {
+		group=new ToggleGroup();
+		male.setToggleGroup(group);
+		female.setToggleGroup(group);
+		secret.setToggleGroup(group);
+		
 		friends.setItems(f);
 		friends.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
 			
@@ -159,12 +171,24 @@ public class PersonalEditLayoutController implements Controller {
 	
 	@FXML
 	private void ok() {
-		
-		//TODO server
+		String oldp=old.getText();
+		String newp1=new1.getText();
+		String newp2=new2.getText();
+		if(!oldp.equals(mainApp.getUser().getPassword())) {
+			InformationDialog.wrongOldPwd();
+			return;
+		}
+		if(!newp1.equals(newp2)) {
+			InformationDialog.differentPwd();
+			return;
+		}
+		LoginMessage change=new LoginMessage(PASSWORD_CHANGE, newp1);
+		mainApp.writeToServer(change);
+		clear();
 	}
 	
 	@FXML
-	private void cancel(){
+	private void clear() {
 		old.setText("");
 		new1.setText("");
 		new2.setText("");

@@ -113,6 +113,15 @@ public class CilentSession implements Runnable,CSConstant {
 		localSimpleMessage(LOGIN_FAILED);
 	}
 	
+	public void localPwdChange(String pwd) {
+		LoginMessage message=new LoginMessage(PASSWORD_CHANGE, pwd);
+		try {
+			out.writeObject(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void localReceiveCard(WordCard card) {
 		SendCardMessage message=new SendCardMessage(RECEIVE_CARD, null, card);
 		try {

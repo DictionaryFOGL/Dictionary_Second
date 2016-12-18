@@ -88,12 +88,12 @@
                      <children>
                         <VBox maxWidth="32.0" minWidth="32.0" prefHeight="200.0" prefWidth="32.0" GridPane.columnIndex="1">
                            <children>
-                              <Button fx:id="cancel" maxHeight="32.0" maxWidth="64.0" minHeight="34.0" minWidth="66.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="64.0" rotate="90.0" text="Clear" translateX="-16.0" translateY="16.0">
+                              <Button fx:id="cancel" maxHeight="32.0" maxWidth="64.0" minHeight="34.0" minWidth="66.0" mnemonicParsing="false" onAction="#clear" prefHeight="32.0" prefWidth="64.0" rotate="90.0" text="Clear" translateX="-16.0" translateY="16.0">
                                  <font>
                                     <Font name="Microsoft YaHei" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="save" layoutX="10.0" layoutY="10.0" maxHeight="32.0" maxWidth="52.0" minHeight="34.0" minWidth="54.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0" rotate="90.0" text="Save" translateX="-10.0" translateY="43.0" />
+                              <Button fx:id="save" layoutX="10.0" layoutY="10.0" maxHeight="32.0" maxWidth="52.0" minHeight="34.0" minWidth="54.0" mnemonicParsing="false" onAction="#ok" prefHeight="32.0" prefWidth="53.0" rotate="90.0" text="Save" translateX="-10.0" translateY="43.0" />
                            </children>
                         </VBox>
                         <GridPane alignment="CENTER">

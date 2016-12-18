@@ -122,6 +122,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 					break;
 				case (PASSWORD_CHANGE):
 					InformationDialog.pwdChanged();
+					pwdSave(message);
 					break;
 				case (PASSWORD_CHANGEFAILED):
 					InformationDialog.pwdChangFailed();
@@ -138,6 +139,12 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 		User target=message.getTarget();
 		ArrayList<String> resemble=message.getResults();
 		mainApp.friendRcvResult(target, resemble);
+	}
+	
+	private void pwdSave(Message m) {
+		LoginMessage message=(LoginMessage) m;
+		String pwd=message.getPwd();
+		mainApp.getUser().setPassword(pwd);
 	}
 	
 	public void receiveCard(Message m) {

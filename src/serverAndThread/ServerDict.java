@@ -119,8 +119,10 @@ public class ServerDict implements CSConstant{
 		String pwdnew=login.getPwd();
 		try {
 			boolean status=db.pwdChange(operator.getUser().getUserID(), pwdnew);
+			System.out.println(operator.getUser().getUserID()+" "+pwdnew);
 			if(status) {
-				operator.localSimpleMessage(PASSWORD_CHANGE);
+				operator.localPwdChange(pwdnew);
+				operator.getUser().setPassword(pwdnew);
 			} else {
 				operator.localSimpleMessage(PASSWORD_CHANGEFAILED);
 			}
