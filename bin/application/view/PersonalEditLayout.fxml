@@ -24,7 +24,7 @@
                <children>
                   <HBox alignment="CENTER" minHeight="46.0" prefHeight="46.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <ImageView fx:id="clearCards" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView id="img" fx:id="clearCards" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="217.0" text="-MailBox-">
                            <padding>
                               <Insets bottom="9.0" />
@@ -33,7 +33,7 @@
                               <Font name="Roboto Light Italic" size="20.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="refreshCards" fitHeight="28.0" fitWidth="32.0" layoutX="62.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView id="img" fx:id="refreshCards" fitHeight="28.0" fitWidth="32.0" layoutX="62.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <padding>
                         <Insets top="6.0" />
@@ -60,7 +60,7 @@
                               <Font name="Roboto Light Italic" size="20.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="refreshFriend" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView id="img" fx:id="refreshFriend" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <opaqueInsets>
                         <Insets />

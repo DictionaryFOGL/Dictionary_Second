@@ -149,9 +149,10 @@ public class CilentSession implements Runnable,CSConstant {
 		return this.user;
 	}
 	
-	public void localGetFriend(String name) {
+	public void localGetFriend(String name,boolean online) {
 		user.addNewFriend(name, true);
 		AddFriendMessage friend=new AddFriendMessage(NEW_FRIEND, name);
+		friend.setOnline(online);
 		try {
 			out.writeObject(friend);
 			out.flush();

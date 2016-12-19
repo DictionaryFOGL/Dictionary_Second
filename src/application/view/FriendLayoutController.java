@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -65,6 +67,8 @@ public class FriendLayoutController implements Controller,CSConstant{
 	private Label rContent2;
 	@FXML
 	private ImageView gender;
+	@FXML
+	private ImageView addImg;
 	
 	@FXML
 	private Text nameNotFound;
@@ -82,10 +86,34 @@ public class FriendLayoutController implements Controller,CSConstant{
 			female=new Image(new File("resources/_0017_female.png").toURI().toURL().toString());
 			male=new Image(new File("resources/_0015_male.png").toURI().toURL().toString());
 			secret=new Image(new File("resources/_0016_secret.png").toURI().toURL().toString());
+			Image addimg=new Image(new File("_0013_friendSearch_addnew.png").toURI().toURL().toString());
+			addImg.setImage(addimg);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	@FXML
+	private void suggest1() {
+		searchResult(recommend1.getText());
+	}
+	
+	@FXML
+	private void suggest2() {
+		searchResult(recommend2.getText());
+	}
+	
+	@FXML
+	private void suggest3() {
+		searchResult(recommend3.getText());
+	}
+	
+	@FXML
+	private void handleSelect(MouseEvent arg) {
+		if(arg.getButton().equals(MouseButton.PRIMARY)) {
+			String item=resembleSuggest.getSelectionModel().getSelectedItem();
+			searchResult(item);
+		}
 	}
 	
 	@FXML

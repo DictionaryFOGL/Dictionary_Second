@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
@@ -7,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane fx:id="myself" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WorkLayoutController">
+<BorderPane fx:id="myself" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="960.0" stylesheets="@Work.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WorkLayoutController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox id="boxwrap" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="40.0" right="40.0" />
          </BorderPane.margin>
@@ -20,12 +21,15 @@
                   <Insets top="12.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="search" defaultButton="true" mnemonicParsing="false" onAction="#goSearch" prefHeight="30.0" text="Search">
+            <Button fx:id="search" defaultButton="true" mnemonicParsing="false" onAction="#goSearch" prefHeight="38.0" prefWidth="110.0" text="Search">
                <HBox.margin>
                   <Insets top="12.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Roboto Light" size="18.0" />
+               </font>
             </Button>
-            <ChoiceBox fx:id="back" prefHeight="30.0" prefWidth="50.0">
+            <ChoiceBox fx:id="back" prefHeight="30.0" prefWidth="50.0" visible="false">
                <HBox.margin>
                   <Insets top="12.0" />
                </HBox.margin>

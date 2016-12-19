@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.SignUpLayoutController">
+<AnchorPane id="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="740.0" stylesheets="@SignUp.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.SignUpLayoutController">
    <children>
       <GridPane prefHeight="382.0" prefWidth="740.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
         <columnConstraints>
@@ -46,13 +46,13 @@
                         <Font name="Roboto Light" size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Button fx:id="ok" mnemonicParsing="false" onAction="#ok" prefHeight="35.0" prefWidth="105.0" text="Sign up" />
-                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="105.0" text="Cancel" />
+                        <Button fx:id="ok" mnemonicParsing="false" onAction="#ok" prefHeight="40.0" prefWidth="110.0" text="Sign up" />
+                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="110.0" text="Cancel" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <RadioButton fx:id="male" mnemonicParsing="false" text="Male" />
                         <RadioButton fx:id="female" mnemonicParsing="false" text="Female" />

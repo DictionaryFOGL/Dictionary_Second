@@ -64,7 +64,6 @@
 }
 .list-view {
 	-fx-background-color:transparent ;
-	-fx-border-width: 0 1 0 1;
 }
 .imgv {
 	-fx-cursor: hand ;

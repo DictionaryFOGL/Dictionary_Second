@@ -79,6 +79,7 @@ public class Main extends Application implements CSConstant{
 		initStartLayout();
 		initWorkLayout();
 		logoutUISet();
+		baseCon.setTime(System.currentTimeMillis());
 		Parameters p=ParametersImpl.getParameters(this);
 	}
 	

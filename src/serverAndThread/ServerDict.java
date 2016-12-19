@@ -162,11 +162,12 @@ public class ServerDict implements CSConstant{
 			CilentSession friend=userList.get(name);
 			if(friend != null) {
 				operator.getUser().addNewFriend(name, true);
-				friend.localGetFriend(operator.getUser().getUserName());
+				friend.localGetFriend(operator.getUser().getUserName(),true);
 				friend.getUser().addNewFriend(operator.getUser().getUserName(), true);
-				operator.localGetFriend(name);
+				operator.localGetFriend(name,true);
 			} else {
 				operator.getUser().addNewFriend(name, false);
+				operator.localGetFriend(name,false);
 			}
 		} catch (SQLException e) {
 			System.out.println("friend add error");

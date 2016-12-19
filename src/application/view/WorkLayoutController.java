@@ -57,6 +57,10 @@ public class WorkLayoutController implements Controller {
 			e.printStackTrace();
 		}
 	}
+	@FXML
+	private void initialize() {
+		modePic.setImage(mode1);
+	}
 
 	@Override
 	public void setPaneMyself(Pane pane) {

@@ -1,0 +1,26 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.text-field {
+	-fx-text-fill:#90bab9;
+	-fx-font-size:17px;
+	-fx-highlight-fill:#90bab9;
+	-fx-highlight-text-fill:white;
+	-fx-prompt-text-fill:aquamarine ;
+	-fx-cursor:text ;
+	-fx-background-color: transparent;
+}
+#boxwrap {
+	-fx-border-color: #90bab9;
+	-fx-border-width: 0 0 2 0;
+}
+.button {
+	-fx-background-color: transparent ;
+	-fx-text-fill: #90bab9;
+	-fx-font-size: 19px;
+	-fx-font-family: "Roboto Lt";
+	-fx-cursor: hand ;
+}
+.button:hover {
+	-fx-border-color: #90bab9;
+	-fx-border-width: 0 1 0 1;
+	-fx-font-size: 21px;
+}

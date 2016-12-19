@@ -1,1 +1,38 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.text-field {
+	-fx-border-width: 1px;
+	-fx-border-color: white;
+	-fx-text-fill:white;
+	-fx-font-size:14px;
+	-fx-highlight-fill:white;
+	-fx-highlight-text-fill:#90bab9;
+	-fx-prompt-text-fill:aquamarine ;
+	-fx-cursor:text ;
+	-fx-background-color: transparent;
+}
+.label {
+	-fx-text-fill:white;
+}
+#box {
+	-fx-background-color:#90bab9;
+}
+.radio-button {
+	-fx-text-fill: white;
+	-fx-font-size: 16px;
+}
+.radio-button .radio {
+	-fx-background-color: transparent;
+	-fx-border-color: white;
+	-fx-border-width: 1px;
+}
+.button {
+	-fx-background-color:transparent ;
+	-fx-border-color: white;
+	-fx-border-width: 1px;
+	-fx-text-fill: white;
+	-fx-font-size: 17px;
+}
+.button:hover {
+	-fx-text-fill: #90bab9;
+	-fx-background-color: white;
+}

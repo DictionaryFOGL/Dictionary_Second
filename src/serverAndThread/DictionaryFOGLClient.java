@@ -191,7 +191,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 	public void newFriend(Message m){		
 		AddFriendMessage message=(AddFriendMessage) m;
 		String friendName=message.getFriendName();
-		user.addNewFriend(friendName, true);
+		user.addNewFriend(friendName, message.isOnline());
 		mainApp.renewfriendData();
 		System.out.println("friend: "+friendName);
 	}

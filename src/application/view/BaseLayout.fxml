@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.BaseLayoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="960.0" stylesheets="@Base.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.BaseLayoutController">
    <top>
       <GridPane alignment="CENTER" prefHeight="90.0" prefWidth="960.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -20,22 +20,25 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label onMouseClicked="#handleBackStart" text="DictionaryPro" GridPane.columnIndex="1" />
+            <Label id="title" onMouseClicked="#handleBackStart" stylesheets="@Base.css" text="DictionaryPro" GridPane.columnIndex="1" />
             <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2">
                <children>
-                  <Label fx:id="time" text="Label" GridPane.columnIndex="2" />
-                  <Label fx:id="date" layoutX="10.0" layoutY="48.0" text="Label" />
+                  <Label id="time" fx:id="time" text="Label" GridPane.columnIndex="2" />
+                  <Label id="date" fx:id="date" layoutX="10.0" layoutY="48.0" text="Label" />
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <ImageView fx:id="personalEdit" fitHeight="50.0" fitWidth="40.0" onMouseClicked="#handleEdit" pickOnBounds="true" preserveRatio="true" />
-                  <Label text="Welcome, ">
+                  <Label id="head" text="Welcome, ">
                      <font>
                         <Font name="Roboto Thin" size="22.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </Label>
-                  <Label fx:id="name" layoutX="50.0" layoutY="10.0" text="guest">
+                  <Label id="head" fx:id="name" layoutX="50.0" layoutY="10.0" text="guest">
                      <font>
                         <Font name="Roboto Thin" size="22.0" />
                      </font>

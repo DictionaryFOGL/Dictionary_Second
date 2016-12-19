@@ -1,1 +1,63 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#cardre {
+	-fx-background-color:transparent ;
+	-fx-border-color: white;
+	-fx-border-width: 1px;
+	-fx-text-fill: white;
+}
+#cardre:hover, #add:hover {
+	-fx-text-fill: #90bab9;
+	-fx-background-color: white;
+}
+#box {
+	-fx-background-color: #90bab9;
+}
+.label {
+	-fx-text-fill: white;
+}
+#name {
+	-fx-fill: white;
+}
+#divide {
+	-fx-border-color: white;
+	-fx-border-width: 0 1 0 0;
+}
+#rec {
+	-fx-background-color:transparent ;
+	-fx-border-color: white;
+	-fx-border-width: 0 1 0 1;
+	-fx-text-fill: white;
+}
+#rec:hover {
+	-fx-background-color:white;
+	-fx-text-fill: #90bab9;
+	-fx-border-width: 0;
+}
+#add {
+	-fx-background-color:transparent ;
+	-fx-text-fill: white;
+	-fx-font-size: 14px;
+	-fx-border-radius: 0;
+}
+#listv {
+	-fx-border-color: #90bab9;
+	-fx-border-width: 0 2 0 2;
+}
+.cell {
+	-fx-background-color:transparent ;
+	-fx-alignment:center ;
+	-fx-text-alignment:center ;
+	-fx-cell-size:40.0;
+	-fx-content-display:center ;
+	-fx-text-fill:#90bab9;
+	-fx-font-size:18.0px;
+	-fx-font-family: "Roboto Lt";
+}
+.cell:hover {
+	-fx-background-color:#90bab9 ;
+    -fx-text-fill:white;
+	-fx-font-size:22.0px;
+}
+.list-view {
+	-fx-background-color:transparent ;
+}

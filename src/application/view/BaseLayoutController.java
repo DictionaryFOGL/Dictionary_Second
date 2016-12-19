@@ -2,6 +2,7 @@ package application.view;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import application.Main;
@@ -9,6 +10,7 @@ import application.model.User;
 import application.model.WordCard;
 import application.model.message.Message;
 import application.util.Controller;
+import application.util.ProcessTimeFormat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -67,6 +69,11 @@ public class BaseLayoutController implements Controller,CSConstant{
 	
 	public void setWorkPane(BorderPane workPane) {
 		this.workPane=workPane;
+	}
+	
+	public void setTime(long timeNow) {
+		date.setText(" "+ProcessTimeFormat.dateStr(new Date(timeNow)));
+		time.setText(ProcessTimeFormat.timeStr(new Date(timeNow)));;
 	}
 	
 	@FXML
