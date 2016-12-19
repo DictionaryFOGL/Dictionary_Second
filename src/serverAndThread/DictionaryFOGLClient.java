@@ -106,7 +106,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 				case (LOGIN_SUCCESS):
 					login(message);
 					mainApp.loadUILoginData();
-					System.out.println(user.hasFriend("QNMD"));
+					mainApp.loginUISet();
 					break;
 				case (SEARCH_USER):
 					receiveUserResult(message);
@@ -119,7 +119,8 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 					InformationDialog.existName();
 					break;
 				case (LOGUT_SUCCESS):
-					//this.user=null;
+					user=null;
+					mainApp.logoutUISet();
 					break;
 				case (PASSWORD_CHANGE):
 					InformationDialog.pwdChanged();
@@ -185,22 +186,21 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 				hBing.put(s.getKeyWord(), bing);
 			}
 		}
-		for(String nam:user.getFriendList()) {
-			System.out.println(nam+" "+user.friendStatus(nam));
-		}
 	}
 	
 	public void newFriend(Message m){		
 		AddFriendMessage message=(AddFriendMessage) m;
 		String friendName=message.getFriendName();
 		user.addNewFriend(friendName, true);
-		mainApp.observableRcvFriend(friendName);
+		mainApp.renewfriendData();
+		System.out.println("friend: "+friendName);
 	}
 	
 	public void hasbeenDeleted(Message m) {
 		AddFriendMessage message=(AddFriendMessage) m;
 		String friendName=message.getFriendName();
 		user.deleteFriend(friendName);
-		mainApp.observableDelFriend(friendName);
+		mainApp.renewfriendData();
+		System.out.println("know delete by "+friendName);
 	}
 }

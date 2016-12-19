@@ -63,7 +63,7 @@
                         <Insets top="6.0" />
                      </padding>
                   </HBox>
-                  <ListView fx:id="friends" prefWidth="200.0" />
+                  <ListView fx:id="friends" onMouseClicked="#handleFriendSelected" prefWidth="200.0" />
                </children>
             </VBox>
             <GridPane vgap="3.0" GridPane.columnIndex="2">

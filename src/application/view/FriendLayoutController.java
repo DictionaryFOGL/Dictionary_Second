@@ -102,12 +102,12 @@ public class FriendLayoutController implements Controller,CSConstant{
 	
 	@FXML
 	private void recentCard1() {
-		
+		mainApp.showCardDialog(card1);
 	}
 	
 	@FXML
 	private void recentCard2() {
-		
+		mainApp.showCardDialog(card2);
 	}
 
 	@Override
@@ -163,11 +163,14 @@ public class FriendLayoutController implements Controller,CSConstant{
 		if(gen == 's') gender.setImage(secret);
 		else if(gen == 'f') gender.setImage(female);
 		else gender.setImage(male);
-		if(mainApp.getUser().hasFriend(userResult.getUserName()) || userResult.getUserName().equals(mainApp.getUser().getUserName())) {
-			add.setVisible(false);
-		} else {
-			add.setVisible(true);
-		}
+		User me=mainApp.getUser();
+		if(me != null) {
+			if(me.hasFriend(userResult.getUserName()) || userResult.getUserName().equals(mainApp.getUser().getUserName())) {
+				add.setVisible(false);
+			} else {
+				add.setVisible(true);
+			}
+		} else add.setVisible(false);
 	}
 	
 	private void loadResultNotFound() {

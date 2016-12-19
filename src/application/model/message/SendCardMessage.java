@@ -19,6 +19,11 @@ public class SendCardMessage extends Message{
 		this.card=card;
 	}
 
+	public SendCardMessage(byte type, WordCard card) {
+		super(type);
+		this.card = card;
+	}
+
 	@Override
 	public byte getType() {
 		return type;

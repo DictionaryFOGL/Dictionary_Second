@@ -34,7 +34,7 @@ public class SendCardController implements Controller,CSConstant{
 	private int site;
 	private ObservableList<String> l=FXCollections.observableArrayList();
 	private ArrayList<String> receiverList=new ArrayList<>();
-
+	private ArrayList<CheckBox> selection=new ArrayList<CheckBox>();
 	@FXML
 	private ListView<String> friend;
 	@FXML
@@ -71,6 +71,7 @@ public class SendCardController implements Controller,CSConstant{
 							super.updateItem(item, empty);
 							CheckBox select=new CheckBox(item);
 							this.setGraphic(select);
+							selection.add(select);
 							select.setOnAction(new EventHandler<ActionEvent>() {
 								@Override
 								public void handle(ActionEvent event) {
@@ -140,6 +141,9 @@ public class SendCardController implements Controller,CSConstant{
 	private void selectAll() {
 		int limit=10;
 		String namelist="";
+		for(CheckBox b:selection) {
+			b.setSelected(true);
+		}
 		receiverList.clear();
 		receiverList.addAll(l);
 		for(String rcvr:receiverList) {
@@ -154,6 +158,9 @@ public class SendCardController implements Controller,CSConstant{
 	
 	@FXML
 	private void resetAll() {
+		for(CheckBox b:selection) {
+			b.setSelected(false);
+		}
 		receiverList.clear();
 		sendTo.setText("");
 	}

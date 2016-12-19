@@ -152,4 +152,17 @@ public class WorkLayoutController implements Controller {
 	public void loadDataPersonal() {
 		personCon.loadData();
 	}
+	
+	public void loginUISet() {
+		input.setText("");
+		personal.setDisable(false);
+		wordCon.loginUISet();
+	}
+	
+	public void logoutUISet() {
+		input.setText("");
+		personal.setDisable(true);
+		personCon.logoutUISet();
+		wordCon.logoutUISet();
+	}
 }

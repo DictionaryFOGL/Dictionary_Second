@@ -163,6 +163,7 @@ public class ServerDict implements CSConstant{
 			if(friend != null) {
 				operator.getUser().addNewFriend(name, true);
 				friend.localGetFriend(operator.getUser().getUserName());
+				friend.getUser().addNewFriend(operator.getUser().getUserName(), true);
 				operator.localGetFriend(name);
 			} else {
 				operator.getUser().addNewFriend(name, false);
@@ -231,11 +232,13 @@ public class ServerDict implements CSConstant{
 		String name=message.getFriendName();
 		User usr=operator.getUser();
 		usr.deleteFriend(name);
+		operator.localLoseFriend(name);
 		try {
 			db.deleteFriend(usr.getUserID(), name);
 			CilentSession friend=userList.get(name);
 			if(friend != null) {
-				friend.localLoseFriend(name);
+				friend.getUser().deleteFriend(usr.getUserName());
+				friend.localLoseFriend(usr.getUserName());
 			}
 		} catch (SQLException e) {
 			System.out.println("delete friend failed");

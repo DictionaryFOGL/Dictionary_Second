@@ -1,5 +1,6 @@
 package application.view;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import application.Main;
@@ -43,7 +44,7 @@ public class WordCardLayoutController implements Controller {
 	private void setAll() {
 		sender.setText(card.getSenderName());
 		String Date=ProcessTimeFormat.dateStr(card.getTime());
-		String Time=ProcessTimeFormat.timeStr(card.getTime());
+		String Time=ProcessTimeFormat.timeStr(new Date(System.currentTimeMillis()));
 		date.setText(Date);
 		time.setText(Time);
 		words.setText(card.getWord().getWords());

@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import application.Main;
 import application.model.User;
 import application.model.Word;
@@ -16,11 +18,14 @@ import application.model.message.LikeMessage;
 import application.util.BaiduSpider;
 import application.util.BingSpider;
 import application.util.Controller;
+import application.util.InformationDialog;
 import application.util.ValidInput;
 import application.util.YoudaoSpider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -159,6 +164,24 @@ public class WordLayoutController implements Controller,CSConstant {
 		baidu = new BaiduSpider();
 	}
 	
+	public void logoutUISet() {
+		send1.setVisible(false);
+		send2.setVisible(false);
+		send3.setVisible(false);
+		like1.setVisible(false);
+		like2.setVisible(false);
+		like3.setVisible(false);
+	}
+	
+	public void loginUISet() {
+		send1.setVisible(true);
+		send2.setVisible(true);
+		send3.setVisible(true);
+		like1.setVisible(true);
+		like2.setVisible(true);
+		like3.setVisible(true);
+	}
+	
 	@FXML
 	private void initialize() {
 		result.setItems(suggest);
@@ -209,7 +232,7 @@ public class WordLayoutController implements Controller,CSConstant {
 
 	public void searchResult(String searchItem) {
 		this.searchItem = ValidInput.wordSearchProcessed(searchItem);
-		searchCon.setText(searchItem);
+		searchCon.setText("¡¤ "+searchItem);
 		modeRank();
 		searchBase();
 		findCheck();
@@ -217,6 +240,7 @@ public class WordLayoutController implements Controller,CSConstant {
 	}
 	
 	private void historyLoad() {
+		if(mainApp.getUser() == null) return;
 		if(mainApp.getBaiduHistory(searchItem)) {
 			likerank[1].setImage(likeYes);
 		} else {
@@ -487,31 +511,31 @@ public class WordLayoutController implements Controller,CSConstant {
 	@FXML
 	private void go1() {
 		if (trans[0] == trans1)
-			goBase(youdao.getPreUrl());
+			goBase(youdao.getPreUrl()+searchItem);
 		else if (trans[1] == trans1)
-			goBase(baidu.getPreUrl());
+			goBase(baidu.getPreUrl()+searchItem);
 		else if (trans[2] == trans1)
-			goBase(bing.getPreUrl());
+			goBase(bing.getPreUrl()+searchItem);
 	}
 
 	@FXML
 	private void go2() {
 		if (trans[0] == trans2)
-			goBase(youdao.getPreUrl());
+			goBase(youdao.getPreUrl()+searchItem);
 		else if (trans[1] == trans2)
-			goBase(baidu.getPreUrl());
+			goBase(baidu.getPreUrl()+searchItem);
 		else if (trans[2] == trans2)
-			goBase(bing.getPreUrl());
+			goBase(bing.getPreUrl()+searchItem);
 	}
 
 	@FXML
 	private void go3() {
 		if (trans[0] == trans3)
-			goBase(youdao.getPreUrl());
+			goBase(youdao.getPreUrl()+searchItem);
 		else if (trans[1] == trans3)
-			goBase(baidu.getPreUrl());
+			goBase(baidu.getPreUrl()+searchItem);
 		else if (trans[2] == trans3)
-			goBase(bing.getPreUrl());
+			goBase(bing.getPreUrl()+searchItem);
 	}
 
 	private void goBase(String url) {
@@ -524,32 +548,52 @@ public class WordLayoutController implements Controller,CSConstant {
 
 	@FXML
 	private void copy1() {
-		setBoardContent(searchItem + "\n" + trans1.getText());
+		String content=searchItem + "\n" + trans1.getText();
+		setBoardContent(content);
+		InformationDialog.copied(content);
 	}
 
 	@FXML
 	private void copy2() {
-		setBoardContent(searchItem + "\n" + trans2.getText());
+		String content=searchItem + "\n" + trans2.getText();
+		setBoardContent(content);
+		InformationDialog.copied(content);
 	}
 
 	@FXML
 	private void copy3() {
-		setBoardContent(searchItem + "\n" + trans2.getText());
+		String content=searchItem + "\n" + trans2.getText();
+		setBoardContent(content);
+		InformationDialog.copied(content);
 	}
 
 	@FXML
 	private void download1() {
-
+		if(found1.isVisible()) snapShot(found1);
+		else snapShot(notFound1);
 	}
 
 	@FXML
 	private void download2() {
-
+		if(found2.isVisible()) snapShot(found2);
+		else snapShot(notFound2);
 	}
 
 	@FXML
 	private void download3() {
-
+		if(found3.isVisible()) snapShot(found3);
+		else snapShot(notFound3);
+	}
+	
+	private void snapShot(Node value) {
+		String name=(mainApp.getUser() != null) ? (mainApp.getUser().getUserName()+"_") : ("guest_");
+		Image img=value.snapshot(null, null);
+		try {
+			ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", new File("temp/"+name+System.currentTimeMillis()+".png"));
+			InformationDialog.picGet(name+".png");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML

@@ -8,7 +8,10 @@ import javax.sound.midi.MidiDevice.Info;
 import application.Main;
 import application.model.User;
 import application.model.WordCard;
+import application.model.message.AddFriendMessage;
 import application.model.message.LoginMessage;
+import application.model.message.Message;
+import application.model.message.SendCardMessage;
 import application.util.Controller;
 import application.util.InformationDialog;
 import javafx.collections.FXCollections;
@@ -169,7 +172,7 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 	}
 	
 	public void observableDelFriend(String friend) {
-		f.remove(friend);
+		f.remove(friend+" ÔÚÏß");
 	}
 	
 	public void observableDelCard(WordCard card) {
@@ -179,11 +182,29 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 	@FXML
 	private void handleCardSelected(MouseEvent arg) {
 		if(arg.getButton().equals(MouseButton.PRIMARY)) {
-			System.out.println(wordCards.getSelectionModel());
-			System.out.println(wordCards.getSelectionModel().getSelectedItem());
 			mainApp.showCardDialog(wordCards.getSelectionModel().getSelectedItem());
 		} else if(arg.getButton().equals(MouseButton.SECONDARY)) {
+			WordCard card=wordCards.getSelectionModel().getSelectedItem();
+			boolean status=InformationDialog.deleteCard(card);
+			if(status) {
+				SendCardMessage message=new SendCardMessage(DELETE_CARD, card);
+				mainApp.writeToServer(message);
+				w.remove(card);
+			}
+		}
+	}
+	
+	@FXML
+	private void handleFriendSelected(MouseEvent arg) {
+		if(arg.getButton().equals(MouseButton.PRIMARY)) {
 			
+		} else if(arg.getButton().equals(MouseButton.SECONDARY)) {
+			String friendName=friends.getSelectionModel().getSelectedItem();
+			boolean status=InformationDialog.deleteFriend(friendName);
+			if(status) {
+				AddFriendMessage message=new AddFriendMessage(DELETE_FRIEND, friendName);
+				mainApp.writeToServer(message);
+			}
 		}
 	}
 	
@@ -210,5 +231,15 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 		old.setText("");
 		new1.setText("");
 		new2.setText("");
+	}
+	
+	public void logoutUISet() {
+		clear();
+		id.setText("");
+		youdao.setText("");
+		baidu.setText("");
+		bing.setText("");
+		f.clear();
+		w.clear();
 	}
 }

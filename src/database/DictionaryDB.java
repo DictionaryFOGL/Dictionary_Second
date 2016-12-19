@@ -155,6 +155,7 @@ public class DictionaryDB implements Database, DBConstant ,CSConstant{
 			int siteNumber = result.getInt(5);
 			cardList.add(new WordCard(new Word(result.getString(3), result.getString(4)), idToName.get(result.getInt(1)), result.getString(7), result.getInt(1),
 					result.getDate(6), siteNumber));
+			System.out.println(result.getDate(6));
 		}
 		return cardList;
 	}
@@ -381,7 +382,7 @@ public class DictionaryDB implements Database, DBConstant ,CSConstant{
 		int affect=-1;
 		String command="delete from "+sheet3+" where senderID='"+card.getSenderID()+"' and receiverID='"
 				+receiverId+ "' and time='"+formatter.format(card.getTime())+"' and say='"+card.getSaySomething()+"';";
-		//System.out.println(command);
+		System.out.println(command);
 		affect=stat.executeUpdate(command);
 		if(affect == 1) return true;
 		else return false;

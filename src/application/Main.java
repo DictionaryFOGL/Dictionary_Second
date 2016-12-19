@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import redis.clients.util.Hashing;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -78,8 +77,8 @@ public class Main extends Application implements CSConstant{
 		this.primaryStage.setTitle("DictionaryPro");
 		initBaseLayout();
 		initStartLayout();
-		setStart();
 		initWorkLayout();
+		logoutUISet();
 		Parameters p=ParametersImpl.getParameters(this);
 	}
 	
@@ -177,15 +176,10 @@ public class Main extends Application implements CSConstant{
 	
 	public void setStart() {
 		baseLayout.setCenter(startLayout);
-		
 	}
 	
 	public void setWork() {
 		baseLayout.setCenter(workLayout);
-	}
-	
-	public void searchEmptyMode() {
-		
 	}
 	
 	public void loadUILoginData() {
@@ -230,12 +224,14 @@ public class Main extends Application implements CSConstant{
 		baseCon.observableRcvCard(card);
 	}
 	
-	public void observableRcvFriend(String friend) {
-		baseCon.observableRcvFriend(friend);
+	public void loginUISet() {
+		baseLayout.setCenter(workLayout);
+		baseCon.loginUISet();
 	}
 	
-	public void observableDelFriend(String friend) {
-		baseCon.observableDelFriend(friend);
+	public void logoutUISet() {
+		baseCon.logoutUISet();
+		setStart();
 	}
 	
 	public void observableDelCard(WordCard card) {

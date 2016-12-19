@@ -142,7 +142,7 @@ public class CilentSession implements Runnable,CSConstant {
 	
 	public void localLogout() {
 		this.user=null;
-		localSimpleMessage(LOGOUT);
+		localSimpleMessage(LOGUT_SUCCESS);
 	}
 	
 	public User getUser() {

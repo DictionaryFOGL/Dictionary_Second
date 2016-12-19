@@ -2,6 +2,7 @@ package application.util;
 
 import java.util.Optional;
 
+import application.model.WordCard;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -25,11 +26,35 @@ public class InformationDialog {
 		if(result.get() == ButtonType.OK) return true;
 		else return false;
 	}
+	public static boolean deleteCard(WordCard card) {
+		Alert alert=new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Delete");
+		alert.setHeaderText("sender: "+card.getSenderName()+"\nwords: "+card.getWord().getWords()+"\nsay: "+card.getSaySomething());
+		alert.setContentText("Are you sure to delete the card?");
+		Optional<ButtonType> result=alert.showAndWait();
+		if(result.get() == ButtonType.OK) return true;
+		else return false;
+	}
+	public static boolean deleteFriend(String name) {
+		Alert alert=new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Delete");
+		alert.setHeaderText("Friend: "+name);
+		alert.setContentText("Are you sure to delete your friend?");
+		Optional<ButtonType> result=alert.showAndWait();
+		if(result.get() == ButtonType.OK) return true;
+		else return false;
+	}
 	public static void registerSucceeded() {
 		baseAlert(AlertType.INFORMATION,"Congratulation!",null,"You have a new account!");
 	}
 	public static void operationSucceeded() {
 		baseAlert(AlertType.INFORMATION,"Congratulation!",null,"Operation succeeded!");
+	}
+	public static void copied(String content) {
+		baseAlert(AlertType.INFORMATION,"Copy",content,"The content above has been copied");
+	}
+	public static void picGet(String name) {
+		baseAlert(AlertType.INFORMATION,"Picture","name: "+name,"The snapshot has been saved");
 	}
 	public static void connectError() {
 		baseAlert(AlertType.WARNING,"UnknownHostException",null,"Fail to connect to server!");

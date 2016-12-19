@@ -35,8 +35,6 @@ public class BaseLayoutController implements Controller,CSConstant{
 	@FXML
 	private Label name;
 	
-	private Image edit;
-	
 	@Override
 	public void setMain(Main mainApp) {
 		this.mainApp=mainApp;
@@ -45,6 +43,22 @@ public class BaseLayoutController implements Controller,CSConstant{
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void loginUISet() {
+		workPane.setCenter(null);
+		workCon.loginUISet();
+		logout.setVisible(true);
+		name.setText(mainApp.getUser().getUserName());
+		personalEdit.setVisible(true);
+	}
+	
+	public void logoutUISet() {
+		workPane.setCenter(null);
+		workCon.logoutUISet();
+		logout.setVisible(false);
+		name.setText("guest");
+		personalEdit.setVisible(false);
 	}
 	
 	public void setWorkCon(WorkLayoutController work) {
@@ -69,6 +83,7 @@ public class BaseLayoutController implements Controller,CSConstant{
 	@FXML
 	private void handleBackStart() {
 		mainApp.setStart();
+		workPane.setCenter(null);
 	}
 
 	@Override

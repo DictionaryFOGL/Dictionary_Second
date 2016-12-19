@@ -11,12 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import serverAndThread.CSConstant;
 
 public class SignUpLayoutController implements Controller,CSConstant{
 	private Main mainApp;
+	private ToggleGroup group;
 	
 	@FXML
 	private Button ok;
@@ -42,9 +44,14 @@ public class SignUpLayoutController implements Controller,CSConstant{
 	}
 
 	@Override
-	public void setPaneMyself(Pane pane) {
-		// TODO Auto-generated method stub
-		
+	public void setPaneMyself(Pane pane) {}
+	
+	@FXML
+	private void initialize() {
+		group=new ToggleGroup();
+		male.setToggleGroup(group);
+		female.setToggleGroup(group);
+		secret.setToggleGroup(group);
 	}
 	
 	@FXML

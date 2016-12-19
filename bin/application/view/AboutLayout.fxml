@@ -34,7 +34,7 @@
                         <Font name="Roboto Light" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="dream" mnemonicParsing="false" text="dreamgazer">
+                  <Button fx:id="dream" mnemonicParsing="false" onAction="#dreamgazerGithub" text="dreamgazer">
                      <font>
                         <Font name="Roboto Light" size="24.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Font name="Roboto Light" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="fog" layoutX="318.0" layoutY="26.0" mnemonicParsing="false" text="GARENFEATHER">
+                  <Button fx:id="fog" layoutX="318.0" layoutY="26.0" mnemonicParsing="false" onAction="#fogGithub" text="GARENFEATHER">
                      <font>
                         <Font name="Roboto Light" size="24.0" />
                      </font>
@@ -72,7 +72,7 @@
                         <Font name="Roboto Light" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="feedback" mnemonicParsing="false" text="Clickhere">
+                  <Button fx:id="feedback" mnemonicParsing="false" onAction="#feedback" text="Clickhere">
                      <font>
                         <Font name="Roboto Light" size="24.0" />
                      </font>
