@@ -1,0 +1,71 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#box {
+	-fx-background-color: #90bab9;
+}
+.label {
+	-fx-text-fill: white;
+}
+#idn {
+	-fx-fill: white;
+}
+.radio-button {
+	-fx-text-fill: white;
+	-fx-font-size: 14px;
+}
+.radio-button .radio {
+	-fx-background-color: transparent;
+	-fx-border-color: white;
+	-fx-border-width: 1px;
+}
+#pwd {
+	-fx-font-family: "Roboto Lt";
+	-fx-font-size: 18px;
+}
+.text-field {
+	-fx-text-fill:white;
+	-fx-font-size:14px;
+	-fx-highlight-fill:white;
+	-fx-highlight-text-fill:#90bab9;
+	-fx-prompt-text-fill:aquamarine ;
+	-fx-cursor:text ;
+	-fx-background-color: transparent;
+}
+.button {
+	-fx-background-color: transparent;
+	-fx-text-fill:white;
+	-fx-font-size: 15px;
+}
+#clear {
+	-fx-border-color: white;
+	-fx-border-width: 0 1 0 0;
+}
+#like {
+	-fx-text-fill:white;
+	-fx-font-size: 20px;
+}
+.button:hover {
+	-fx-background-color:white;
+	-fx-text-fill:#90bab9;
+}
+.cell {
+	-fx-alignment:center ;
+	-fx-text-alignment:center ;
+	-fx-cell-size:42.0;
+	-fx-content-display:center ;
+	-fx-font-size:18.0px;
+	-fx-font-family: "Roboto Lt";
+    -fx-text-fill:white;
+    -fx-background-color:transparent ;
+}
+.cell:hover {
+	-fx-background-color:white ;
+	-fx-text-fill:#90bab9;
+	-fx-font-size:22.0px;
+}
+.list-view {
+	-fx-background-color:transparent ;
+	-fx-border-width: 0 1 0 1;
+}
+.imgv {
+	-fx-cursor: hand ;
+}

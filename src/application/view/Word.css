@@ -1,0 +1,77 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.label {
+	-fx-font-family: "Roboto Lt","Microsoft JhengHei";
+	-fx-text-fill: white;
+}
+#con {
+	-fx-font-size: 21.0px;
+	-fx-text-fill: #90bab9;
+	-fx-font-weight:bold;
+}
+#trans1, #trans2, #trans3 {
+	-fx-font-family: "Microsoft JhengHei";
+	-fx-fill: white;
+	-fx-font-size: 15.0px;
+}
+#suggest {
+	-fx-font-family: "Roboto Lt";
+	-fx-font-weight:bold;
+	-fx-fill: white;
+	-fx-font-size: 20.0px;
+	-fx-font-style: italic;
+}
+#nd {
+	-fx-font-family: "Microsoft JhengHei";
+	-fx-fill: white;
+	-fx-font-size: 17.0px;
+}
+.cell {
+	-fx-background-color:transparent ;
+	-fx-alignment:center ;
+	-fx-text-alignment:center ;
+	-fx-cell-size:40.0;
+	-fx-content-display:center ;
+	-fx-text-fill:#90bab9;
+	-fx-font-size:18.0px;
+	-fx-font-family: "Roboto Lt";
+}
+.cell:hover {
+	-fx-background-color:#90bab9 ;
+    -fx-text-fill:white;
+	-fx-font-size:22.0px;
+}
+.list-view {
+	-fx-background-color:transparent ;
+	-fx-border-width: 0 1 0 1;
+}
+.scroll-bar {
+	-fx-background-color:transparent;
+}
+.thumb {
+	-fx-background-color:transparent;
+	-fx-border-width:0 1 0 1;
+}
+#f1, #f2, #f3,  #sendLike1, #sendLike2, #sendLike3 {
+	-fx-background-color: #90bab9;
+}
+#nf1, #nf2, #nf3, #notSendLike1, #notSendLike2, #notSendLike3 {
+	-fx-background-color: #818faa;
+} 
+#listv {
+	-fx-border-color: #90bab9;
+	-fx-border-width: 0 2 0 2;
+}
+#s1, #s2, #s3, #ns1, #ns2, #ns3{
+	-fx-border-width: 0.0px 0.0px 1.0px 0.0px;
+	-fx-border-color: white;
+	-fx-font-size: 14.0px;
+}
+#choose1, #choose2, #choose3 {
+	-fx-font-size: 16.0px;
+	-fx-text-fill: #90bab9;
+}
+.check-box .box {
+	-fx-border-color: #90bab9;
+	-fx-border-width: 2.0px;
+	-fx-background-color: transparent;
+}

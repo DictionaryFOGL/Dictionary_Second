@@ -8,22 +8,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WordLayoutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="960.0" stylesheets="@Word.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WordLayoutController">
    <children>
       <GridPane prefHeight="490.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="16.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="225.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="220.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView fx:id="result" prefHeight="200.0" prefWidth="200.0">
+            <VBox id="listv">
+               <children>
+                  <ListView fx:id="result" prefHeight="462.0" prefWidth="170.0">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="35.0" />
+                     </GridPane.margin>
+                  </ListView>
+               </children>
                <GridPane.margin>
-                  <Insets right="25.0" />
+                  <Insets left="12.0" right="25.0" top="27.0" />
                </GridPane.margin>
-            </ListView>
+            </VBox>
             <GridPane GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,39 +43,42 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <CheckBox fx:id="bingGet" layoutX="617.0" layoutY="18.0" mnemonicParsing="false" text="必应">
+                        <CheckBox id="choose1" fx:id="bingGet" layoutX="617.0" layoutY="18.0" mnemonicParsing="false" text="必应">
                            <font>
                               <Font name="Microsoft JhengHei UI" size="18.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="baiduGet" layoutX="617.0" layoutY="18.0" mnemonicParsing="false" text="百度">
+                        <CheckBox id="choose2" fx:id="baiduGet" layoutX="617.0" layoutY="18.0" mnemonicParsing="false" text="百度">
                            <font>
                               <Font name="Microsoft JhengHei UI" size="18.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="youdaoGet" mnemonicParsing="false" text="有道">
+                        <CheckBox id="choose3" fx:id="youdaoGet" mnemonicParsing="false" text="有道">
                            <font>
                               <Font name="Microsoft JhengHei UI" size="18.0" />
                            </font>
                         </CheckBox>
                      </children>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="searchCon" text="· There is my friend called dog.">
+                        <Label id="con" fx:id="searchCon" text="· There is my friend called dog.">
                            <font>
-                              <Font size="22.0" />
+                              <Font name="Roboto Light" size="22.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="found1" alignment="TOP_CENTER" layoutX="10.0" layoutY="50.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="2">
+                  <HBox fx:id="found1" alignment="TOP_CENTER" layoutX="10.0" layoutY="50.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="2">
                      <children>
-                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane id="f1" prefHeight="100.0" prefWidth="600.0">
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" BorderPane.alignment="CENTER">
+                              <HBox id="s1" alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="comefrom1" text="www.youdao.com" />
                                  </children>
@@ -83,7 +93,7 @@
                                     <Insets left="12.0" top="2.0" />
                                  </BorderPane.margin>
                                  <children>
-                                    <Text fx:id="trans1" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
+                                    <Text id="trans1" fx:id="trans1" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="14.0" />
                                        </font>
@@ -118,7 +128,7 @@
                                  </children>
                               </HBox>
                            </right></BorderPane>
-                        <VBox fx:id="box1" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox id="sendLike1" fx:id="box1" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0">
                            <children>
                               <ImageView fx:id="like1" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like1" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="send1" fitHeight="28.0" fitWidth="30.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" pickOnBounds="true" preserveRatio="true" />
@@ -128,13 +138,13 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox fx:id="found2" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="3">
+                  <HBox fx:id="found2" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="3">
                      <children>
-                        <BorderPane fx:id="result2" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane id="f2" fx:id="result2" prefHeight="100.0" prefWidth="600.0">
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text fx:id="trans2" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
+                                    <Text id="trans2" fx:id="trans2" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。   有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="14.0" />
                                        </font>
@@ -173,7 +183,7 @@
                               </HBox>
                            </right>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox id="s2" alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="comefrom2" text="www.youdao.com" />
                                  </children>
@@ -183,7 +193,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox fx:id="box2" alignment="CENTER" prefHeight="100.0" prefWidth="80.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox id="sendLike2" fx:id="box2" alignment="CENTER" prefHeight="100.0" prefWidth="80.0" spacing="16.0">
                            <children>
                               <ImageView fx:id="like2" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like2" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="send2" fitHeight="30.0" fitWidth="32.0" layoutX="18.0" layoutY="45.0" onMouseClicked="#send2" onMouseEntered="#mouseIn2" onMouseExited="#mouseOut2" onMousePressed="#mouseOut2" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
@@ -194,13 +204,13 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox fx:id="found3" alignment="TOP_CENTER" layoutX="10.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="4">
+                  <HBox fx:id="found3" alignment="TOP_CENTER" layoutX="10.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="4">
                      <children>
-                        <BorderPane fx:id="result3" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane id="f3" fx:id="result3" prefHeight="100.0" prefWidth="600.0">
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text fx:id="trans3" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
+                                    <Text id="trans3" fx:id="trans3" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="· 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋友叫的狗。有我的朋友叫的狗。 有我的朋友叫的狗。 有我的朋" wrappingWidth="472.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="14.0" />
                                        </font>
@@ -239,7 +249,7 @@
                               </HBox>
                            </right>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox id="s3" alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="comefrom3" text="www.youdao.com" />
                                  </children>
@@ -249,7 +259,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox fx:id="box3" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox id="sendLike3" fx:id="box3" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0">
                            <children>
                               <ImageView fx:id="like3" fitHeight="28.0" fitWidth="30.0" onMouseClicked="#like3" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="send3" fitHeight="28.0" fitWidth="30.0" layoutX="18.0" layoutY="45.0" onMouseClicked="#send3" onMouseEntered="#mouseIn3" onMouseExited="#mouseOut3" onMousePressed="#mouseOut3" onMouseReleased="#mouseIn3" pickOnBounds="true" preserveRatio="true" />
@@ -260,13 +270,13 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox fx:id="notFound1" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="2">
+                  <HBox fx:id="notFound1" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="2">
                      <children>
-                        <BorderPane fx:id="result11" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane id="nf1" fx:id="result11" prefHeight="100.0" prefWidth="600.0">
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="4.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text fx:id="trans11" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="没有找到相关结果，您是不是要找 : " wrappingWidth="160.0">
+                                    <Text id="nd" fx:id="trans11" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="没有找到相关结果，您是不是要找 : " wrappingWidth="160.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -274,7 +284,7 @@
                                           <Insets left="5.0" top="10.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice11" layoutX="15.0" layoutY="46.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice11" layoutX="15.0" layoutY="46.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -282,7 +292,7 @@
                                           <Insets left="14.0" top="38.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice12" layoutX="180.0" layoutY="73.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice12" layoutX="180.0" layoutY="73.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -290,7 +300,7 @@
                                           <Insets left="5.0" top="38.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice13" layoutX="305.0" layoutY="29.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice13" layoutX="305.0" layoutY="29.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -305,7 +315,7 @@
                               </HBox>
                            </center>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox id="ns1" alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="emptyfrom1" text="www.youdao.com" />
                                  </children>
@@ -315,7 +325,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox id="notSendLike1" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0">
                            <children>
                               <ImageView fx:id="questionmark1" fitHeight="48.0" fitWidth="28.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" onMousePressed="#mouseOut1" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -325,13 +335,13 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox fx:id="notFound2" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="3">
+                  <HBox fx:id="notFound2" alignment="TOP_CENTER" layoutX="10.0" layoutY="108.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="3">
                      <children>
-                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane id="nf2" prefHeight="100.0" prefWidth="600.0">
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="4.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text fx:id="trans111" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="没有找到相关结果，您是不是要找 : " wrappingWidth="160.0">
+                                    <Text id="nd" fx:id="trans111" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="没有找到相关结果，您是不是要找 : " wrappingWidth="160.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -339,7 +349,7 @@
                                           <Insets left="5.0" top="10.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice21" layoutX="15.0" layoutY="46.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice21" layoutX="15.0" layoutY="46.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -347,7 +357,7 @@
                                           <Insets left="14.0" top="38.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice22" layoutX="180.0" layoutY="73.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice22" layoutX="180.0" layoutY="73.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -355,7 +365,7 @@
                                           <Insets left="5.0" top="38.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice23" layoutX="305.0" layoutY="29.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice23" layoutX="305.0" layoutY="29.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -370,7 +380,7 @@
                               </HBox>
                            </center>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox id="ns2" alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="emptyfrom2" text="fanyi.baidu.com" />
                                  </children>
@@ -380,7 +390,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox id="notSendLike2" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0">
                            <children>
                               <ImageView fx:id="questionmark2" fitHeight="48.0" fitWidth="28.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" onMousePressed="#mouseOut1" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -390,13 +400,13 @@
                         <Insets top="18.0" />
                      </GridPane.margin>
                   </HBox>
-                  <HBox fx:id="notFound3" alignment="TOP_CENTER" layoutX="10.0" layoutY="226.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" visible="false" GridPane.rowIndex="4">
+                  <HBox fx:id="notFound3" alignment="TOP_CENTER" layoutX="10.0" layoutY="226.0" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="4">
                      <children>
-                        <BorderPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                        <BorderPane id="nf3" prefHeight="100.0" prefWidth="600.0">
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="4.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text fx:id="trans1111" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="没有找到相关结果，您是不是要找 : " wrappingWidth="160.0">
+                                    <Text id="nd" fx:id="trans1111" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="没有找到相关结果，您是不是要找 : " wrappingWidth="160.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -404,7 +414,7 @@
                                           <Insets left="5.0" top="10.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice31" layoutX="15.0" layoutY="46.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice31" layoutX="15.0" layoutY="46.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -412,7 +422,7 @@
                                           <Insets left="14.0" top="38.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice32" layoutX="180.0" layoutY="73.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice32" layoutX="180.0" layoutY="73.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -420,7 +430,7 @@
                                           <Insets left="5.0" top="38.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fx:id="advice33" layoutX="305.0" layoutY="29.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
+                                    <Text id="suggest" fx:id="advice33" layoutX="305.0" layoutY="29.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pelll" underline="true" wrappingWidth="125.0">
                                        <font>
                                           <Font name="Microsoft JhengHei" size="17.0" />
                                        </font>
@@ -435,7 +445,7 @@
                               </HBox>
                            </center>
                            <top>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" style="-fx-border-width: 1px;" BorderPane.alignment="CENTER">
+                              <HBox id="ns3" alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="emptyfrom3" text="www.bing.com/translator" />
                                  </children>
@@ -445,7 +455,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0" style="-fx-background-color: YELLOW;">
+                        <VBox id="notSendLike3" alignment="CENTER" prefHeight="100.0" prefWidth="50.0" spacing="16.0">
                            <children>
                               <ImageView fx:id="questionmark3" fitHeight="48.0" fitWidth="28.0" layoutX="19.0" layoutY="23.0" onMouseClicked="#send1" onMouseEntered="#mouseIn1" onMouseExited="#mouseOut1" onMousePressed="#mouseOut1" onMouseReleased="#mouseIn1" pickOnBounds="true" preserveRatio="true" />
                            </children>
