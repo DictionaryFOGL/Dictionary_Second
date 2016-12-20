@@ -1,7 +1,7 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -154,7 +154,7 @@ public class DictionaryDB implements Database, DBConstant ,CSConstant{
 		while (result.next()) {
 			int siteNumber = result.getInt(5);
 			cardList.add(new WordCard(new Word(result.getString(3), result.getString(4)), idToName.get(result.getInt(1)), result.getString(7), result.getInt(1),
-					result.getDate(6), siteNumber));
+					result.getTimestamp(6).getTime(), siteNumber));
 			System.out.println(result.getDate(6));
 		}
 		return cardList;
@@ -406,7 +406,7 @@ public class DictionaryDB implements Database, DBConstant ,CSConstant{
 	
 	public static void main(String[] args) throws SQLException {
 		DictionaryDB db=new DictionaryDB();
-		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,new Date(233333333),0);
+		WordCard card=new WordCard(new Word("hhh","是的"),"jk","quuu",2,233333333,0);
 		db.connect();
 		System.out.println(db.pwdChange(3, "12345"));
 	}

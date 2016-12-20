@@ -1,7 +1,7 @@
 package application.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class WordCard implements Serializable{
 	/**
@@ -12,15 +12,15 @@ public class WordCard implements Serializable{
 	private String senderName;
 	private String saySomething;
 	private int senderID;
-	private Date time;
+	private long time;
 	private int site;
 	
-	public WordCard(Word word, String senderName, String saySomething, int senderID, Date time, int site) {
+	public WordCard(Word word, String senderName, String saySomething, int senderID, long time, int site) {
 		this(word,senderName,saySomething,time,site);
 		this.senderID = senderID;
 	}
 	
-	public WordCard(Word word, String senderName, String saySomething, Date time, int site) {
+	public WordCard(Word word, String senderName, String saySomething, long time, int site) {
 		this.word = word;
 		this.senderName = senderName;
 		this.saySomething=saySomething;
@@ -52,7 +52,7 @@ public class WordCard implements Serializable{
 		return senderID;
 	}
 
-	public Date getTime() {
+	public long getTime() {
 		return time;
 	}
 

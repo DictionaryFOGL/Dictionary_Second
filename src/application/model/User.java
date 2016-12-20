@@ -3,7 +3,7 @@ package application.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 
 import application.util.*;

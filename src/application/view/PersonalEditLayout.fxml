@@ -202,8 +202,8 @@
                                  </font>
                               </Label>
                               <ImageView fx:id="like1" fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="like2" fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                              <ImageView fx:id="like3" fitHeight="32.0" fitWidth="32.0" layoutX="26.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                              <ImageView fx:id="like2" fitHeight="24.0" fitWidth="27.0" layoutX="26.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                              <ImageView fx:id="like3" fitHeight="24.0" fitWidth="27.0" layoutX="26.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
                               <Label id="like" fx:id="baidu" layoutX="78.0" layoutY="128.0" text="123" GridPane.columnIndex="2">
                                  <font>
                                     <Font size="18.0" />

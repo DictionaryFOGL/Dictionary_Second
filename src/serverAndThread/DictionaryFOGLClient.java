@@ -95,6 +95,7 @@ public class DictionaryFOGLClient implements CSConstant,Runnable {
 					break;
 				case (NEW_FRIEND):
 					newFriend(message);
+					InformationDialog.addFriendSuccess();
 					break;
 				//Äã±»¶Ô·½É¾³ý
 				case (DELETE_FRIEND):

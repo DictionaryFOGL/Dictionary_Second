@@ -72,8 +72,8 @@ public class BaseLayoutController implements Controller,CSConstant{
 	}
 	
 	public void setTime(long timeNow) {
-		date.setText(" "+ProcessTimeFormat.dateStr(new Date(timeNow)));
-		time.setText(ProcessTimeFormat.timeStr(new Date(timeNow)));;
+		date.setText(" "+ProcessTimeFormat.dateStr(timeNow));
+		time.setText(ProcessTimeFormat.timeStr(timeNow));;
 	}
 	
 	@FXML

@@ -14,6 +14,7 @@ import application.model.message.Message;
 import application.model.message.SendCardMessage;
 import application.util.Controller;
 import application.util.InformationDialog;
+import application.util.ProcessTimeFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -185,6 +186,7 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 			mainApp.showCardDialog(wordCards.getSelectionModel().getSelectedItem());
 		} else if(arg.getButton().equals(MouseButton.SECONDARY)) {
 			WordCard card=wordCards.getSelectionModel().getSelectedItem();
+			System.out.println(ProcessTimeFormat.standard(card.getTime()));
 			boolean status=InformationDialog.deleteCard(card);
 			if(status) {
 				SendCardMessage message=new SendCardMessage(DELETE_CARD, card);

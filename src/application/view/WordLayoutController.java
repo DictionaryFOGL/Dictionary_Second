@@ -269,13 +269,45 @@ public class WordLayoutController implements Controller,CSConstant {
 		suggest.clear();
 		ArrayList<String> Sug=bing.getSuggestion();
 		if(Sug != null && Sug.size() != 0) {
-			for(String s:Sug)
+			int i=0;
+			for(String s:Sug) {
 				suggest.add(s);
+				i++;
+				if(i == 1) {
+					if(trans[2] == trans1) advice11.setText(s);
+					else if(trans[2] == trans2) advice21.setText(s);
+					else advice31.setText(s);
+				} else if(i == 2) {
+					if(trans[2] == trans1) advice12.setText(s);
+					else if(trans[2] == trans2) advice22.setText(s);
+					else advice32.setText(s);
+				} else if(i == 3) {
+					if(trans[2] == trans1) advice13.setText(s);
+					else if(trans[2] == trans2) advice23.setText(s);
+					else advice33.setText(s);
+				}
+			}
 		}
 		Sug=youdao.getSuggestion();
 		if(Sug != null && Sug.size() != 0) {
-			for(String s:Sug)
+			int i=0;
+			for(String s:Sug) {
 				suggest.add(s);
+				i++;
+				if(i == 1) {
+					if(trans[0] == trans1) advice11.setText(s);
+					else if(trans[0] == trans2) advice21.setText(s);
+					else advice31.setText(s);
+				} else if(i == 2) {
+					if(trans[0] == trans1) advice12.setText(s);
+					else if(trans[0] == trans2) advice22.setText(s);
+					else advice32.setText(s);
+				} else if(i == 3) {
+					if(trans[0] == trans1) advice13.setText(s);
+					else if(trans[0] == trans2) advice23.setText(s);
+					else advice33.setText(s);
+				}
+			}
 		}
 	}
 

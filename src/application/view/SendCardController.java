@@ -118,7 +118,7 @@ public class SendCardController implements Controller,CSConstant{
 			return;
 		}
 		for(String name:receiverList) {
-			WordCard card=new WordCard(word, mainApp.getUser().getUserName(), saysome, new Date(presentTimeStamp), site);
+			WordCard card=new WordCard(word, mainApp.getUser().getUserName(), saysome, mainApp.getUser().getUserID(), presentTimeStamp, site);
 			SendCardMessage message=new SendCardMessage(SEND_CARD, name, card);
 			mainApp.writeToServer(message);
 			try {

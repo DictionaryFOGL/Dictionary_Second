@@ -1,7 +1,5 @@
 package serverAndThread;
 
-import java.io.IOException;
-import java.net.ServerSocket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -117,6 +115,7 @@ public class ServerDict implements CSConstant{
 			return null;
 		}
 	}
+
 	public boolean userLogout(String name) {
 		CilentSession operator= userList.remove(name);
 		guests.add(operator);
@@ -124,6 +123,7 @@ public class ServerDict implements CSConstant{
 		broadCastOffLine(name);
 		return true;
 	}
+	
 	public void userPwdChange(CilentSession operator, Message m) {
 		LoginMessage login = (LoginMessage) m;
 		String pwdnew=login.getPwd();
@@ -140,6 +140,7 @@ public class ServerDict implements CSConstant{
 			e.printStackTrace();
 		}
 	}
+	
 	public boolean searchUsers(CilentSession operator, Message m) {
 		SearchMessage message=(SearchMessage) m;
 		String item=message.getKeyWord();
@@ -154,6 +155,7 @@ public class ServerDict implements CSConstant{
 		operator.localSearchUser(R);
 		return true;
 	}
+	
 	public void userAddFriend(CilentSession operator, Message m) {
 		AddFriendMessage message=(AddFriendMessage) m;
 		String name=message.getFriendName();
@@ -174,6 +176,7 @@ public class ServerDict implements CSConstant{
 			e.printStackTrace();
 		}
 	}
+	
 	public void userLike(CilentSession operator, Message m) {
 		LikeMessage message=(LikeMessage) m;
 		int site=message.getSite();
@@ -199,6 +202,7 @@ public class ServerDict implements CSConstant{
 		}
 		System.out.println("like renew");
 	}
+	
 	public void userSendCard(CilentSession operator, Message m) {
 		SendCardMessage message=(SendCardMessage) m;
 		WordCard card=message.getCard();

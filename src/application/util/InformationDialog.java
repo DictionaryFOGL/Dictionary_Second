@@ -92,6 +92,9 @@ public class InformationDialog {
 	public static void invalidInputForUsr() {
 		baseAlert(AlertType.INFORMATION, "Empty", null, "Empty Username!");
 	}
+	public static void addFriendSuccess() {
+		baseAlert(AlertType.INFORMATION, "Sccess", null, "Add friend successfully!");
+	}
 	private static void baseAlert(AlertType type,String title,String headerText,String contentText) {
 		Alert alert=new Alert(type);
 		alert.setTitle(title);
