@@ -120,8 +120,8 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 					protected void updateItem(String item, boolean empty) {
 						super.updateItem(item, empty);
 						if(mainApp.getUser().friendStatus(item)) {
-							this.setText(item+" 在线");
-							System.out.println(item+" 在线");
+							this.setText(item+" ▇");
+							System.out.println(item+" ▇");
 						} else this.setText(item);
 					}
 				};
@@ -149,6 +149,12 @@ public class PersonalEditLayoutController implements Controller ,CSConstant{
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void synchronizeLike() {
+		youdao.setText(mainApp.getUser().getYoudao()+"");
+		baidu.setText(mainApp.getUser().getBaidu()+"");
+		bing.setText(mainApp.getUser().getBing()+"");
 	}
 	
 	public void loadData() {

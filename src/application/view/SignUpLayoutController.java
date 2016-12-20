@@ -88,5 +88,6 @@ public class SignUpLayoutController implements Controller,CSConstant{
 		System.out.println(name.getText()+" "+gender+" "+Encryption.MD5(pwdh));
 		LoginMessage message=new LoginMessage(REGISTER, name.getText(), pwdh, gender);
 		mainApp.writeToServer(message);
+		cancel();
 	}
 }

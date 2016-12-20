@@ -101,7 +101,6 @@ public class WorkLayoutController implements Controller {
 
 	private void searchWordBase(String content) {
 		wordSearchMode();
-		// TODO change
 		wordCon.searchResult(content);
 	}
 
@@ -143,6 +142,10 @@ public class WorkLayoutController implements Controller {
 	
 	public void observableDelCard(WordCard card) {
 		personCon.observableDelCard(card);
+	}
+	
+	public void synchronizeLike() {
+		personCon.synchronizeLike();
 	}
 	
 	public void renewfriendData() {

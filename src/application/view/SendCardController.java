@@ -108,7 +108,7 @@ public class SendCardController implements Controller,CSConstant{
 	@FXML
 	private void ok() {
 		String saysome=say.getText();
-		if(saysome.length() > 10) {
+		if(saysome.length() > 45) {
 			InformationDialog.sayTooMuch();
 			say.setText("");
 			return;

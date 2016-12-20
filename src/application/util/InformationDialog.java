@@ -84,13 +84,16 @@ public class InformationDialog {
 		baseAlert(AlertType.ERROR, "Password error", null, "Old password error!");
 	}
 	public static void sayTooMuch() {
-		baseAlert(AlertType.INFORMATION, "Invalid", "Too much words", "10 characters most!");
+		baseAlert(AlertType.INFORMATION, "Invalid", "Too much words", "45 characters most!");
 	}
 	public static void noBodySent() {
 		baseAlert(AlertType.INFORMATION, "SendNothing", null, "No friend has been choosen!");
 	}
 	public static void invalidInputForUsr() {
 		baseAlert(AlertType.INFORMATION, "Empty", null, "Empty Username!");
+	}
+	public static void invalidInputForWord() {
+		baseAlert(AlertType.INFORMATION, "Empty", null, "Empty Word!");
 	}
 	public static void addFriendSuccess() {
 		baseAlert(AlertType.INFORMATION, "Sccess", null, "Add friend successfully!");

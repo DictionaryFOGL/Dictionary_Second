@@ -68,6 +68,7 @@ public class SignInLayoutController implements Controller,CSConstant{
 		}
 		LoginMessage message=new LoginMessage(LOGIN, Name, Encryption.MD5(Pwd), ' ');
 		mainApp.writeToServer(message);
+		cancel();
 	}
 	
 	@FXML

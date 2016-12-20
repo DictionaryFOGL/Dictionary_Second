@@ -48,10 +48,9 @@
 	-fx-text-fill:#90bab9;
 }
 .cell {
-	-fx-alignment:center ;
-	-fx-text-alignment:center ;
+	-fx-text-alignment:left ;
 	-fx-cell-size:42.0;
-	-fx-content-display:center ;
+	-fx-content-display:left ;
 	-fx-font-size:18.0px;
 	-fx-font-family: "Roboto Lt";
     -fx-text-fill:white;
@@ -67,4 +66,14 @@
 }
 .imgv {
 	-fx-cursor: hand ;
+}
+.scroll-bar {
+	-fx-background-color:transparent;
+}
+.thumb {
+	-fx-background-color:transparent;
+	-fx-border-width:0 1 0 1;
+}
+.menu-bar {
+	-fx-background-color:black;
 }

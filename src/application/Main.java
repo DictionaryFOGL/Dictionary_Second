@@ -247,6 +247,10 @@ public class Main extends Application implements CSConstant{
 		baseCon.renewfriendData();
 	}
 	
+	public void synchronizeLike() {
+		baseCon.synchronizeLike();
+	}
+	
 	public void showSendCardDialog(Word spell,int site) {
 		try {
 			FXMLLoader loader=new FXMLLoader();
@@ -293,6 +297,7 @@ public class Main extends Application implements CSConstant{
 			e.printStackTrace();
 		}
 	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

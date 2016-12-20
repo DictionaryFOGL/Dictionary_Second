@@ -31,6 +31,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -181,6 +183,7 @@ public class WordLayoutController implements Controller,CSConstant {
 		like2.setVisible(true);
 		like3.setVisible(true);
 	}
+
 	
 	@FXML
 	private void initialize() {
@@ -219,6 +222,16 @@ public class WordLayoutController implements Controller,CSConstant {
 			questionmark1.setImage(question);
 			questionmark2.setImage(question);
 			questionmark3.setImage(question);
+			
+			advice11.setText("");
+			advice12.setText("");
+			advice13.setText("");
+			advice21.setText("");
+			advice22.setText("");
+			advice23.setText("");
+			advice31.setText("");
+			advice32.setText("");
+			advice33.setText("");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -233,6 +246,13 @@ public class WordLayoutController implements Controller,CSConstant {
 	public void searchResult(String searchItem) {
 		this.searchItem = ValidInput.wordSearchProcessed(searchItem);
 		searchCon.setText("¡¤ "+searchItem);
+		if(searchItem == null || searchItem.length() == 0) {
+			find1(false,false);
+			find2(false,false);
+			find3(false,false);
+			InformationDialog.invalidInputForWord();
+			return;
+		}
 		modeRank();
 		searchBase();
 		findCheck();
@@ -436,6 +456,7 @@ public class WordLayoutController implements Controller,CSConstant {
 			}
 			like1.setImage(likeDefault);
 		}
+		mainApp.synchronizeLike();
 	}
 
 	@FXML
@@ -470,6 +491,7 @@ public class WordLayoutController implements Controller,CSConstant {
 			}
 			like2.setImage(likeDefault);
 		}
+		mainApp.synchronizeLike();
 	}
 
 	@FXML
@@ -505,6 +527,7 @@ public class WordLayoutController implements Controller,CSConstant {
 			}
 			like3.setImage(likeDefault);
 		}
+		mainApp.synchronizeLike();
 	}
 
 	@FXML
@@ -677,6 +700,13 @@ public class WordLayoutController implements Controller,CSConstant {
 	private void comefrom3(String con) {
 		comefrom3.setText(con);
 		emptyfrom3.setText(con);
+	}
+	
+	@FXML
+	private void handleSelected(MouseEvent arg) {
+		if(arg.getButton().equals(MouseButton.PRIMARY)) {
+			searchResult(result.getSelectionModel().getSelectedItem());
+		}
 	}
 
 	private void modeDefault() {

@@ -21,7 +21,7 @@
          <children>
             <VBox id="listv">
                <children>
-                  <ListView fx:id="result" prefHeight="462.0" prefWidth="170.0">
+                  <ListView fx:id="result" onMouseClicked="#handleSelected" prefHeight="462.0" prefWidth="170.0">
                      <GridPane.margin>
                         <Insets left="15.0" right="35.0" />
                      </GridPane.margin>

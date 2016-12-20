@@ -71,6 +71,10 @@ public class BaseLayoutController implements Controller,CSConstant{
 		this.workPane=workPane;
 	}
 	
+	public void synchronizeLike() {
+		workCon.synchronizeLike();
+	}
+	
 	public void setTime(long timeNow) {
 		date.setText(" "+ProcessTimeFormat.dateStr(timeNow));
 		time.setText(ProcessTimeFormat.timeStr(timeNow));;
