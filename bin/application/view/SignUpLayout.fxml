@@ -48,7 +48,7 @@
                   </Label>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Button fx:id="ok" mnemonicParsing="false" onAction="#ok" prefHeight="40.0" prefWidth="110.0" text="Sign up" />
+                        <Button fx:id="ok" defaultButton="true" mnemonicParsing="false" onAction="#ok" prefHeight="40.0" prefWidth="110.0" text="Sign up" />
                         <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="110.0" text="Cancel" />
                      </children>
                   </HBox>
